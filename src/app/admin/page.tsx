@@ -8,12 +8,36 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminLogin() {
-  const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
+  let session = null;
+  let isConfigured = false;
+
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getSession();
+    session = data.session;
+    isConfigured = true;
+  } catch (error) {
+    // If createClient throws, it means the URL is invalid or missing
+    isConfigured = false;
+  }
 
   // If already logged in, redirect to the dashboard
   if (session) {
     redirect("/admin/dashboard");
+  }
+
+  if (!isConfigured) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#050505] text-brand-text px-4 relative">
+        <div className="w-full max-w-lg glass p-8 rounded-2xl relative z-10 border border-brand-accent/30 text-center">
+          <h1 className="text-2xl font-bold tracking-tight mb-4 text-brand-accent">Setup Required</h1>
+          <p className="text-brand-text-secondary mb-6">
+            Your Supabase environment variables are missing or invalid. Please open <code className="bg-black/50 px-2 py-1 rounded text-white">.env.local</code> and add your <strong>NEXT_PUBLIC_SUPABASE_URL</strong> and <strong>NEXT_PUBLIC_SUPABASE_ANON_KEY</strong>.
+          </p>
+          <a href="/" className="inline-block bg-brand-accent text-black font-bold px-6 py-2 rounded-lg">Return Home</a>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -33,7 +57,7 @@ export default async function AdminLogin() {
           <p className="text-brand-text-secondary text-sm mt-2">Enter your credentials to access the Website Walae control panel.</p>
         </div>
 
-        <form className="space-y-4">
+        <form action="/auth/login" method="post" className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-brand-text-secondary mb-1">Email Address</label>
             <input 
@@ -57,7 +81,6 @@ export default async function AdminLogin() {
 
           <button 
             type="submit"
-            formAction="/auth/login" // We will create this route next
             className="w-full bg-brand-accent text-black font-bold rounded-lg px-4 py-3 mt-6 hover:bg-brand-accent/90 transition-colors"
           >
             Authenticate

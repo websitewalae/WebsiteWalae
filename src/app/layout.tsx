@@ -118,6 +118,11 @@ export default function RootLayout({
           <Navigation />
           <main className="relative">{children}</main>
         </SmoothScroll>
+        
+        {/* Google Analytics Injection */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );
