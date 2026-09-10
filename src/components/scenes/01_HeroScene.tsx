@@ -51,7 +51,7 @@ export default function HeroScene() {
       <div 
         ref={cameraRef as any}
         className="absolute inset-0 z-0 w-full h-full pointer-events-none bg-cover bg-center bg-no-repeat opacity-60"
-        style={{ backgroundImage: "url('/images/commercial_shoot_bg.jpg')" }}
+        style={{ backgroundImage: "url('/images/tech_hero_bg.jpg')" }}
       />
 
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-brand-bg via-transparent to-brand-bg opacity-90 pointer-events-none" />
