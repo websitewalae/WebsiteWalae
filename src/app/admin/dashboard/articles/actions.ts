@@ -1,0 +1,53 @@
+"use server";
+
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+
+export async function createArticle(formData: FormData) {
+  const supabase = await createClient();
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (!session) {
+    throw new Error("Unauthorized");
+  }
+
+  const title = formData.get("title") as string;
+  const slug = formData.get("slug") as string;
+  const author = formData.get("author") as string;
+  const content = formData.get("content") as string;
+  const seo_description = formData.get("seo_description") as string;
+  const seo_keywords = formData.get("seo_keywords") as string;
+  const geo_summary = formData.get("geo_summary") as string;
+  const published = formData.get("published") === "on";
+
+  // Parse dynamic FAQs if provided
+  const aeo_faq_raw = formData.get("aeo_faq") as string;
+  let aeo_faq = null;
+  if (aeo_faq_raw) {
+    try {
+      aeo_faq = JSON.parse(aeo_faq_raw);
+    } catch (e) {
+      console.error("Failed to parse AEO FAQ JSON", e);
+    }
+  }
+
+  const { error } = await supabase.from("articles").insert({
+    title,
+    slug,
+    author,
+    content,
+    seo_description,
+    seo_keywords,
+    geo_summary,
+    aeo_faq,
+    published,
+  });
+
+  if (error) {
+    console.error("Error inserting article:", error);
+    // You could return an error state here, but for now we'll throw
+    throw new Error(error.message);
+  }
+
+  redirect("/admin/dashboard/articles");
+}
