@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   robots: "noindex, nofollow", // Keep Google out of the admin panel
 };
 
-export default async function AdminLogin() {
+export default async function AdminLogin(props: { searchParams?: Promise<{ error?: string }> }) {
+  const searchParams = await props.searchParams;
+  const errorMsg = searchParams?.error;
+
   let session = null;
   let isConfigured = false;
 
@@ -56,6 +59,12 @@ export default async function AdminLogin() {
           <h1 className="text-2xl font-bold tracking-tight">System Access</h1>
           <p className="text-brand-text-secondary text-sm mt-2">Enter your credentials to access the Website Walae control panel.</p>
         </div>
+
+        {errorMsg && (
+          <div className="bg-red-500/10 border border-red-500/50 text-red-500 p-3 rounded-lg mb-6 text-sm text-center">
+            {errorMsg}
+          </div>
+        )}
 
         <form action="/auth/login" method="post" className="space-y-4">
           <div>
