@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, useScroll } from "framer-motion";
 import MagneticButton from "../ui/MagneticButton";
 
 export default function Navigation() {
+  const pathname = usePathname();
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -14,6 +16,8 @@ export default function Navigation() {
       setIsScrolled(latest > 50);
     });
   }, [scrollY]);
+
+  if (pathname.startsWith('/admin')) return null;
 
   return (
     <motion.header
@@ -31,10 +35,10 @@ export default function Navigation() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link href="#work" className="hover:text-brand-accent transition-colors" data-cursor="link">Work</Link>
-          <Link href="#services" className="hover:text-brand-accent transition-colors" data-cursor="link">Services</Link>
-          <Link href="#about" className="hover:text-brand-accent transition-colors" data-cursor="link">About</Link>
-          <Link href="#contact" className="hover:text-brand-accent transition-colors" data-cursor="link">Contact</Link>
+          <Link href="/#work" className="hover:text-brand-accent transition-colors" data-cursor="link">Work</Link>
+          <Link href="/#services" className="hover:text-brand-accent transition-colors" data-cursor="link">Services</Link>
+          <Link href="/about" className="hover:text-brand-accent transition-colors" data-cursor="link">About</Link>
+          <Link href="/#contact" className="hover:text-brand-accent transition-colors" data-cursor="link">Contact</Link>
         </nav>
 
         <MagneticButton>Start a Project</MagneticButton>
