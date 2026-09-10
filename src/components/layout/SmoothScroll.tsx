@@ -13,7 +13,7 @@ export default function SmoothScroll({
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // cubic-bezier-like smooth easing
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // cubic-bezier-like smooth easing
       direction: "vertical",
       gestureDirection: "vertical",
       smooth: true,
