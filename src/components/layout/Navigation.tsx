@@ -19,11 +19,20 @@ export default function Navigation() {
 
   if (pathname.startsWith('/admin')) return null;
 
+  const isHome = pathname === '/';
+  const shouldHide = isHome && !isScrolled;
+
   return (
     <motion.header
       className="fixed top-0 left-0 w-full z-[100] transition-all duration-500"
-      initial={{ backgroundColor: "rgba(5, 5, 5, 0)", borderBottom: "1px solid rgba(255, 255, 255, 0)", backdropFilter: "blur(0px)" }}
+      initial={{ 
+        y: isHome ? -100 : 0,
+        backgroundColor: "rgba(5, 5, 5, 0)", 
+        borderBottom: "1px solid rgba(255, 255, 255, 0)", 
+        backdropFilter: "blur(0px)" 
+      }}
       animate={{
+        y: shouldHide ? -100 : 0,
         backgroundColor: isScrolled ? "rgba(5, 5, 5, 0.72)" : "rgba(5, 5, 5, 0)",
         borderBottom: isScrolled ? "1px solid rgba(255, 255, 255, 0.08)" : "1px solid rgba(255, 255, 255, 0)",
         backdropFilter: isScrolled ? "blur(18px)" : "blur(0px)",
