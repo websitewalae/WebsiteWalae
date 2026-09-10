@@ -30,8 +30,8 @@ export default function Navigation() {
       }}
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-[5vw] h-[72px] lg:h-[84px] flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tighter" data-cursor="link">
-          WEBSITE WALAE
+        <Link href="/" className="flex items-center" data-cursor="link">
+          <img src="/logo.png" alt="Website Walae" className="h-10 md:h-12 w-auto object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">

@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="w-full bg-[#050505] border-t border-brand-border py-12 lg:py-24 relative z-50">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-[5vw] flex flex-col md:flex-row justify-between gap-12">
         <div className="flex flex-col gap-4 max-w-sm">
-          <div className="text-2xl font-bold tracking-tighter text-brand-text">WEBSITE WALAE</div>
+          <img src="/logo.png" alt="Website Walae" className="h-12 w-auto object-contain mb-2" />
           <div className="text-brand-text-secondary text-sm font-semibold tracking-widest uppercase">Digital Creative Agency</div>
           <p className="text-brand-text-muted text-sm mt-4">
             We combine design, technology, content and marketing to help brands build a stronger digital presence.
