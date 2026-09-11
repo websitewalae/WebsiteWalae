@@ -29,9 +29,11 @@ const SERVICES = [
     id: "ui-ux",
     num: "01",
     title: "UI / UX DESIGN",
+    mobileTitle: "UI / UX",
     icon: Layout,
     color: "#7C3AED",
     pos: { top: "8%", left: "50%", transform: "translateX(-50%)" },
+    mobilePos: { top: "10%", left: "50%", transform: "translateX(-50%)" },
     lineAngle: -90,
     preview: {
       tag: "DESIGN SYSTEM",
@@ -44,9 +46,11 @@ const SERVICES = [
     id: "web-dev",
     num: "02",
     title: "WEBSITE DEVELOPMENT",
+    mobileTitle: "WEB DEV",
     icon: Code,
     color: "#C7FF3D",
     pos: { top: "20%", right: "6%" },
+    mobilePos: { top: "17%", right: "2%" },
     lineAngle: -35,
     preview: {
       tag: "FULLSTACK WEB",
@@ -59,9 +63,11 @@ const SERVICES = [
     id: "video-prod",
     num: "03",
     title: "VIDEO PRODUCTION",
+    mobileTitle: "VIDEO PROD",
     icon: Video,
     color: "#EF4444",
     pos: { top: "50%", right: "3%", transform: "translateY(-50%)" },
+    mobilePos: { top: "63%", right: "2%" },
     lineAngle: 0,
     preview: {
       tag: "CINEMATIC 4K",
@@ -74,9 +80,11 @@ const SERVICES = [
     id: "meta-ads",
     num: "04",
     title: "META ADS",
+    mobileTitle: "META ADS",
     icon: Target,
     color: "#3B82F6",
     pos: { bottom: "20%", right: "8%" },
+    mobilePos: { top: "72%", right: "3%" },
     lineAngle: 45,
     preview: {
       tag: "PERFORMANCE MARKETING",
@@ -89,9 +97,11 @@ const SERVICES = [
     id: "seo",
     num: "05",
     title: "SEO & GROWTH",
+    mobileTitle: "SEO & GROWTH",
     icon: Search,
     color: "#10B981",
     pos: { bottom: "20%", left: "8%" },
+    mobilePos: { top: "72%", left: "3%" },
     lineAngle: 135,
     preview: {
       tag: "ORGANIC RANKING",
@@ -104,9 +114,11 @@ const SERVICES = [
     id: "content-creation",
     num: "06",
     title: "CONTENT CREATION",
+    mobileTitle: "CONTENT",
     icon: Sparkles,
     color: "#F59E0B",
     pos: { top: "50%", left: "3%", transform: "translateY(-50%)" },
+    mobilePos: { top: "63%", left: "2%" },
     lineAngle: 180,
     preview: {
       tag: "STUDIO CREATIVE",
@@ -119,9 +131,11 @@ const SERVICES = [
     id: "social-media",
     num: "07",
     title: "SOCIAL MEDIA MARKETING",
+    mobileTitle: "SOCIAL MEDIA",
     icon: Share2,
     color: "#EC4899",
     pos: { top: "20%", left: "6%" },
+    mobilePos: { top: "17%", left: "2%" },
     lineAngle: -145,
     preview: {
       tag: "ATTENTION ENGINE",
@@ -255,6 +269,15 @@ export default function HeroScene() {
           {SERVICES.map((srv, idx) => {
             const isSelected = activeServiceIndex === idx;
             const isAnyActive = activeServiceIndex !== null;
+            const isMobile = windowDims.w < 768;
+
+            const targetXPercent = isMobile ?
+              (idx === 0 ? 0.5 : idx === 1 ? 0.82 : idx === 2 ? 0.82 : idx === 3 ? 0.80 : idx === 4 ? 0.20 : idx === 5 ? 0.18 : 0.18) :
+              (idx === 0 ? 0.5 : idx === 1 ? 0.92 : idx === 2 ? 0.95 : idx === 3 ? 0.90 : idx === 4 ? 0.10 : idx === 5 ? 0.05 : 0.08);
+
+            const targetYPercent = isMobile ?
+              (idx === 0 ? 0.12 : idx === 1 ? 0.19 : idx === 2 ? 0.65 : idx === 3 ? 0.74 : idx === 4 ? 0.74 : idx === 5 ? 0.65 : 0.19) :
+              (idx === 0 ? 0.10 : idx === 1 ? 0.22 : idx === 2 ? 0.50 : idx === 3 ? 0.78 : idx === 4 ? 0.78 : idx === 5 ? 0.50 : 0.22);
 
             return (
               <g key={srv.id}>
@@ -262,22 +285,8 @@ export default function HeroScene() {
                 <line
                   x1="50%"
                   y1="50%"
-                  x2={
-                    idx === 0 ? "50%" :
-                    idx === 1 ? "92%" :
-                    idx === 2 ? "95%" :
-                    idx === 3 ? "90%" :
-                    idx === 4 ? "10%" :
-                    idx === 5 ? "5%" : "8%"
-                  }
-                  y2={
-                    idx === 0 ? "10%" :
-                    idx === 1 ? "22%" :
-                    idx === 2 ? "50%" :
-                    idx === 3 ? "78%" :
-                    idx === 4 ? "78%" :
-                    idx === 5 ? "50%" : "22%"
-                  }
+                  x2={`${targetXPercent * 100}%`}
+                  y2={`${targetYPercent * 100}%`}
                   stroke={isSelected ? srv.color : isLogoHovered ? "#c7ff3d" : "rgba(255,255,255,0.12)"}
                   strokeWidth={isSelected ? "2.5" : isLogoHovered ? "1.5" : "1"}
                   strokeDasharray={isSelected ? "none" : "4 6"}
@@ -289,21 +298,7 @@ export default function HeroScene() {
                   <animateMotion
                     dur={isSelected ? "1.2s" : isLogoHovered ? "2s" : "4s"}
                     repeatCount="indefinite"
-                    path={`M ${windowDims.w / 2},${windowDims.h / 2} L ${
-                      idx === 0 ? windowDims.w * 0.5 :
-                      idx === 1 ? windowDims.w * 0.92 :
-                      idx === 2 ? windowDims.w * 0.95 :
-                      idx === 3 ? windowDims.w * 0.90 :
-                      idx === 4 ? windowDims.w * 0.10 :
-                      idx === 5 ? windowDims.w * 0.05 : windowDims.w * 0.08
-                    },${
-                      idx === 0 ? windowDims.h * 0.10 :
-                      idx === 1 ? windowDims.h * 0.22 :
-                      idx === 2 ? windowDims.h * 0.50 :
-                      idx === 3 ? windowDims.h * 0.78 :
-                      idx === 4 ? windowDims.h * 0.78 :
-                      idx === 5 ? windowDims.h * 0.50 : windowDims.h * 0.22
-                    }`}
+                    path={`M ${windowDims.w / 2},${windowDims.h / 2} L ${windowDims.w * targetXPercent},${windowDims.h * targetYPercent}`}
                   />
                 </circle>
               </g>
@@ -355,11 +350,12 @@ export default function HeroScene() {
           const Icon = srv.icon;
           const isSelected = activeServiceIndex === idx;
           const isDimmed = activeServiceIndex !== null && activeServiceIndex !== idx;
+          const isMobile = windowDims.w < 768;
 
           return (
             <div
               key={srv.id}
-              style={srv.pos}
+              style={isMobile ? srv.mobilePos : srv.pos}
               className="absolute pointer-events-auto transition-all duration-300"
             >
               {/* Node Button */}
@@ -374,25 +370,25 @@ export default function HeroScene() {
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   opacity: isDimmed ? 0.35 : 1,
-                  scale: isSelected ? 1.1 : isLogoHovered ? 1.05 : 1,
+                  scale: isSelected ? 1.08 : isLogoHovered ? 1.04 : 1,
                 }}
-                className={`glass px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl border flex items-center gap-2.5 text-xs sm:text-sm font-mono font-bold transition-all duration-300 shadow-floating backdrop-blur-xl group ${
+                className={`glass px-2 py-1 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl border flex items-center gap-1.5 sm:gap-2.5 text-[10px] sm:text-sm font-mono font-bold transition-all duration-300 shadow-floating backdrop-blur-xl group ${
                   isSelected
                     ? "bg-black/90 border-brand-accent text-white shadow-[0_0_25px_rgba(199,255,61,0.4)]"
-                    : "bg-black/60 border-white/15 text-white/80 hover:text-white hover:border-white/40"
+                    : "bg-black/70 border-white/15 text-white/80 hover:text-white hover:border-white/40"
                 }`}
               >
                 <div
-                  className="w-7 h-7 rounded-xl flex items-center justify-center transition-colors"
+                  className="w-5 h-5 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors shrink-0"
                   style={{ backgroundColor: `${srv.color}20` }}
                 >
-                  <Icon className="w-4 h-4" style={{ color: srv.color }} />
+                  <Icon className="w-3 h-3 sm:w-4 sm:h-4" style={{ color: srv.color }} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[9px] text-white/40 font-mono leading-none mb-0.5">{srv.num}</span>
-                  <span className="tracking-tight uppercase">{srv.title}</span>
+                  <span className="text-[8px] sm:text-[9px] text-white/40 font-mono leading-none mb-0.5">{srv.num}</span>
+                  <span className="tracking-tight uppercase whitespace-nowrap">{isMobile ? srv.mobileTitle : srv.title}</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-accent" />
+                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-accent hidden sm:block" />
               </motion.button>
 
               {/* Interactive Service Preview Pop-up */}

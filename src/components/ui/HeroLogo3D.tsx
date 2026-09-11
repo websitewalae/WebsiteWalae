@@ -257,7 +257,7 @@ export default function HeroLogo3D({
       ref={containerRef}
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
-      className="relative w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[440px] md:h-[440px] flex items-center justify-center cursor-pointer transition-transform duration-500 hover:drop-shadow-[0_0_45px_rgba(199,255,61,0.45)]"
+      className="relative w-[210px] h-[210px] sm:w-[320px] sm:h-[320px] md:w-[440px] md:h-[440px] flex items-center justify-center cursor-pointer transition-transform duration-500 hover:drop-shadow-[0_0_45px_rgba(199,255,61,0.45)]"
     />
   );
 }
