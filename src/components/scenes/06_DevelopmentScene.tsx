@@ -23,40 +23,40 @@ export default function DevelopmentScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=200%",
-        scrub: 1,
+        end: "+=140%",
+        scrub: 0.5,
         pin: true,
       },
     });
 
-    // Fade in text and editor
-    tl.fromTo(textRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 });
+    // 0% - Viewport entry: text & editor rotate in immediately
+    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
     tl.fromTo(editorRef.current, 
-      { opacity: 0, rotateY: 30, scale: 0.8, x: 100 }, 
-      { opacity: 1, rotateY: 0, scale: 1, x: 0, duration: 1, ease: "power2.out" },
+      { opacity: 0, rotateY: 20, scale: 0.88, x: 50 }, 
+      { opacity: 1, rotateY: 0, scale: 1, x: 0, duration: 0.6, ease: "power2.out" },
       "<"
     );
 
-    // Type code lines
+    // 20% - Rapid code typing lines
     tl.fromTo(codeLines, 
-      { opacity: 0, x: -20 }, 
-      { opacity: 1, x: 0, stagger: 0.1, duration: 1 }
+      { opacity: 0, x: -15 }, 
+      { opacity: 1, x: 0, stagger: 0.06, duration: 0.8 }
     );
 
-    // Show build statuses
+    // 45% - Terminal status checklist lights up
     tl.fromTo(buildStatuses,
-      { opacity: 0, y: 10 },
-      { opacity: 1, y: 0, stagger: 0.2, duration: 1, color: "#C7FF3D" }
+      { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.6, color: "#C7FF3D" }
     );
 
-    // Fade out
+    // 75% - Morph exit into Marketing Engine
     tl.to([editorRef.current, textRef.current], {
       opacity: 0,
-      scale: 0.9,
-      y: -50,
-      duration: 1,
+      scale: 0.94,
+      y: -40,
+      duration: 0.5,
       ease: "power2.in"
-    });
+    }, "+=0.2");
 
   }, []);
 

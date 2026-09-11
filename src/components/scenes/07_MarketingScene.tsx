@@ -22,40 +22,42 @@ export default function MarketingScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=200%",
-        scrub: 1,
+        end: "+=140%",
+        scrub: 0.5,
         pin: true,
       },
     });
 
-    // Fade in text and Search UI
-    tl.fromTo(textRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 });
+    // 0% - Viewport entry: text & search engine enter immediately
+    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
     tl.fromTo(searchRef.current, 
-      { opacity: 0, y: 100, scale: 0.9 }, 
-      { opacity: 1, y: 0, scale: 1, duration: 1 }
+      { opacity: 0, y: 60, scale: 0.92 }, 
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" },
+      "<"
     );
 
-    // Search Results move up
+    // 25% - Search result ranking highlight (#1 position)
     const resultItem = searchRef.current.querySelector('.search-result');
     if (resultItem) {
-      tl.to(resultItem, { y: -80, color: "#C7FF3D", duration: 1 });
+      tl.to(resultItem, { y: -50, color: "#C7FF3D", duration: 0.6 });
     }
 
-    // Search fades out, Analytics come in
-    tl.to(searchRef.current, { opacity: 0, scale: 1.1, duration: 0.5 });
+    // 45% - Search UI dissolves as analytics metric grid powers on
+    tl.to(searchRef.current, { opacity: 0, scale: 1.05, duration: 0.4 });
     
     tl.fromTo(stats, 
-      { opacity: 0, y: 50, scale: 0.8 }, 
-      { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 1, ease: "back.out(1.5)" }
+      { opacity: 0, y: 40, scale: 0.85 }, 
+      { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.6, ease: "back.out(1.5)" }
     );
 
-    // Fade out
+    // 75% - Morph exit into Services overview
     tl.to([analyticsRef.current, textRef.current], {
       opacity: 0,
-      y: -50,
-      duration: 1,
+      y: -30,
+      scale: 0.95,
+      duration: 0.5,
       ease: "power2.in"
-    });
+    }, "+=0.2");
 
   }, []);
 

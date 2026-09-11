@@ -20,40 +20,40 @@ export default function WebDesignScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=200%",
-        scrub: 1,
+        end: "+=140%",
+        scrub: 0.5,
         pin: true,
       },
     });
 
-    // Fade in
-    tl.fromTo(textRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 });
+    // 0% - Immediate entry: headline & screen expansion start together
+    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
     
-    // Screen scales up from a "social post" size
     tl.fromTo(screenRef.current, 
-      { scale: 0.2, y: 200, opacity: 0, borderRadius: "50px" },
-      { scale: 1, y: 0, opacity: 1, borderRadius: "16px", duration: 1, ease: "power2.out" },
+      { scale: 0.35, y: 120, opacity: 0, borderRadius: "40px" },
+      { scale: 1, y: 0, opacity: 1, borderRadius: "16px", duration: 0.7, ease: "power2.out" },
       "<"
     );
 
-    // Wireframe morphs to UI Design
-    tl.to(wireframeRef.current, { opacity: 0, duration: 0.5 });
-    tl.fromTo(uiRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, "<");
+    // 35% - Wireframe morphs into polished UI Design
+    tl.to(wireframeRef.current, { opacity: 0, duration: 0.3 });
+    tl.fromTo(uiRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
 
-    // UI elements stagger animate (simulate building)
+    // 50% - Stagger UI component build elements
     const uiElements = uiRef.current.children;
     tl.fromTo(uiElements, 
-      { opacity: 0, x: -20 }, 
-      { opacity: 1, x: 0, stagger: 0.1, duration: 1, ease: "back.out(1.7)" }
+      { opacity: 0, y: 15 }, 
+      { opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: "back.out(1.5)" }
     );
 
-    // Fade out
+    // 75% - Morph exit into Development Code Editor
     tl.to([screenRef.current, textRef.current], {
       opacity: 0,
-      scale: 1.1,
-      duration: 1,
+      scale: 1.05,
+      y: -30,
+      duration: 0.5,
       ease: "power2.in"
-    });
+    }, "+=0.2");
 
   }, []);
 
@@ -63,9 +63,9 @@ export default function WebDesignScene() {
         <h2 className="text-h2 mb-4">THEN WE BUILD <br /> THE DIGITAL HOME.</h2>
       </div>
 
-      <div ref={screenRef} className="w-[90%] max-w-6xl h-[70vh] bg-brand-surface border border-brand-border-strong rounded-2xl mt-[5%] shadow-cinematic overflow-hidden relative flex flex-col">
+      <div ref={screenRef} className="w-[92%] sm:w-[90%] max-w-6xl h-[65vh] sm:h-[70vh] bg-brand-surface border border-brand-border-strong rounded-2xl mt-[5%] shadow-cinematic overflow-hidden relative flex flex-col">
         {/* Fake Browser Header */}
-        <div className="h-10 border-b border-brand-border bg-[#0a0a0a] flex items-center px-4 gap-2 shrink-0">
+        <div className="h-9 sm:h-10 border-b border-brand-border bg-[#0a0a0a] flex items-center px-4 gap-2 shrink-0">
           <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />
           <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />
           <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />

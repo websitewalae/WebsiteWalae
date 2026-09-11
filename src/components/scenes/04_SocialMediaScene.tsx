@@ -21,41 +21,44 @@ export default function SocialMediaScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=200%",
-        scrub: 1,
+        end: "+=130%",
+        scrub: 0.5,
         pin: true,
       },
     });
 
-    tl.fromTo(textRef.current, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+    // 0% - Viewport entry headline
+    tl.fromTo(textRef.current, { opacity: 0, scale: 0.95, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.4 });
 
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
-    // Cards fan out from center based on viewport
+    // 15% - Cards fan out smoothly
     tl.fromTo(cards, 
-      { opacity: 0, y: 200, scale: 0.8, rotateZ: 0 },
+      { opacity: 0, y: 150, scale: 0.8, rotateZ: 0 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
         rotateZ: (i) => isMobile ? [-5, 0, 5][i] : [-10, 0, 10][i],
         x: (i) => isMobile ? [-40, 0, 40][i] : [-280, 0, 280][i],
-        stagger: 0.1,
-        duration: 1,
+        stagger: 0.12,
+        duration: 0.8,
         ease: "power2.out"
-      }
+      },
+      "-=0.2"
     );
 
-    // Cards move up and disappear
+    // 70% - Cards scale up and morph toward Web Design Home
     tl.to(cards, {
-      y: -500,
+      y: -350,
+      scale: (i) => i === 1 ? 1.4 : 0.6,
       opacity: 0,
-      stagger: 0.1,
-      duration: 1,
+      stagger: 0.08,
+      duration: 0.6,
       ease: "power2.in"
     });
 
-    tl.to(textRef.current, { opacity: 0, y: -50, duration: 0.5 }, "<");
+    tl.to(textRef.current, { opacity: 0, y: -40, duration: 0.4 }, "<");
 
   }, []);
 
@@ -74,7 +77,7 @@ export default function SocialMediaScene() {
         <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[30vw] h-[30vw] bg-brand-accent/10 rounded-full blur-[100px] mix-blend-screen" />
       </div>
 
-      <div ref={textRef} className="absolute top-[15%] text-center px-6 z-20">
+      <div ref={textRef} className="absolute top-[12%] text-center px-6 z-20">
         <h2 className="text-h2 mb-4">FROM CONTENT TO ATTENTION.</h2>
       </div>
 
@@ -100,14 +103,14 @@ export default function SocialMediaScene() {
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between text-brand-text">
                 <div className="flex gap-4">
-                  <Heart className="w-6 h-6" />
+                  <Heart className="w-6 h-6 text-pink-500 fill-pink-500/20" />
                   <MessageCircle className="w-6 h-6" />
                   <Share2 className="w-6 h-6" />
                 </div>
                 <Bookmark className="w-6 h-6" />
               </div>
-              <div className="text-sm font-bold">{stat.likes} likes</div>
-              <div className="text-xs text-brand-text-muted">
+              <div className="text-sm font-bold text-white">{stat.likes} likes</div>
+              <div className="text-[10px] text-brand-text-muted">
                 Demo metrics for illustrative purposes only.
               </div>
             </div>

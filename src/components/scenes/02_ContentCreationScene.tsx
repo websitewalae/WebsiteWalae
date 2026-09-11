@@ -7,10 +7,11 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 export default function ContentCreationScene() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const recRef = useRef<HTMLDivElement>(null);
   const filesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !textRef.current || !filesContainerRef.current) return;
+    if (!sectionRef.current || !textRef.current || !filesContainerRef.current || !recRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -20,34 +21,42 @@ export default function ContentCreationScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=150%",
-        scrub: 1,
+        end: "+=120%",
+        scrub: 0.5,
         pin: true,
       },
     });
 
-    // Fade in text
-    tl.fromTo(textRef.current, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5 });
+    // 0% - Viewport entry: REC indicator lights up & headline moves in immediately
+    tl.fromTo(recRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3 });
+    tl.fromTo(textRef.current, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
 
-    // Show files capturing instantly with the text
+    // 20% - Staggered file entry (sliding with rotation & depth velocity)
     tl.fromTo(files, 
-      { opacity: 0, scale: 0.8, y: 50, rotateX: 20 },
-      { opacity: 1, scale: 1, y: 0, rotateX: 0, stagger: 0.2, duration: 1, ease: "back.out(1.7)" },
-      "<0.1" // Starts almost instantly with the text
+      { opacity: 0, y: 120, rotateX: 30, scale: 0.7 },
+      { opacity: 1, y: 0, rotateX: 0, scale: 1, stagger: 0.15, duration: 0.8, ease: "power2.out" },
+      "-=0.2"
     );
 
-    // Files fly away toward the computer (next scene)
+    // 50% - Orbital shift before export
     tl.to(files, {
-      z: -500,
-      y: -200,
-      scale: 0.5,
+      rotateZ: (i) => [-4, 0, 4][i],
+      y: (i) => [-10, 10, -10][i],
+      duration: 0.5,
+    });
+
+    // 75% - Files fly toward editing workstation (continuous story transition)
+    tl.to(files, {
+      z: -600,
+      y: -250,
+      scale: 0.4,
       opacity: 0,
-      stagger: 0.1,
-      duration: 1,
+      stagger: 0.08,
+      duration: 0.8,
       ease: "power2.in"
     });
 
-    tl.to(textRef.current, { opacity: 0, y: -50, duration: 0.5 }, "<");
+    tl.to(textRef.current, { opacity: 0, y: -40, duration: 0.4 }, "<");
 
   }, []);
 
@@ -58,13 +67,15 @@ export default function ContentCreationScene() {
       </div>
 
       {/* Viewfinder UI */}
-      <div className="absolute inset-0 pointer-events-none border-[1px] border-brand-border opacity-20 m-4 sm:m-12 lg:m-24 flex items-center justify-center">
+      <div className="absolute inset-0 pointer-events-none border-[1px] border-brand-border opacity-25 m-4 sm:m-12 lg:m-24 flex items-center justify-center">
         <div className="w-8 h-8 sm:w-16 sm:h-16 border-t-2 border-l-2 border-brand-accent absolute top-4 left-4 sm:top-8 sm:left-8" />
         <div className="w-8 h-8 sm:w-16 sm:h-16 border-t-2 border-r-2 border-brand-accent absolute top-4 right-4 sm:top-8 sm:right-8" />
         <div className="w-8 h-8 sm:w-16 sm:h-16 border-b-2 border-l-2 border-brand-accent absolute bottom-4 left-4 sm:bottom-8 sm:left-8" />
         <div className="w-8 h-8 sm:w-16 sm:h-16 border-b-2 border-r-2 border-brand-accent absolute bottom-4 right-4 sm:bottom-8 sm:right-8" />
-        <div className="absolute top-4 sm:top-8 flex items-center gap-2 text-brand-accent font-mono text-xs sm:text-sm tracking-widest animate-pulse">
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" /> REC 00:00:12
+        
+        <div ref={recRef} className="absolute top-4 sm:top-8 flex items-center gap-2 text-brand-accent font-mono text-xs sm:text-sm tracking-widest">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500 animate-pulse" /> 
+          REC ● 00:00:12
         </div>
       </div>
 
