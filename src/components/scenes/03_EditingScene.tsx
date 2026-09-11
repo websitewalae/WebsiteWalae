@@ -19,9 +19,11 @@ export default function EditingScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
-        end: "+=110%",
-        scrub: 0.3,
+        start: "top top",
+        end: "+=130%",
+        scrub: 0.4,
+        pin: true,
+        pinSpacing: true,
       },
     });
 
@@ -70,11 +72,13 @@ export default function EditingScene() {
 
   return (
     <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
-      <div ref={textRef} className="absolute top-[12%] text-center px-6 z-20">
-        <h2 className="text-h2 mb-4">THEN WE TURN RAW <br/> FOOTAGE INTO CONTENT.</h2>
+      <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 max-w-full">
+        <h2 className="text-xl sm:text-3xl md:text-5xl text-white font-black tracking-tight mb-2">
+          THEN WE TURN RAW <br/> FOOTAGE INTO CONTENT.
+        </h2>
       </div>
 
-      <div ref={uiRef} className="w-[92%] sm:w-[90%] max-w-6xl h-[60vh] sm:h-[70vh] rounded-2xl border border-brand-border-strong flex flex-col overflow-hidden mt-[10%] shadow-cinematic perspective-[1000px] relative">
+      <div ref={uiRef} className="w-[94%] sm:w-[90%] max-w-6xl h-[48vh] sm:h-[65vh] rounded-2xl border border-brand-border-strong flex flex-col overflow-hidden mt-[16%] sm:mt-[10%] shadow-cinematic perspective-[1000px] relative">
         {/* Cinematic Editor Background */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"

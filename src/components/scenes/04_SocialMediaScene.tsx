@@ -20,9 +20,11 @@ export default function SocialMediaScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
-        end: "+=110%",
-        scrub: 0.3,
+        start: "top top",
+        end: "+=130%",
+        scrub: 0.4,
+        pin: true,
+        pinSpacing: true,
       },
     });
 
@@ -38,8 +40,8 @@ export default function SocialMediaScene() {
         opacity: 1,
         y: 0,
         scale: 1,
-        rotateZ: (i) => isMobile ? [-5, 0, 5][i] : [-10, 0, 10][i],
-        x: (i) => isMobile ? [-40, 0, 40][i] : [-280, 0, 280][i],
+        rotateZ: (i) => isMobile ? [-4, 0, 4][i] : [-10, 0, 10][i],
+        x: (i) => isMobile ? [-25, 0, 25][i] : [-280, 0, 280][i],
         stagger: 0.12,
         duration: 0.8,
         ease: "power2.out"
@@ -76,13 +78,13 @@ export default function SocialMediaScene() {
         <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[30vw] h-[30vw] bg-brand-accent/10 rounded-full blur-[100px] mix-blend-screen" />
       </div>
 
-      <div ref={textRef} className="absolute top-[12%] text-center px-6 z-20">
-        <h2 className="text-h2 mb-4">FROM CONTENT TO ATTENTION.</h2>
+      <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 max-w-full">
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">FROM CONTENT TO ATTENTION.</h2>
       </div>
 
-      <div ref={cardsRef} className="relative z-10 flex items-center justify-center w-full h-full mt-[10%] px-4">
+      <div ref={cardsRef} className="relative z-10 flex items-center justify-center w-full h-full mt-[12%] sm:mt-[10%] px-4">
         {stats.map((stat, i) => (
-          <div key={i} className="absolute w-[260px] sm:w-[300px] h-[420px] sm:h-[500px] glass rounded-3xl p-4 flex flex-col justify-between shadow-floating border-brand-border-strong bg-[#0a0a0a]/80">
+          <div key={i} className="absolute w-[220px] sm:w-[300px] h-[360px] sm:h-[500px] glass rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between shadow-floating border-brand-border-strong bg-[#0a0a0a]/90 backdrop-blur-xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-brand-surface border border-brand-border" />
               <div>

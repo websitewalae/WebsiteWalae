@@ -21,9 +21,11 @@ export default function MarketingScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
-        end: "+=110%",
-        scrub: 0.3,
+        start: "top top",
+        end: "+=130%",
+        scrub: 0.4,
+        pin: true,
+        pinSpacing: true,
       },
     });
 
@@ -69,8 +71,8 @@ export default function MarketingScene() {
 
   return (
     <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
-      <div ref={textRef} className="absolute top-[10%] text-center px-6 z-20">
-        <h2 className="text-h2 mb-4">BUILT TO BE FOUND.<br/>BUILT TO CONVERT.</h2>
+      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 max-w-full">
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">BUILT TO BE FOUND.<br/>BUILT TO CONVERT.</h2>
       </div>
 
       {/* Search Engine UI */}

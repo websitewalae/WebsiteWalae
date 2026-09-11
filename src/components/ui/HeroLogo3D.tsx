@@ -166,53 +166,69 @@ export default function HeroLogo3D({
 
     window.addEventListener("resize", handleResize);
 
-    // 8. Animation Loop
+    // 8. Performance Optimization: Pause loop when offscreen
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(containerRef.current);
+
+    // Animation Loop
     let time = 0;
 
     const animate = () => {
-      time += 0.015;
+      if (isVisible) {
+        time += 0.015;
 
-      if (group) {
-        // Apply smooth tilt interpolation based on mouse coordinates (fixed upright base)
-        currentRotationX.current += (targetRotationX.current - currentRotationX.current) * 0.08;
-        currentRotationY.current += (targetRotationY.current - currentRotationY.current) * 0.08;
+        if (group) {
+          // Apply smooth tilt interpolation based on mouse coordinates (fixed upright base)
+          currentRotationX.current += (targetRotationX.current - currentRotationX.current) * 0.08;
+          currentRotationY.current += (targetRotationY.current - currentRotationY.current) * 0.08;
 
-        // FIXED UPRIGHT ROTATION: text stays front-facing and legible at all times
-        group.rotation.y = currentRotationY.current;
-        group.rotation.x = currentRotationX.current;
+          // FIXED UPRIGHT ROTATION: text stays front-facing and legible at all times
+          group.rotation.y = currentRotationY.current;
+          group.rotation.x = currentRotationX.current;
 
-        // Gentle floating breathing motion on Y axis
-        group.position.y = Math.sin(time) * 0.08;
+          // Gentle floating breathing motion on Y axis
+          group.position.y = Math.sin(time) * 0.08;
 
-        // Scale animation on hover/service activation
-        const targetScaleVal = isHovered ? 1.15 : activeServiceIndex !== null ? 1.08 : 1.0;
-        currentScale.current += (targetScaleVal - currentScale.current) * 0.08;
-        group.scale.set(currentScale.current, currentScale.current, currentScale.current);
+          // Scale animation on hover/service activation
+          const targetScaleVal = isHovered ? 1.15 : activeServiceIndex !== null ? 1.08 : 1.0;
+          currentScale.current += (targetScaleVal - currentScale.current) * 0.08;
+          group.scale.set(currentScale.current, currentScale.current, currentScale.current);
 
-        // Animate surrounding energy rings independently
-        if (ringMesh) {
-          ringMesh.rotation.z += 0.01;
-          ringMesh.rotation.x = Math.sin(time * 0.8) * 0.15;
+          // Animate surrounding energy rings independently
+          if (ringMesh) {
+            ringMesh.rotation.z += 0.01;
+            ringMesh.rotation.x = Math.sin(time * 0.8) * 0.15;
+          }
+          if (ringMesh2) {
+            ringMesh2.rotation.z -= 0.008;
+            ringMesh2.rotation.y = Math.cos(time * 0.6) * 0.2;
+          }
         }
-        if (ringMesh2) {
-          ringMesh2.rotation.z -= 0.008;
-          ringMesh2.rotation.y = Math.cos(time * 0.6) * 0.2;
+
+        // Point Light intensity boost when hovered
+        if (limeLightRef.current) {
+          const targetLightInt = isHovered ? 7 : activeServiceIndex !== null ? 5.5 : 3.5;
+          limeLightRef.current.intensity += (targetLightInt - limeLightRef.current.intensity) * 0.08;
         }
+
+        renderer.render(scene, camera);
       }
 
-      // Point Light intensity boost when hovered
-      if (limeLightRef.current) {
-        const targetLightInt = isHovered ? 7 : activeServiceIndex !== null ? 5.5 : 3.5;
-        limeLightRef.current.intensity += (targetLightInt - limeLightRef.current.intensity) * 0.08;
-      }
-
-      renderer.render(scene, camera);
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
     animate();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
       if (rendererRef.current && rendererRef.current.domElement) {

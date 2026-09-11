@@ -182,9 +182,10 @@ export default function HeroScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=100%",
+        end: "+=120%",
         scrub: 0.4,
         pin: true,
+        pinSpacing: true,
       },
     });
 

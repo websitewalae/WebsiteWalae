@@ -24,9 +24,11 @@ export default function ContentCreationScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
-        end: "+=100%",
-        scrub: 0.3,
+        start: "top top",
+        end: "+=130%",
+        scrub: 0.4,
+        pin: true,
+        pinSpacing: true,
       },
     });
 
@@ -125,28 +127,28 @@ export default function ContentCreationScene() {
         <div className="absolute top-1/4 left-1/3 w-[50vw] h-[50vw] bg-gradient-to-br from-brand-accent/20 via-purple-600/10 to-transparent rounded-full blur-[150px] mix-blend-screen" />
       </div>
 
-      {/* Participating Headline (Point 18) */}
-      <div ref={textRef} className="absolute top-[12%] text-center px-4 z-20 max-w-full">
-        <h2 className="text-h2 text-white font-black tracking-tight flex flex-wrap justify-center gap-2">
+      {/* Participating Headline */}
+      <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 max-w-full">
+        <h2 className="text-xl sm:text-3xl md:text-5xl text-white font-black tracking-tight flex flex-wrap justify-center gap-2">
           <span ref={textLeftRef} className="inline-block">FROM CONTENT</span>
           <span ref={textRightRef} className="inline-block text-brand-accent">TO ATTENTION.</span>
         </h2>
       </div>
 
       {/* Viewfinder UI Indicator */}
-      <div className="absolute inset-0 pointer-events-none border border-brand-border opacity-20 m-3 sm:m-8 lg:m-20 flex items-center justify-center max-w-full overflow-hidden">
-        <div className="w-6 h-6 sm:w-12 sm:h-12 border-t-2 border-l-2 border-brand-accent absolute top-3 left-3 sm:top-6 sm:left-6" />
-        <div className="w-6 h-6 sm:w-12 sm:h-12 border-t-2 border-r-2 border-brand-accent absolute top-3 right-3 sm:top-6 sm:right-6" />
-        <div className="w-6 h-6 sm:w-12 sm:h-12 border-b-2 border-l-2 border-brand-accent absolute bottom-3 left-3 sm:bottom-6 sm:left-6" />
-        <div className="w-6 h-6 sm:w-12 sm:h-12 border-b-2 border-r-2 border-brand-accent absolute bottom-3 right-3 sm:bottom-6 sm:right-6" />
+      <div className="absolute inset-0 pointer-events-none border border-brand-border opacity-20 m-2 sm:m-8 lg:m-20 flex items-center justify-center max-w-full overflow-hidden">
+        <div className="w-6 h-6 sm:w-12 sm:h-12 border-t-2 border-l-2 border-brand-accent absolute top-2 left-2 sm:top-6 sm:left-6" />
+        <div className="w-6 h-6 sm:w-12 sm:h-12 border-t-2 border-r-2 border-brand-accent absolute top-2 right-2 sm:top-6 sm:right-6" />
+        <div className="w-6 h-6 sm:w-12 sm:h-12 border-b-2 border-l-2 border-brand-accent absolute bottom-2 left-2 sm:bottom-6 sm:left-6" />
+        <div className="w-6 h-6 sm:w-12 sm:h-12 border-b-2 border-r-2 border-brand-accent absolute bottom-2 right-2 sm:bottom-6 sm:right-6" />
         
-        <div ref={recRef} className="absolute top-3 sm:top-6 flex items-center gap-2 text-brand-accent font-mono text-xs tracking-widest bg-black/60 px-3 py-1 rounded-full border border-brand-accent/30">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" /> 
+        <div ref={recRef} className="absolute top-2 sm:top-6 flex items-center gap-1.5 sm:gap-2 text-brand-accent font-mono text-[9px] sm:text-xs tracking-widest bg-black/80 px-2.5 py-1 rounded-full border border-brand-accent/30 z-30">
+          <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-500 animate-pulse" /> 
           <span>REC ● 00:00:01:12 // CAPTURED</span>
         </div>
       </div>
 
-      {/* Electric Lime Attention Signal Thread (Point 16) */}
+      {/* Electric Lime Attention Signal Thread */}
       <div 
         ref={signalLineRef}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-4xl h-0.5 bg-gradient-to-r from-transparent via-brand-accent to-transparent pointer-events-none z-10 opacity-0"
@@ -154,14 +156,14 @@ export default function ContentCreationScene() {
         <div className="w-3 h-3 rounded-full bg-brand-accent shadow-[0_0_15px_rgba(199,255,61,0.8)] -mt-1.2 animate-[ping_2s_infinite]" />
       </div>
 
-      {/* Content Story Cards Container (Points 13-17) */}
-      <div ref={cardsContainerRef} className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-6 mt-16 sm:mt-8 px-4 max-w-full perspective-[1000px]">
+      {/* Content Story Cards Container */}
+      <div ref={cardsContainerRef} className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-2.5 sm:gap-6 mt-12 sm:mt-8 px-4 max-w-full perspective-[1000px]">
         {storyCards.map((card, i) => {
           const CardIcon = card.icon;
           return (
             <div 
               key={i} 
-              className={`glass p-5 sm:p-6 rounded-2xl w-[280px] sm:w-[310px] h-[190px] sm:h-[210px] flex flex-col justify-between shadow-floating border bg-[#0a0a0a]/90 backdrop-blur-xl transform-gpu transition-all duration-300 hover:scale-105 ${card.color}`}
+              className={`glass p-3.5 sm:p-6 rounded-2xl w-[260px] sm:w-[310px] h-[145px] sm:h-[210px] flex flex-col justify-between shadow-floating border bg-[#0a0a0a]/90 backdrop-blur-xl transform-gpu transition-all duration-300 hover:scale-105 ${card.color}`}
             >
               {/* Card Top Header */}
               <div className="flex justify-between items-start">

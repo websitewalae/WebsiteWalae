@@ -22,9 +22,11 @@ export default function DevelopmentScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
-        end: "+=110%",
-        scrub: 0.3,
+        start: "top top",
+        end: "+=130%",
+        scrub: 0.4,
+        pin: true,
+        pinSpacing: true,
       },
     });
 
@@ -77,11 +79,11 @@ export default function DevelopmentScene() {
 
   return (
     <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#0a0a0a]">
-      <div ref={textRef} className="absolute top-[10%] text-center px-6 z-20">
-        <h2 className="text-h2 mb-4">DESIGN IS ONLY <br /> THE BEGINNING.</h2>
+      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 max-w-full">
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">DESIGN IS ONLY <br /> THE BEGINNING.</h2>
       </div>
 
-      <div className="flex w-full max-w-6xl mt-[8%] sm:mt-[5%] gap-8 px-4 sm:px-6 perspective-[1000px]">
+      <div className="flex w-full max-w-6xl mt-[14%] sm:mt-[5%] gap-8 px-4 sm:px-6 perspective-[1000px]">
         {/* Code Editor */}
         <div ref={editorRef} className="flex-1 h-[65vh] sm:h-[60vh] bg-[#050505] border border-brand-border-strong rounded-xl shadow-cinematic flex flex-col overflow-hidden">
           <div className="h-9 sm:h-10 bg-brand-surface border-b border-brand-border flex items-center px-3 sm:px-4 gap-2">

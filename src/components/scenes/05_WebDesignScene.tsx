@@ -19,9 +19,11 @@ export default function WebDesignScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top 85%",
-        end: "+=110%",
-        scrub: 0.3,
+        start: "top top",
+        end: "+=130%",
+        scrub: 0.4,
+        pin: true,
+        pinSpacing: true,
       },
     });
 
@@ -58,11 +60,11 @@ export default function WebDesignScene() {
 
   return (
     <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-brand-bg">
-      <div ref={textRef} className="absolute top-[10%] text-center px-6 z-20">
-        <h2 className="text-h2 mb-4">THEN WE BUILD <br /> THE DIGITAL HOME.</h2>
+      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 max-w-full">
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">THEN WE BUILD <br /> THE DIGITAL HOME.</h2>
       </div>
 
-      <div ref={screenRef} className="w-[92%] sm:w-[90%] max-w-6xl h-[65vh] sm:h-[70vh] bg-brand-surface border border-brand-border-strong rounded-2xl mt-[5%] shadow-cinematic overflow-hidden relative flex flex-col">
+      <div ref={screenRef} className="w-[94%] sm:w-[90%] max-w-6xl h-[52vh] sm:h-[65vh] bg-brand-surface border border-brand-border-strong rounded-2xl mt-[12%] sm:mt-[5%] shadow-cinematic overflow-hidden relative flex flex-col">
         {/* Fake Browser Header */}
         <div className="h-9 sm:h-10 border-b border-brand-border bg-[#0a0a0a] flex items-center px-4 gap-2 shrink-0">
           <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />
