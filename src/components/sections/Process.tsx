@@ -50,17 +50,17 @@ export default function Process() {
       <div className="flex items-center justify-start w-full h-full pt-[10%]">
         <div ref={trackRef} className="flex h-64">
           {steps.map((step, i) => (
-            <div key={i} className="flex flex-col justify-center px-[10vw] relative shrink-0">
+            <div key={i} className="flex flex-col items-center justify-center px-[4vw] sm:px-[8vw] md:px-[10vw] relative shrink-0">
               {/* Connection Line */}
               {i < steps.length - 1 && (
                 <div className="absolute top-1/2 left-[50%] w-full h-px bg-brand-border-strong -translate-y-1/2" />
               )}
               
-              <div className="relative z-10 w-32 h-32 md:w-48 md:h-48 rounded-full border border-brand-border-strong bg-brand-bg flex items-center justify-center mb-8 shadow-floating transition-transform hover:scale-110">
-                 <div className="text-xs font-mono text-brand-accent absolute top-8">{step.id}</div>
-                 <div className="text-xl md:text-2xl font-bold tracking-tighter">{step.name}</div>
+              <div className="relative z-10 w-28 h-28 sm:w-36 sm:h-36 md:w-48 md:h-48 rounded-full border border-brand-border-strong bg-brand-bg flex items-center justify-center mb-4 sm:mb-8 shadow-floating transition-transform hover:scale-110">
+                 <div className="text-[10px] sm:text-xs font-mono text-brand-accent absolute top-4 sm:top-8">{step.id}</div>
+                 <div className="text-sm sm:text-xl md:text-2xl font-bold tracking-tighter text-center">{step.name}</div>
               </div>
-              <div className="text-center font-mono text-brand-text-muted">
+              <div className="text-center font-mono text-xs sm:text-sm text-brand-text-muted">
                 {`-> ${step.phase}`}
               </div>
             </div>

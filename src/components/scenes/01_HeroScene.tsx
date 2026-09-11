@@ -96,23 +96,23 @@ export default function HeroScene() {
       </div>
 
       {/* Main HUD Container */}
-      <div ref={contentRef} className="absolute inset-0 z-20 flex flex-col justify-between p-6 md:p-12">
+      <div ref={contentRef} className="absolute inset-0 z-20 flex flex-col justify-between p-4 sm:p-6 md:p-12">
         
         {/* Top HUD Bar */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="flex justify-between items-start w-full"
+          className="flex justify-between items-center w-full"
         >
-          {/* Top Left: Logo / Sound */}
+          {/* Top Left: Logo */}
           <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center" data-cursor="link">
-              <img src="/logo.png" alt="Website Walae" className="h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
+              <img src="/logo.png" alt="Website Walae" className="h-8 sm:h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
             </Link>
           </div>
 
-          {/* Top Center: Timeline Gauge (Reference Vibe) */}
+          {/* Top Center: Timeline Gauge */}
           <div className="hidden md:flex flex-col items-center">
             <div className="flex gap-1 opacity-40 mb-2">
               {[...Array(21)].map((_, i) => (
@@ -123,12 +123,12 @@ export default function HeroScene() {
           </div>
 
           {/* Top Right: Status Badge */}
-          <div className="glass px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
+          <div className="glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/10 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
             </span>
-            <span className="text-xs font-bold tracking-widest text-white">READY</span>
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-white">READY</span>
           </div>
         </motion.div>
 
@@ -139,7 +139,7 @@ export default function HeroScene() {
           transition={{ duration: 1.2, delay: 0.5 }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center pointer-events-none"
         >
-          <div className="relative w-24 h-24 flex items-center justify-center mb-4">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center mb-4">
             {/* Glowing Ring */}
             <motion.div 
               animate={{ rotate: 360 }}
@@ -149,7 +149,7 @@ export default function HeroScene() {
             <div className="absolute inset-2 rounded-full border border-white/5 bg-white/5 backdrop-blur-md" />
             
             {/* Inner Text */}
-            <div className="text-[10px] font-black tracking-widest text-white text-center leading-tight">
+            <div className="text-[9px] sm:text-[10px] font-black tracking-widest text-white text-center leading-tight">
               SCROLL<br/>DOWN
             </div>
           </div>
@@ -160,19 +160,19 @@ export default function HeroScene() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="flex justify-center w-full pb-4"
+          className="flex justify-center w-full pb-2 sm:pb-4"
         >
-          <div className="glass px-2 py-2 rounded-full border border-white/10 flex items-center gap-2 backdrop-blur-xl bg-black/40">
-            <Link href="#work" className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors group">
-              <span className="text-xs group-hover:scale-110 transition-transform">✦</span>
+          <div className="glass px-2 py-1.5 sm:py-2 rounded-full border border-white/10 flex items-center gap-1.5 sm:gap-2 backdrop-blur-xl bg-black/40">
+            <Link href="#work" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors group">
+              <span className="text-xs group-hover:scale-110 transition-transform text-white">✦</span>
             </Link>
             
-            <Link href="#contact" className="px-6 py-2 h-10 bg-white text-black font-bold text-sm rounded-full hover:bg-brand-accent transition-colors flex items-center">
+            <Link href="#contact" className="px-4 py-1.5 sm:px-6 sm:py-2 h-8 sm:h-10 bg-white text-black font-bold text-xs sm:text-sm rounded-full hover:bg-brand-accent transition-colors flex items-center">
               Start a Project
             </Link>
             
-            <button className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors text-white">
-              <Menu size={16} />
+            <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors text-white">
+              <Menu size={14} className="sm:w-4 sm:h-4" />
             </button>
           </div>
         </motion.div>

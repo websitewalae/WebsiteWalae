@@ -38,11 +38,11 @@ export default function Services() {
                 }`}
               />
 
-              <div className="flex gap-6 md:gap-12 items-center relative z-10 transition-transform duration-500 group-hover:translate-x-4">
-                <span className="text-sm md:text-lg font-mono text-brand-text-muted transition-colors group-hover:text-brand-accent">
+              <div className="flex gap-3 sm:gap-6 md:gap-12 items-center relative z-10 transition-transform duration-500 group-hover:translate-x-4">
+                <span className="text-xs sm:text-sm md:text-lg font-mono text-brand-text-muted transition-colors group-hover:text-brand-accent">
                   {service.id}
                 </span>
-                <span className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-brand-text group-hover:text-white">
+                <span className="text-xl sm:text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-brand-text group-hover:text-white">
                   {service.name}
                 </span>
               </div>

@@ -37,7 +37,7 @@ export default function EditingScene() {
     // Playhead moves across timeline
     tl.fromTo(playheadRef.current, 
       { x: "0%" }, 
-      { x: "400px", duration: 2, ease: "none" }
+      { x: "90%", duration: 2, ease: "none" }
     );
 
     // Simulate exporting text update

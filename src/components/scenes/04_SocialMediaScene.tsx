@@ -29,15 +29,17 @@ export default function SocialMediaScene() {
 
     tl.fromTo(textRef.current, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
 
-    // Cards fan out from center
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+    // Cards fan out from center based on viewport
     tl.fromTo(cards, 
       { opacity: 0, y: 200, scale: 0.8, rotateZ: 0 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        rotateZ: (i) => [-10, 0, 10][i],
-        x: (i) => [-300, 0, 300][i],
+        rotateZ: (i) => isMobile ? [-5, 0, 5][i] : [-10, 0, 10][i],
+        x: (i) => isMobile ? [-40, 0, 40][i] : [-280, 0, 280][i],
         stagger: 0.1,
         duration: 1,
         ease: "power2.out"
@@ -76,9 +78,9 @@ export default function SocialMediaScene() {
         <h2 className="text-h2 mb-4">FROM CONTENT TO ATTENTION.</h2>
       </div>
 
-      <div ref={cardsRef} className="relative z-10 flex items-center justify-center w-full h-full mt-[10%]">
+      <div ref={cardsRef} className="relative z-10 flex items-center justify-center w-full h-full mt-[10%] px-4">
         {stats.map((stat, i) => (
-          <div key={i} className="absolute w-[300px] h-[500px] glass rounded-3xl p-4 flex flex-col justify-between shadow-floating border-brand-border-strong bg-[#0a0a0a]/80">
+          <div key={i} className="absolute w-[260px] sm:w-[300px] h-[420px] sm:h-[500px] glass rounded-3xl p-4 flex flex-col justify-between shadow-floating border-brand-border-strong bg-[#0a0a0a]/80">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-full bg-brand-surface border border-brand-border" />
               <div>

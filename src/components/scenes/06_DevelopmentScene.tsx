@@ -82,23 +82,23 @@ export default function DevelopmentScene() {
         <h2 className="text-h2 mb-4">DESIGN IS ONLY <br /> THE BEGINNING.</h2>
       </div>
 
-      <div className="flex w-full max-w-6xl mt-[5%] gap-8 px-6 perspective-[1000px]">
+      <div className="flex w-full max-w-6xl mt-[8%] sm:mt-[5%] gap-8 px-4 sm:px-6 perspective-[1000px]">
         {/* Code Editor */}
-        <div ref={editorRef} className="flex-1 h-[60vh] bg-[#050505] border border-brand-border-strong rounded-xl shadow-cinematic flex flex-col overflow-hidden">
-          <div className="h-10 bg-brand-surface border-b border-brand-border flex items-center px-4 gap-2">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500/80" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        <div ref={editorRef} className="flex-1 h-[65vh] sm:h-[60vh] bg-[#050505] border border-brand-border-strong rounded-xl shadow-cinematic flex flex-col overflow-hidden">
+          <div className="h-9 sm:h-10 bg-brand-surface border-b border-brand-border flex items-center px-3 sm:px-4 gap-2">
+            <div className="flex gap-1.5 sm:gap-2">
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
             </div>
-            <span className="ml-4 text-xs font-mono text-brand-text-muted">page.tsx</span>
+            <span className="ml-2 sm:ml-4 text-[10px] sm:text-xs font-mono text-brand-text-muted">page.tsx</span>
           </div>
           
-          <div className="flex-1 p-6 font-mono text-sm overflow-hidden flex flex-col relative">
-             <div ref={codeLinesRef} className="flex flex-col gap-1">
+          <div className="flex-1 p-3 sm:p-6 font-mono text-[11px] sm:text-sm overflow-hidden flex flex-col relative">
+             <div ref={codeLinesRef} className="flex flex-col gap-1 overflow-x-auto no-scrollbar">
                {codeSnippet.map((line, i) => (
-                 <div key={i} className="flex">
-                   <span className="text-brand-text-disabled w-8 select-none">{i + 1}</span>
+                 <div key={i} className="flex whitespace-nowrap">
+                   <span className="text-brand-text-disabled w-6 sm:w-8 select-none shrink-0">{i + 1}</span>
                    <span className={line.includes('import') ? 'text-blue-400' : line.includes('function') ? 'text-purple-400' : line.includes('<') ? 'text-green-400' : 'text-brand-text-secondary'}>
                      {line}
                    </span>
@@ -107,14 +107,13 @@ export default function DevelopmentScene() {
              </div>
 
              {/* Terminal Overlay */}
-             <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-black/90 border-t border-brand-border p-4 font-mono text-xs">
-                <div className="text-brand-text-muted mb-2">$ npm run build</div>
-                <div ref={buildStatusRef} className="flex flex-col gap-1">
+             <div className="absolute bottom-0 left-0 right-0 h-2/5 sm:h-1/3 bg-black/90 border-t border-brand-border p-3 sm:p-4 font-mono text-[10px] sm:text-xs">
+                <div className="text-brand-text-muted mb-1">$ npm run build</div>
+                <div ref={buildStatusRef} className="flex flex-col gap-0.5 sm:gap-1">
                   <div>✓ Compiled successfully</div>
                   <div>→ Responsive layout verified</div>
                   <div>→ Performance 100/100</div>
-                  <div>→ SEO Optimized</div>
-                  <div className="mt-2 text-brand-text">Ready for production.</div>
+                  <div className="mt-1 text-brand-text text-brand-accent">Ready for production.</div>
                 </div>
              </div>
           </div>

@@ -58,32 +58,32 @@ export default function ContentCreationScene() {
       </div>
 
       {/* Viewfinder UI */}
-      <div className="absolute inset-0 pointer-events-none border-[1px] border-brand-border opacity-20 m-12 lg:m-24 flex items-center justify-center">
-        <div className="w-16 h-16 border-t-2 border-l-2 border-brand-accent absolute top-8 left-8" />
-        <div className="w-16 h-16 border-t-2 border-r-2 border-brand-accent absolute top-8 right-8" />
-        <div className="w-16 h-16 border-b-2 border-l-2 border-brand-accent absolute bottom-8 left-8" />
-        <div className="w-16 h-16 border-b-2 border-r-2 border-brand-accent absolute bottom-8 right-8" />
-        <div className="absolute top-8 flex items-center gap-2 text-brand-accent font-mono text-sm tracking-widest animate-pulse">
-          <div className="w-3 h-3 rounded-full bg-red-500" /> REC 00:00:12
+      <div className="absolute inset-0 pointer-events-none border-[1px] border-brand-border opacity-20 m-4 sm:m-12 lg:m-24 flex items-center justify-center">
+        <div className="w-8 h-8 sm:w-16 sm:h-16 border-t-2 border-l-2 border-brand-accent absolute top-4 left-4 sm:top-8 sm:left-8" />
+        <div className="w-8 h-8 sm:w-16 sm:h-16 border-t-2 border-r-2 border-brand-accent absolute top-4 right-4 sm:top-8 sm:right-8" />
+        <div className="w-8 h-8 sm:w-16 sm:h-16 border-b-2 border-l-2 border-brand-accent absolute bottom-4 left-4 sm:bottom-8 sm:left-8" />
+        <div className="w-8 h-8 sm:w-16 sm:h-16 border-b-2 border-r-2 border-brand-accent absolute bottom-4 right-4 sm:bottom-8 sm:right-8" />
+        <div className="absolute top-4 sm:top-8 flex items-center gap-2 text-brand-accent font-mono text-xs sm:text-sm tracking-widest animate-pulse">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" /> REC 00:00:12
         </div>
       </div>
 
       {/* Captured Files */}
-      <div ref={filesContainerRef} className="relative z-10 flex flex-wrap items-center justify-center gap-8 -mt-12 perspective-[1000px]">
+      <div ref={filesContainerRef} className="relative z-10 flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-12 sm:-mt-12 px-4 max-w-full perspective-[1000px]">
         {[
           { name: "FINAL_REEL_01.mp4", size: "4K • 24fps" },
           { name: "PRODUCT_SHOOT.mov", size: "1080p • 60fps" },
           { name: "CAMPAIGN_MASTER.mp4", size: "4K • RAW" }
         ].map((file, i) => (
-          <div key={i} className="glass p-6 rounded-2xl w-[280px] h-[180px] flex flex-col justify-between shadow-floating transform-gpu transition-transform hover:scale-105">
+          <div key={i} className="glass p-4 sm:p-6 rounded-2xl w-[260px] sm:w-[280px] h-[150px] sm:h-[180px] flex flex-col justify-between shadow-floating transform-gpu transition-transform hover:scale-105">
             <div className="flex justify-between items-start">
-              <div className="w-10 h-10 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center">
-                <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-brand-text border-b-[6px] border-b-transparent ml-1" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center">
+                <div className="w-0 h-0 border-t-[5px] sm:border-t-[6px] border-t-transparent border-l-[8px] sm:border-l-[10px] border-l-brand-text border-b-[5px] sm:border-b-[6px] border-b-transparent ml-1" />
               </div>
-              <span className="text-xs text-brand-text-muted font-mono">{file.size}</span>
+              <span className="text-[10px] sm:text-xs text-brand-text-muted font-mono">{file.size}</span>
             </div>
             <div>
-              <p className="font-mono text-sm text-brand-text mb-1 truncate">{file.name}</p>
+              <p className="font-mono text-xs sm:text-sm text-brand-text mb-1 truncate">{file.name}</p>
               <div className="w-full bg-brand-surface h-1 rounded-full overflow-hidden">
                 <div className="w-full h-full bg-brand-accent" />
               </div>

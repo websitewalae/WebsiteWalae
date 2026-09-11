@@ -27,7 +27,7 @@ export default function Portfolio() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const cards = containerRef.current.children;
+    const cards = containerRef.current.querySelectorAll('.portfolio-card');
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -48,19 +48,19 @@ export default function Portfolio() {
 
   return (
     <section id="work" ref={sectionRef} className="relative w-full h-screen bg-[#050505] overflow-hidden flex flex-col">
-      <div className="absolute top-[10%] left-6 lg:left-[5vw] z-20">
+      <div className="absolute top-[8%] sm:top-[10%] left-4 sm:left-6 lg:left-[5vw] z-20">
         <h2 className="text-h2 text-brand-text mb-4">WORK THAT SPEAKS <br /> BEFORE WE DO.</h2>
       </div>
 
-      <div className="flex-1 flex items-center h-full mt-[10%] pl-6 lg:pl-[5vw]">
-        <div ref={containerRef} className="flex gap-8 lg:gap-16 items-center h-[60vh]">
+      <div className="flex-1 flex items-center h-full mt-[12%] sm:mt-[10%] pl-4 sm:pl-6 lg:pl-[5vw]">
+        <div ref={containerRef} className="flex gap-4 sm:gap-8 lg:gap-16 items-center h-[55vh] sm:h-[60vh]">
           {projects.map((project, i) => (
             <a 
               key={i}
               href={project.url}
               target="_blank"
               rel="noopener noreferrer" 
-              className="relative w-[80vw] max-w-4xl h-full shrink-0 group rounded-3xl overflow-hidden cursor-pointer block"
+              className="portfolio-card relative w-[88vw] sm:w-[80vw] max-w-4xl h-full shrink-0 group rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer block"
               data-cursor="project"
             >
               <div className="absolute inset-0 bg-[#0a0a0a] transition-transform duration-700 group-hover:scale-105">
@@ -74,22 +74,22 @@ export default function Portfolio() {
                 />
               </div>
               
-              <div className="absolute inset-0 z-20 p-8 md:p-12 flex flex-col justify-between">
+              <div className="absolute inset-0 z-20 p-5 sm:p-8 md:p-12 flex flex-col justify-between">
                 <div className="flex justify-between items-start">
-                  <div className="text-brand-text-muted font-mono">{project.id}</div>
-                  <div className="glass px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-widest">
+                  <div className="text-brand-text-muted font-mono text-xs sm:text-base">{project.id}</div>
+                  <div className="glass px-3 py-1 sm:px-4 sm:py-2 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-white">
                     {project.industry}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 transform transition-transform duration-500 group-hover:translate-x-4">
+                  <h3 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-tighter mb-2 sm:mb-4 text-white transform transition-transform duration-500 group-hover:translate-x-4">
                     {project.name}
                   </h3>
-                  <div className="flex flex-col md:flex-row md:items-center gap-4 text-brand-text-secondary transform transition-transform duration-500 delay-75 group-hover:translate-x-4">
-                    <span className="text-sm font-mono">{project.services}</span>
+                  <div className="flex flex-col md:flex-row md:items-center gap-1 sm:gap-4 text-brand-text-secondary transform transition-transform duration-500 delay-75 group-hover:translate-x-4">
+                    <span className="text-xs sm:text-sm font-mono text-brand-accent">{project.services}</span>
                     <span className="hidden md:block w-8 h-px bg-brand-border" />
-                    <span className="text-sm">{project.desc}</span>
+                    <span className="text-xs sm:text-sm">{project.desc}</span>
                   </div>
                 </div>
               </div>

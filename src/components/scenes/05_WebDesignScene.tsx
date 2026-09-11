@@ -66,48 +66,48 @@ export default function WebDesignScene() {
       <div ref={screenRef} className="w-[90%] max-w-6xl h-[70vh] bg-brand-surface border border-brand-border-strong rounded-2xl mt-[5%] shadow-cinematic overflow-hidden relative flex flex-col">
         {/* Fake Browser Header */}
         <div className="h-10 border-b border-brand-border bg-[#0a0a0a] flex items-center px-4 gap-2 shrink-0">
-          <div className="w-3 h-3 rounded-full bg-brand-border" />
-          <div className="w-3 h-3 rounded-full bg-brand-border" />
-          <div className="w-3 h-3 rounded-full bg-brand-border" />
-          <div className="ml-4 h-6 w-64 bg-brand-bg rounded-md border border-brand-border flex items-center px-3">
-             <span className="text-[10px] text-brand-text-muted font-mono">websitewalae.com</span>
+          <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />
+          <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />
+          <div className="w-2.5 h-2.5 rounded-full bg-brand-border" />
+          <div className="ml-2 sm:ml-4 h-6 w-36 sm:w-64 bg-brand-bg rounded-md border border-brand-border flex items-center px-3">
+             <span className="text-[9px] sm:text-[10px] text-brand-text-muted font-mono">websitewalae.com</span>
           </div>
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 relative bg-brand-bg overflow-hidden p-8">
+        <div className="flex-1 relative bg-brand-bg overflow-hidden p-4 sm:p-8">
           
           {/* Wireframe State */}
-          <div ref={wireframeRef} className="absolute inset-0 p-8 flex flex-col gap-8 opacity-100">
-            <div className="h-12 w-full border-2 border-dashed border-brand-border rounded flex justify-between items-center px-4">
-              <div className="w-24 h-4 bg-brand-surface rounded" />
-              <div className="w-48 h-4 bg-brand-surface rounded" />
+          <div ref={wireframeRef} className="absolute inset-0 p-4 sm:p-8 flex flex-col gap-4 sm:gap-8 opacity-100">
+            <div className="h-10 sm:h-12 w-full border-2 border-dashed border-brand-border rounded flex justify-between items-center px-4">
+              <div className="w-16 sm:w-24 h-3 sm:h-4 bg-brand-surface rounded" />
+              <div className="w-24 sm:w-48 h-3 sm:h-4 bg-brand-surface rounded" />
             </div>
-            <div className="flex-1 flex items-center justify-center border-2 border-dashed border-brand-border rounded">
-              <div className="flex flex-col items-center gap-4">
-                <div className="w-64 h-12 bg-brand-surface rounded" />
-                <div className="w-96 h-6 bg-brand-surface rounded" />
-                <div className="w-32 h-10 bg-brand-surface rounded-full mt-4" />
+            <div className="flex-1 flex items-center justify-center border-2 border-dashed border-brand-border rounded p-4">
+              <div className="flex flex-col items-center gap-3 sm:gap-4 w-full max-w-sm">
+                <div className="w-48 sm:w-64 h-8 sm:h-12 bg-brand-surface rounded" />
+                <div className="w-full h-4 sm:h-6 bg-brand-surface rounded" />
+                <div className="w-24 sm:w-32 h-8 sm:h-10 bg-brand-surface rounded-full mt-2 sm:mt-4" />
               </div>
             </div>
           </div>
 
           {/* Polished UI State */}
-          <div ref={uiRef} className="absolute inset-0 p-8 flex flex-col gap-8 opacity-0">
+          <div ref={uiRef} className="absolute inset-0 p-4 sm:p-8 flex flex-col gap-4 sm:gap-8 opacity-0">
             {/* Nav */}
-            <div className="h-12 w-full glass rounded-full flex justify-between items-center px-6">
-              <div className="text-sm font-bold tracking-widest text-brand-text">BRAND</div>
-              <div className="flex gap-4 text-xs text-brand-text-secondary">
+            <div className="h-10 sm:h-12 w-full glass rounded-full flex justify-between items-center px-4 sm:px-6">
+              <div className="text-xs sm:text-sm font-bold tracking-widest text-brand-text">BRAND</div>
+              <div className="flex gap-2 sm:gap-4 text-[10px] sm:text-xs text-brand-text-secondary">
                 <span>HOME</span>
                 <span>ABOUT</span>
                 <span>CONTACT</span>
               </div>
             </div>
             {/* Hero */}
-            <div className="flex-1 flex flex-col items-center justify-center text-center">
-              <h1 className="text-6xl font-bold mb-4 text-white">THE FUTURE IS NOW.</h1>
-              <p className="text-brand-text-secondary max-w-md mb-8">A fully realized digital experience built from the ground up to convert.</p>
-              <button className="px-8 py-4 bg-brand-accent text-brand-bg font-bold rounded-full">Explore</button>
+            <div className="flex-1 flex flex-col items-center justify-center text-center px-2">
+              <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4 text-white">THE FUTURE IS NOW.</h1>
+              <p className="text-xs sm:text-base text-brand-text-secondary max-w-md mb-4 sm:mb-8">A fully realized digital experience built from the ground up to convert.</p>
+              <button className="px-6 py-2.5 sm:px-8 sm:py-4 bg-brand-accent text-brand-bg font-bold text-xs sm:text-sm rounded-full">Explore</button>
             </div>
           </div>
 
