@@ -23,18 +23,18 @@ export default function HeroLogo3D({
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
   const meshGroupRef = useRef<THREE.Group | null>(null);
-  const logoMeshRef = useRef<THREE.Mesh | null>(null);
   const ringMeshRef = useRef<THREE.Mesh | null>(null);
   const ringMesh2Ref = useRef<THREE.Mesh | null>(null);
   const limeLightRef = useRef<THREE.PointLight | null>(null);
   const animFrameRef = useRef<number | null>(null);
 
-  // Smooth physical variables
+  // Smooth physical variables for controlled front-facing tilt
   const currentRotationX = useRef(0);
   const currentRotationY = useRef(0);
   const targetRotationX = useRef(0);
   const targetRotationY = useRef(0);
   const currentScale = useRef(1);
+  const currentZ = useRef(0);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -58,17 +58,16 @@ export default function HeroLogo3D({
       powerPreference: "high-performance",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    // Clean container before appending canvas
     containerRef.current.innerHTML = "";
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // 4. Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    // 4. Studio Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
@@ -81,55 +80,60 @@ export default function HeroLogo3D({
     scene.add(limeLight);
     limeLightRef.current = limeLight;
 
-    const purpleLight = new THREE.PointLight(0x8b5cf6, 3, 12);
+    const purpleLight = new THREE.PointLight(0x8b5cf6, 3.5, 12);
     purpleLight.position.set(3, -2, 3);
     scene.add(purpleLight);
 
-    // 5. Group container for logo + rings
+    // 5. Logo Master Group
     const group = new THREE.Group();
     scene.add(group);
     meshGroupRef.current = group;
 
-    // 6. Texture Loader for Website Walae Logo
+    // 6. Texture Loader for Ultra High-Res Website Walae Logo
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load("/logo.png", (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.generateMipmaps = true;
       texture.minFilter = THREE.LinearMipmapLinearFilter;
 
-      // Create a cylindrical coin/emblem mesh
-      const radius = 1.35;
-      const heightVal = 0.22;
-      const cylinderGeo = new THREE.CylinderGeometry(radius, radius, heightVal, 64, 1);
+      // --- A. FRONT FACE DISK (ALWAYS Facing Camera +Z) ---
+      const frontGeo = new THREE.CircleGeometry(1.36, 64);
+      const frontMat = new THREE.MeshStandardMaterial({
+        map: texture,
+        transparent: true,
+        roughness: 0.2,
+        metalness: 0.1,
+      });
+      const frontMesh = new THREE.Mesh(frontGeo, frontMat);
+      frontMesh.position.z = 0.112;
+      group.add(frontMesh);
 
-      // Materials: 0=side bevel, 1=top face (logo), 2=bottom face (logo)
+      // --- B. METALLIC BEVEL RIM (Side Thickness) ---
+      const cylinderGeo = new THREE.CylinderGeometry(1.38, 1.38, 0.22, 64, 1, true);
       const sideMat = new THREE.MeshPhysicalMaterial({
-        color: 0x141414,
+        color: 0x111111,
         metalness: 0.85,
-        roughness: 0.25,
+        roughness: 0.2,
         clearcoat: 0.6,
         clearcoatRoughness: 0.1,
         emissive: 0xc7ff3d,
-        emissiveIntensity: 0.08,
+        emissiveIntensity: 0.1,
       });
+      const sideMesh = new THREE.Mesh(cylinderGeo, sideMat);
+      sideMesh.rotation.x = Math.PI / 2;
+      group.add(sideMesh);
 
-      const faceMat = new THREE.MeshStandardMaterial({
-        map: texture,
-        transparent: true,
+      // --- C. BACK DISK ---
+      const backGeo = new THREE.CircleGeometry(1.38, 64);
+      const backMat = new THREE.MeshStandardMaterial({
+        color: 0x0a0a0a,
         roughness: 0.3,
-        metalness: 0.2,
+        metalness: 0.8,
       });
-
-      const materials = [sideMat, faceMat, faceMat];
-
-      const logoMesh = new THREE.Mesh(cylinderGeo, materials);
-      // Rotate cylinder so top face faces camera (cylinder default height is along Y)
-      logoMesh.rotation.x = Math.PI / 2;
-      logoMesh.castShadow = true;
-      logoMesh.receiveShadow = true;
-
-      group.add(logoMesh);
-      logoMeshRef.current = logoMesh;
+      const backMesh = new THREE.Mesh(backGeo, backMat);
+      backMesh.position.z = -0.112;
+      backMesh.rotation.y = Math.PI;
+      group.add(backMesh);
     });
 
     // 7. Futuristic Energy Rings
@@ -166,7 +170,7 @@ export default function HeroLogo3D({
 
     window.addEventListener("resize", handleResize);
 
-    // 8. Performance Optimization: Pause loop when offscreen
+    // 8. Offscreen Pause Observer
     let isVisible = true;
     const observer = new IntersectionObserver(
       (entries) => {
@@ -178,7 +182,7 @@ export default function HeroLogo3D({
     );
     observer.observe(containerRef.current);
 
-    // Animation Loop
+    // 9. Animation Loop with Strict Front-Facing Constraints
     let time = 0;
 
     const animate = () => {
@@ -186,19 +190,24 @@ export default function HeroLogo3D({
         time += 0.015;
 
         if (group) {
-          // Apply smooth tilt interpolation based on mouse coordinates (fixed upright base)
+          // Controlled pointer tilt interpolation (max ~5.7 degrees yaw/pitch)
           currentRotationX.current += (targetRotationX.current - currentRotationX.current) * 0.08;
           currentRotationY.current += (targetRotationY.current - currentRotationY.current) * 0.08;
 
-          // FIXED UPRIGHT ROTATION: text stays front-facing and legible at all times
+          // FRONT FACING GUARANTEE: rotation.y & rotation.x are strictly constrained to pointer tilt
           group.rotation.y = currentRotationY.current;
           group.rotation.x = currentRotationX.current;
 
-          // Gentle floating breathing motion on Y axis
-          group.position.y = Math.sin(time) * 0.08;
+          // Gentle breathing float on Y-axis
+          group.position.y = Math.sin(time) * 0.06;
 
-          // Scale animation on hover/service activation
-          const targetScaleVal = isHovered ? 1.15 : activeServiceIndex !== null ? 1.08 : 1.0;
+          // Z-axis movement on hover
+          const targetZVal = isHovered ? 0.35 : activeServiceIndex !== null ? 0.2 : 0;
+          currentZ.current += (targetZVal - currentZ.current) * 0.08;
+          group.position.z = currentZ.current;
+
+          // Scale animation on hover/service focus
+          const targetScaleVal = isHovered ? 1.12 : activeServiceIndex !== null ? 1.06 : 1.0;
           currentScale.current += (targetScaleVal - currentScale.current) * 0.08;
           group.scale.set(currentScale.current, currentScale.current, currentScale.current);
 
@@ -213,7 +222,7 @@ export default function HeroLogo3D({
           }
         }
 
-        // Point Light intensity boost when hovered
+        // Boost lighting intensity on hover
         if (limeLightRef.current) {
           const targetLightInt = isHovered ? 7 : activeServiceIndex !== null ? 5.5 : 3.5;
           limeLightRef.current.intensity += (targetLightInt - limeLightRef.current.intensity) * 0.08;
@@ -237,10 +246,10 @@ export default function HeroLogo3D({
     };
   }, []);
 
-  // Update target tilt from props mouseX & mouseY (pitch up to ~8deg, yaw up to ~8deg)
+  // Mouse tilt parameters: Max +/- 0.10 rad (~5.7 degrees max tilt pitch/yaw)
   useEffect(() => {
-    targetRotationX.current = -mouseY * 0.22; // ~12 degrees max tilt pitch
-    targetRotationY.current = mouseX * 0.22;  // ~12 degrees max tilt yaw
+    targetRotationX.current = -mouseY * 0.10;
+    targetRotationY.current = mouseX * 0.10;
   }, [mouseX, mouseY]);
 
   return (

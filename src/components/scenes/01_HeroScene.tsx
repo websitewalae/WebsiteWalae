@@ -342,7 +342,7 @@ export default function HeroScene() {
               ? "SYSTEM AWAKENED // SELECT SERVICE"
               : activeServiceIndex !== null
               ? `SERVICE: ${SERVICES[activeServiceIndex].title}`
-              : "WEBSITE WALAE 3D CORE • HOVER LOGO"}
+              : "WEBSITE WALAE • CREATIVE SYSTEM"}
           </span>
         </motion.div>
       </div>
