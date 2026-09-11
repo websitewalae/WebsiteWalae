@@ -1,52 +1,180 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { Menu, Sparkles, Camera, Cpu, Layout, Code, Search, ChevronDown, Zap, ArrowRight } from "lucide-react";
+import {
+  Menu,
+  ChevronDown,
+  ArrowRight,
+  Code,
+  Layout,
+  Share2,
+  Sparkles,
+  Video,
+  Search,
+  Target,
+  ExternalLink,
+  Zap,
+  CheckCircle2,
+  TrendingUp,
+} from "lucide-react";
+import HeroLogo3D from "../ui/HeroLogo3D";
+
+// 7 Core Services Definition
+const SERVICES = [
+  {
+    id: "ui-ux",
+    num: "01",
+    title: "UI / UX DESIGN",
+    icon: Layout,
+    color: "#7C3AED",
+    pos: { top: "8%", left: "50%", transform: "translateX(-50%)" },
+    lineAngle: -90,
+    preview: {
+      tag: "DESIGN SYSTEM",
+      heading: "Figma & Design Systems",
+      desc: "Pixel-perfect visual architectures, component libraries & interactive prototypes.",
+      stats: ["4.9/5 Rating", "100+ UI Kits"],
+    },
+  },
+  {
+    id: "web-dev",
+    num: "02",
+    title: "WEBSITE DEVELOPMENT",
+    icon: Code,
+    color: "#C7FF3D",
+    pos: { top: "20%", right: "6%" },
+    lineAngle: -35,
+    preview: {
+      tag: "FULLSTACK WEB",
+      heading: "Next.js & WebGL Systems",
+      desc: "Ultra-fast, SEO-optimized web applications built with modern 3D & GSAP motion.",
+      stats: ["100/100 Lighthouse", "60 FPS Motion"],
+    },
+  },
+  {
+    id: "video-prod",
+    num: "03",
+    title: "VIDEO PRODUCTION",
+    icon: Video,
+    color: "#EF4444",
+    pos: { top: "50%", right: "3%", transform: "translateY(-50%)" },
+    lineAngle: 0,
+    preview: {
+      tag: "CINEMATIC 4K",
+      heading: "Commercials & Visuals",
+      desc: "High-end video production, 3D motion graphics & commercial brand films.",
+      stats: ["4K RAW Capture", "Color Graded"],
+    },
+  },
+  {
+    id: "meta-ads",
+    num: "04",
+    title: "META ADS",
+    icon: Target,
+    color: "#3B82F6",
+    pos: { bottom: "20%", right: "8%" },
+    lineAngle: 45,
+    preview: {
+      tag: "PERFORMANCE MARKETING",
+      heading: "Paid Acquisition & Scaling",
+      desc: "Data-driven Meta ad campaigns targeting high-intent custom audiences.",
+      stats: ["4.8x Avg ROAS", "+1.2M Reach"],
+    },
+  },
+  {
+    id: "seo",
+    num: "05",
+    title: "SEO & GROWTH",
+    icon: Search,
+    color: "#10B981",
+    pos: { bottom: "20%", left: "8%" },
+    lineAngle: 135,
+    preview: {
+      tag: "ORGANIC RANKING",
+      heading: "Search Engine Dominance",
+      desc: "Technical SEO, semantic keyword optimization & authority link acquisition.",
+      stats: ["#1 Rank Growth", "+350% Organic"],
+    },
+  },
+  {
+    id: "content-creation",
+    num: "06",
+    title: "CONTENT CREATION",
+    icon: Sparkles,
+    color: "#F59E0B",
+    pos: { top: "50%", left: "3%", transform: "translateY(-50%)" },
+    lineAngle: 180,
+    preview: {
+      tag: "STUDIO CREATIVE",
+      heading: "Brand Storytelling & Assets",
+      desc: "Short-form video, creative copy, graphic design & content systems.",
+      stats: ["10k+ Asset Bank", "Viral Formats"],
+    },
+  },
+  {
+    id: "social-media",
+    num: "07",
+    title: "SOCIAL MEDIA MARKETING",
+    icon: Share2,
+    color: "#EC4899",
+    pos: { top: "20%", left: "6%" },
+    lineAngle: -145,
+    preview: {
+      tag: "ATTENTION ENGINE",
+      heading: "Social Strategy & Growth",
+      desc: "Multi-platform content distribution, community management & audience scaling.",
+      stats: ["+2.4M Views", "85% Engaged"],
+    },
+  },
+];
 
 export default function HeroScene() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const aiCoreRef = useRef<HTMLDivElement>(null);
-  const cameraRef = useRef<HTMLDivElement>(null);
-  const nodesRef = useRef<HTMLDivElement>(null);
+  const logoContainerRef = useRef<HTMLDivElement>(null);
+  const nodesContainerRef = useRef<HTMLDivElement>(null);
 
-  // Micro State for AI Core Processing Animation
-  const [aiStateIndex, setAiStateIndex] = useState<number>(0);
-  const AI_STATES = ["STATUS: READY", "ANALYZING INTENT...", "CREATIVE SIGNAL FOUND", "SYSTEM ACTIVE"];
+  // Hover & Active States
+  const [isLogoHovered, setIsLogoHovered] = useState<boolean>(false);
+  const [activeServiceIndex, setActiveServiceIndex] = useState<number | null>(null);
 
-  // Mouse Parallax
+  // SSR Safe Window dimensions
+  const [windowDims, setWindowDims] = useState<{ w: number; h: number }>({ w: 1200, h: 800 });
+
+  useEffect(() => {
+    const updateDims = () => {
+      if (typeof window !== "undefined") {
+        setWindowDims({ w: window.innerWidth, h: window.innerHeight });
+      }
+    };
+    updateDims();
+    window.addEventListener("resize", updateDims);
+    return () => window.removeEventListener("resize", updateDims);
+  }, []);
+
+  // Mouse Parallax normalized (-1 to 1)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const springMouseX = useSpring(mouseX, { stiffness: 120, damping: 25 });
+  const springMouseY = useSpring(mouseY, { stiffness: 120, damping: 25 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = sectionRef.current?.getBoundingClientRect();
     if (rect) {
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      mouseX.set(x);
-      mouseY.set(y);
+      const normX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      const normY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+      mouseX.set(normX);
+      mouseY.set(normY);
     }
   };
 
-  const parallaxX = useSpring(useTransform(mouseX, [-600, 600], [-15, 15]), { stiffness: 100, damping: 30 });
-  const parallaxY = useSpring(useTransform(mouseY, [-600, 600], [-15, 15]), { stiffness: 100, damping: 30 });
-
-  // AI Core Micro State Cycle
+  // GSAP 1st Scroll Response & Perspective Recede
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAiStateIndex((prev) => (prev + 1) % AI_STATES.length);
-    }, 2800);
-    return () => clearInterval(interval);
-  }, []);
-
-  // GSAP 1st Scroll Pixel Instant Response & Morph into Production
-  useEffect(() => {
-    if (!sectionRef.current || !contentRef.current || !cameraRef.current || !aiCoreRef.current) return;
+    if (!sectionRef.current || !logoContainerRef.current || !nodesContainerRef.current) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -60,297 +188,302 @@ export default function HeroScene() {
       },
     });
 
-    // 1st pixel scroll: Grid zooms forward, Camera viewfinder activates, AI Core signals camera
-    tl.to(gridRef.current, {
-      scale: 2.4,
-      rotateX: 65,
-      y: "25%",
-      opacity: 0.15,
-      duration: 1,
-      ease: "none",
-    }, 0);
+    // 1st Pixel Scroll: 3D logo recedes backward, service nodes collapse toward center
+    tl.to(
+      logoContainerRef.current,
+      {
+        scale: 0.65,
+        y: "-15%",
+        opacity: 0.3,
+        duration: 1,
+        ease: "none",
+      },
+      0
+    );
 
-    tl.to(aiCoreRef.current, {
-      scale: 1.4,
-      opacity: 0,
-      y: "-30%",
-      duration: 0.8,
-      ease: "power2.in",
-    }, 0);
+    tl.to(
+      nodesContainerRef.current,
+      {
+        scale: 0.8,
+        opacity: 0.1,
+        duration: 0.8,
+        ease: "power2.in",
+      },
+      0
+    );
 
-    tl.to(cameraRef.current, {
-      scale: 1.6,
-      x: 0,
-      opacity: 1,
-      duration: 0.8,
-      ease: "power2.out",
-    }, 0);
-
-    tl.to(nodesRef.current, {
-      scale: 1.2,
-      opacity: 0,
-      duration: 0.7,
-      ease: "power2.in",
-    }, 0);
-
-    tl.to(contentRef.current, {
-      opacity: 0,
-      y: -60,
-      scale: 0.94,
-      duration: 0.7,
-      ease: "power2.inOut",
-    }, 0);
-
+    tl.to(
+      contentRef.current,
+      {
+        opacity: 0,
+        y: -50,
+        duration: 0.7,
+        ease: "power2.inOut",
+      },
+      0
+    );
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#020202] selection:bg-brand-accent selection:text-black max-w-full"
+      className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#030303] selection:bg-brand-accent selection:text-black max-w-full"
     >
       {/* ========================================================================= */}
-      {/* LAYER 1 — ATMOSPHERE (DARK BLUE/PURPLE HAZE & DIGITIZED SCAN) */}
+      {/* BACKGROUND CANVAS: ATMOSPHERIC LIGHT & GRAIN */}
       {/* ========================================================================= */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <motion.div 
-          animate={{ opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75vw] h-[75vw] bg-gradient-to-br from-brand-accent/15 via-purple-900/15 to-transparent rounded-full blur-[170px] mix-blend-screen"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#040404] via-transparent to-[#040404]/90 z-1" />
-      </div>
-
-      {/* ========================================================================= */}
-      {/* LAYER 2 — DIGITAL PERSPECTIVE GRID (POWER ON AT 0.4s) */}
-      {/* ========================================================================= */}
-      <div 
-        ref={gridRef}
-        className="absolute inset-0 z-0 pointer-events-none perspective-[1000px] flex items-center justify-center opacity-30 overflow-hidden"
-      >
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-          className="w-[150vw] h-[150vw] border border-white/10 rounded-full border-dashed animate-[spin_140s_linear_infinite]"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: "50px 50px",
-            transform: "rotateX(75deg)",
+        <motion.div
+          animate={{
+            opacity: isLogoHovered ? [0.35, 0.6, 0.35] : [0.15, 0.3, 0.15],
+            scale: isLogoHovered ? 1.15 : 1,
           }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-gradient-to-br from-brand-accent/20 via-purple-900/20 to-blue-900/10 rounded-full blur-[180px] mix-blend-screen"
         />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:100%_4px] opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/90" />
       </div>
 
       {/* ========================================================================= */}
-      {/* LAYER 3 — SUBTLE VECTOR SIGNAL PATHS CONNECTING SYSTEM NODES */}
+      {/* SVG CONNECTING SIGNAL PATHS BETWEEN CENTRAL LOGO AND 7 SERVICE NODES */}
       {/* ========================================================================= */}
-      <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center opacity-30 overflow-hidden">
-        <svg className="w-full h-full max-w-5xl">
-          <motion.path 
-            d="M 120,220 L 480,360 L 840,220"
-            fill="none" 
-            stroke="rgba(199, 255, 61, 0.5)" 
-            strokeWidth="1"
-            strokeDasharray="4 6"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.5, delay: 0.6, ease: "easeInOut" }}
-          />
+      <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+        <svg className="w-full h-full overflow-visible">
+          {SERVICES.map((srv, idx) => {
+            const isSelected = activeServiceIndex === idx;
+            const isAnyActive = activeServiceIndex !== null;
+
+            return (
+              <g key={srv.id}>
+                {/* Background path line */}
+                <line
+                  x1="50%"
+                  y1="50%"
+                  x2={
+                    idx === 0 ? "50%" :
+                    idx === 1 ? "92%" :
+                    idx === 2 ? "95%" :
+                    idx === 3 ? "90%" :
+                    idx === 4 ? "10%" :
+                    idx === 5 ? "5%" : "8%"
+                  }
+                  y2={
+                    idx === 0 ? "10%" :
+                    idx === 1 ? "22%" :
+                    idx === 2 ? "50%" :
+                    idx === 3 ? "78%" :
+                    idx === 4 ? "78%" :
+                    idx === 5 ? "50%" : "22%"
+                  }
+                  stroke={isSelected ? srv.color : isLogoHovered ? "#c7ff3d" : "rgba(255,255,255,0.12)"}
+                  strokeWidth={isSelected ? "2.5" : isLogoHovered ? "1.5" : "1"}
+                  strokeDasharray={isSelected ? "none" : "4 6"}
+                  className="transition-all duration-500"
+                />
+
+                {/* Traveling Signal Pulses */}
+                <circle r={isSelected ? "4" : "2.5"} fill={isSelected ? srv.color : "#c7ff3d"}>
+                  <animateMotion
+                    dur={isSelected ? "1.2s" : isLogoHovered ? "2s" : "4s"}
+                    repeatCount="indefinite"
+                    path={`M ${windowDims.w / 2},${windowDims.h / 2} L ${
+                      idx === 0 ? windowDims.w * 0.5 :
+                      idx === 1 ? windowDims.w * 0.92 :
+                      idx === 2 ? windowDims.w * 0.95 :
+                      idx === 3 ? windowDims.w * 0.90 :
+                      idx === 4 ? windowDims.w * 0.10 :
+                      idx === 5 ? windowDims.w * 0.05 : windowDims.w * 0.08
+                    },${
+                      idx === 0 ? windowDims.h * 0.10 :
+                      idx === 1 ? windowDims.h * 0.22 :
+                      idx === 2 ? windowDims.h * 0.50 :
+                      idx === 3 ? windowDims.h * 0.78 :
+                      idx === 4 ? windowDims.h * 0.78 :
+                      idx === 5 ? windowDims.h * 0.50 : windowDims.h * 0.22
+                    }`}
+                  />
+                </circle>
+              </g>
+            );
+          })}
         </svg>
       </div>
 
       {/* ========================================================================= */}
-      {/* LAYER 4 — CONNECTED CREATIVE SYSTEM NODES (CAMERA, DESIGN, CODE, SEARCH) */}
+      {/* CENTERPIECE: 3D WEBSITE WALAE LOGO MESH */}
       {/* ========================================================================= */}
-      <motion.div 
-        ref={nodesRef} 
-        style={{ x: parallaxX, y: parallaxY }}
-        className="absolute inset-0 pointer-events-none z-10 overflow-hidden max-w-full"
+      <div
+        ref={logoContainerRef}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center"
       >
-        {/* CAMERA / PRODUCTION Node (Left) */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="absolute top-[26%] left-[4%] sm:left-[8%] md:left-[12%] glass px-3 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-[10px] font-mono text-white/80 shadow-cinematic backdrop-blur-md"
-        >
-          <Camera className="w-3.5 h-3.5 text-red-500 animate-pulse" />
-          <span>CAMERA // PRODUCTION</span>
-        </motion.div>
+        <HeroLogo3D
+          isHovered={isLogoHovered}
+          onHoverChange={setIsLogoHovered}
+          mouseX={springMouseX.get()}
+          mouseY={springMouseY.get()}
+          activeServiceIndex={activeServiceIndex}
+        />
 
-        {/* DESIGN / UI-UX Node (Top Right) */}
-        <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="absolute top-[22%] right-[4%] sm:right-[8%] md:right-[12%] glass px-3 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-[10px] font-mono text-white/80 shadow-cinematic backdrop-blur-md"
+        {/* Dynamic System Status Indicator */}
+        <motion.div
+          animate={{
+            scale: isLogoHovered ? [1, 1.05, 1] : 1,
+            borderColor: isLogoHovered ? "rgba(199,255,61,0.8)" : "rgba(255,255,255,0.15)",
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="mt-3 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border text-[10px] font-mono tracking-widest text-white uppercase flex items-center gap-2 shadow-cinematic pointer-events-none"
         >
-          <Layout className="w-3.5 h-3.5 text-blue-400" />
-          <span>DESIGN // UI-UX</span>
+          <span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
+          <span className="text-brand-accent font-bold">
+            {isLogoHovered
+              ? "SYSTEM AWAKENED // SELECT SERVICE"
+              : activeServiceIndex !== null
+              ? `SERVICE: ${SERVICES[activeServiceIndex].title}`
+              : "WEBSITE WALAE 3D CORE • HOVER LOGO"}
+          </span>
         </motion.div>
-
-        {/* CODE / WEB Node (Bottom Left) */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="absolute bottom-[24%] left-[4%] sm:left-[6%] md:left-[10%] glass px-3 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-[10px] font-mono text-white/80 shadow-cinematic backdrop-blur-md"
-        >
-          <Code className="w-3.5 h-3.5 text-green-400" />
-          <span>CODE // WEB</span>
-        </motion.div>
-
-        {/* SEARCH / GROWTH Node (Bottom Right) */}
-        <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="absolute bottom-[24%] right-[4%] sm:right-[6%] md:right-[10%] glass px-3 py-2 rounded-xl border border-white/10 flex items-center gap-2 text-[10px] font-mono text-white/80 shadow-cinematic backdrop-blur-md"
-        >
-          <Search className="w-3.5 h-3.5 text-purple-400" />
-          <span>SEARCH // GROWTH</span>
-        </motion.div>
-      </motion.div>
+      </div>
 
       {/* ========================================================================= */}
-      {/* CAMERA SYSTEM VIEWFINDER (ENTRY IN HERO) */}
+      {/* 7 SERVICE NODES & INTERACTIVE PREVIEW CARDS */}
       {/* ========================================================================= */}
-      <motion.div 
-        ref={cameraRef}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.8, scale: 1 }}
-        transition={{ duration: 1, delay: 0.7 }}
-        className="absolute top-[28%] left-[4%] sm:left-[6%] z-15 pointer-events-none hidden md:block"
-      >
-        <div className="border border-red-500/40 bg-black/60 p-2.5 rounded-lg font-mono text-[9px] text-white flex items-center gap-2 shadow-cinematic">
-          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-          <span className="text-red-400 font-bold">REC ● 4K RAW</span>
-          <span className="text-white/50">24 FPS</span>
-        </div>
-      </motion.div>
+      <div ref={nodesContainerRef} className="absolute inset-0 z-20 pointer-events-none">
+        {SERVICES.map((srv, idx) => {
+          const Icon = srv.icon;
+          const isSelected = activeServiceIndex === idx;
+          const isDimmed = activeServiceIndex !== null && activeServiceIndex !== idx;
 
-      {/* ========================================================================= */}
-      {/* CENTER FOCAL POINT: AI CREATIVE CORE & AUTONOMOUS MICRO-STATES */}
-      {/* ========================================================================= */}
-      <motion.div 
-        ref={aiCoreRef}
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, delay: 0.4 }}
-        style={{ x: parallaxX, y: parallaxY }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-15 flex flex-col items-center pointer-events-none"
-      >
-        <div className="relative w-44 h-44 sm:w-60 sm:h-60 flex items-center justify-center">
-          {/* Outer Rotating Node Ring */}
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 rounded-full border border-brand-accent/30 border-t-brand-accent shadow-[0_0_30px_rgba(199,255,61,0.25)]"
-          />
-          {/* Reverse Inner Ring */}
-          <motion.div 
-            animate={{ rotate: -360 }}
-            transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-3 rounded-full border border-blue-500/20 border-b-blue-400"
-          />
-
-          {/* Inner Core Glass Sphere */}
-          <div className="absolute inset-8 rounded-full glass bg-black/70 border border-white/20 flex flex-col items-center justify-center p-4 backdrop-blur-xl shadow-floating text-center">
-            <Cpu className="w-7 h-7 sm:w-9 sm:h-9 text-brand-accent mb-1 animate-pulse" />
-            <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-widest text-white uppercase text-center leading-tight">
-              AI CREATIVE CORE
-            </span>
-            {/* Dynamic Micro State Cycle */}
-            <motion.span 
-              key={aiStateIndex}
-              initial={{ opacity: 0, y: 3 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -3 }}
-              className="text-[8px] font-mono text-brand-accent mt-1 font-bold tracking-wider uppercase"
+          return (
+            <div
+              key={srv.id}
+              style={srv.pos}
+              className="absolute pointer-events-auto transition-all duration-300"
             >
-              {AI_STATES[aiStateIndex]}
-            </motion.span>
-          </div>
+              {/* Node Button */}
+              <motion.button
+                onMouseEnter={() => setActiveServiceIndex(idx)}
+                onMouseLeave={() => setActiveServiceIndex(null)}
+                onClick={() => {
+                  const targetEl = document.querySelector("#services") || document.querySelector("#work");
+                  if (targetEl) targetEl.scrollIntoView({ behavior: "smooth" });
+                }}
+                whileHover={{ scale: 1.08, y: -4 }}
+                whileTap={{ scale: 0.95 }}
+                animate={{
+                  opacity: isDimmed ? 0.35 : 1,
+                  scale: isSelected ? 1.1 : isLogoHovered ? 1.05 : 1,
+                }}
+                className={`glass px-3 py-2 sm:px-4 sm:py-2.5 rounded-2xl border flex items-center gap-2.5 text-xs sm:text-sm font-mono font-bold transition-all duration-300 shadow-floating backdrop-blur-xl group ${
+                  isSelected
+                    ? "bg-black/90 border-brand-accent text-white shadow-[0_0_25px_rgba(199,255,61,0.4)]"
+                    : "bg-black/60 border-white/15 text-white/80 hover:text-white hover:border-white/40"
+                }`}
+              >
+                <div
+                  className="w-7 h-7 rounded-xl flex items-center justify-center transition-colors"
+                  style={{ backgroundColor: `${srv.color}20` }}
+                >
+                  <Icon className="w-4 h-4" style={{ color: srv.color }} />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="text-[9px] text-white/40 font-mono leading-none mb-0.5">{srv.num}</span>
+                  <span className="tracking-tight uppercase">{srv.title}</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-brand-accent" />
+              </motion.button>
 
-          {/* Signal Link Badge */}
-          <motion.div 
-            animate={{ opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-8 bg-black/90 border border-brand-accent/50 px-3.5 py-1 rounded-full text-[9px] font-mono text-brand-accent tracking-widest uppercase flex items-center gap-1.5 shadow-cinematic whitespace-nowrap"
-          >
-            <Sparkles className="w-3 h-3 animate-spin" />
-            <span>AI THINKS • CAMERA CREATES</span>
-          </motion.div>
-        </div>
-      </motion.div>
+              {/* Interactive Service Preview Pop-up */}
+              <AnimatePresence>
+                {isSelected && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 12, scale: 0.92 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.92 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="absolute z-40 top-full mt-3 left-1/2 -translate-x-1/2 w-64 sm:w-72 glass bg-black/95 border border-white/20 p-4 rounded-2xl shadow-cinematic backdrop-blur-2xl text-left pointer-events-none"
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span
+                        className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full uppercase"
+                        style={{ backgroundColor: `${srv.color}25`, color: srv.color }}
+                      >
+                        {srv.preview.tag}
+                      </span>
+                      <Zap className="w-3.5 h-3.5 text-brand-accent animate-pulse" />
+                    </div>
+
+                    <h4 className="text-sm font-bold text-white mb-1 tracking-tight">{srv.preview.heading}</h4>
+                    <p className="text-xs text-white/70 leading-relaxed mb-3">{srv.preview.desc}</p>
+
+                    <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-white/60">
+                      {srv.preview.stats.map((st, i) => (
+                        <div key={i} className="flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-brand-accent" />
+                          <span>{st}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
 
       {/* ========================================================================= */}
-      {/* MAIN HUD CONTENT CONTAINER */}
+      {/* TOP & BOTTOM HUD OVERLAY (TYPOGRAPHY & ACTIONS) */}
       {/* ========================================================================= */}
-      <div ref={contentRef} className="absolute inset-0 z-20 flex flex-col justify-between p-4 sm:p-6 md:p-12">
+      <div ref={contentRef} className="absolute inset-0 z-30 flex flex-col justify-between p-4 sm:p-6 md:p-10 pointer-events-none">
         
-        {/* Top HUD Bar */}
-        <motion.div 
+        {/* Top HUD Header */}
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="flex justify-between items-center w-full"
+          transition={{ duration: 0.8 }}
+          className="flex justify-between items-center w-full pointer-events-auto"
         >
-          {/* Top Left: Logo */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center" data-cursor="link">
-              <img src="/logo.png" alt="Website Walae" className="h-8 sm:h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
+              <img src="/logo.png" alt="Website Walae" className="h-8 sm:h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
             </Link>
           </div>
 
-          {/* Top Center: Timeline Gauge */}
           <div className="hidden md:flex flex-col items-center">
-            <div className="flex gap-1 opacity-40 mb-2">
-              {[...Array(21)].map((_, i) => (
-                <div key={i} className={`w-[1px] ${i % 5 === 0 ? 'h-3 bg-white' : 'h-2 bg-white/50'}`} />
+            <div className="flex gap-1 opacity-40 mb-1">
+              {[...Array(19)].map((_, i) => (
+                <div key={i} className={`w-[1px] ${i % 5 === 0 ? "h-3 bg-white" : "h-2 bg-white/40"}`} />
               ))}
             </div>
-            <div className="text-[10px] tracking-[0.3em] text-white/50 font-mono">WEBSITE WALAE // DIGITAL CREATIVE OPERATING SYSTEM</div>
+            <span className="text-[10px] font-mono tracking-[0.25em] text-white/50 uppercase">
+              WEBSITE WALAE // INTERACTIVE CREATIVE UNIVERSE
+            </span>
           </div>
 
-          {/* Top Right: Status Badge */}
-          <div className="glass px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/10 flex items-center gap-2">
+          <div className="glass px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2 bg-black/60">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
             </span>
-            <span className="text-[10px] sm:text-xs font-bold tracking-widest text-white font-mono">SYSTEM ACTIVE</span>
+            <span className="text-[10px] font-mono font-bold text-white tracking-widest uppercase">
+              3D CORE ACTIVE
+            </span>
           </div>
         </motion.div>
 
-        {/* Center Main Headline (Typed & Confident) */}
-        <div className="absolute top-[28%] sm:top-[30%] left-1/2 -translate-x-1/2 text-center pointer-events-none w-[92%] max-w-4xl z-20">
-          <motion.h1 
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.6 }}
-            className="text-display-hero text-white tracking-tighter uppercase font-black filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)]"
-          >
-            IDEAS IN.<br/>
-            <span className="text-brand-accent">ATTENTION OUT.</span>
-          </motion.h1>
-        </div>
-
-        {/* Immediate Scroll Cue (Rule 08 & 10: Appears at 1.2s at bottom center) */}
-        <motion.div 
+        {/* Immediate Scroll Cue (1.2s Intro Speed Requirement) */}
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-30"
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center z-30 pointer-events-none"
         >
-          <div className="flex flex-col items-center text-center gap-1 font-mono text-[10px] tracking-[0.25em] text-white/90 uppercase">
+          <div className="flex flex-col items-center text-center gap-1 font-mono text-[10px] tracking-[0.25em] text-white/80 uppercase">
             <span>SCROLL</span>
-            <motion.div 
-              animate={{ y: [0, 6, 0] }}
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
             >
               <ChevronDown className="w-4 h-4 text-brand-accent" />
@@ -359,32 +492,34 @@ export default function HeroScene() {
           </div>
         </motion.div>
 
-        {/* Bottom Dock with Integrated Signal Trace */}
-        <motion.div 
+        {/* Bottom Navigation Dock */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="flex justify-center w-full pb-2 sm:pb-4 z-20"
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex justify-center w-full pb-2 pointer-events-auto z-30"
         >
-          <div className="glass px-2 py-1.5 sm:py-2 rounded-full border border-white/10 flex items-center gap-1.5 sm:gap-2 backdrop-blur-xl bg-black/60 shadow-cinematic">
-            <Link href="#work" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors group">
-              <span className="text-xs group-hover:scale-110 transition-transform text-white">✦</span>
+          <div className="glass px-2.5 py-1.5 sm:py-2 rounded-full border border-white/15 flex items-center gap-2 backdrop-blur-2xl bg-black/75 shadow-cinematic">
+            <Link
+              href="#work"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors text-white group"
+            >
+              <span className="text-xs group-hover:scale-110 transition-transform">✦</span>
             </Link>
-            
-            <Link 
-              href="#contact" 
-              className="px-4 py-1.5 sm:px-6 sm:py-2 h-8 sm:h-10 bg-white text-black font-bold text-xs sm:text-sm rounded-full hover:bg-brand-accent transition-all duration-300 flex items-center gap-2 group shadow-[0_0_20px_rgba(255,255,255,0.2)]"
+
+            <Link
+              href="#contact"
+              className="px-4 py-1.5 sm:px-6 sm:py-2 h-8 sm:h-10 bg-white text-black font-bold text-xs sm:text-sm rounded-full hover:bg-brand-accent transition-all duration-300 flex items-center gap-2 group shadow-[0_0_20px_rgba(255,255,255,0.25)]"
             >
               <span>Start a Project</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            
-            <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors text-white">
+
+            <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors text-white">
               <Menu size={14} className="sm:w-4 sm:h-4" />
             </button>
           </div>
         </motion.div>
-
       </div>
     </section>
   );
