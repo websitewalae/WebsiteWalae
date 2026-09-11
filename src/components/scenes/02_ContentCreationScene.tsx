@@ -24,10 +24,9 @@ export default function ContentCreationScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top top",
+        start: "top 85%",
         end: "+=100%",
-        scrub: 0.4,
-        pin: true,
+        scrub: 0.3,
       },
     });
 

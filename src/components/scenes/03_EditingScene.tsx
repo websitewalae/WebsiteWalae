@@ -19,10 +19,9 @@ export default function EditingScene() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top top",
-        end: "+=140%",
-        scrub: 0.5,
-        pin: true,
+        start: "top 85%",
+        end: "+=110%",
+        scrub: 0.3,
       },
     });
 
