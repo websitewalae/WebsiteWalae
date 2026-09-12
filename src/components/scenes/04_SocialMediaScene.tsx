@@ -5,6 +5,48 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Heart, MessageCircle, Share2, Bookmark } from "lucide-react";
 
+const CLIENT_REELS = [
+  {
+    id: "reel-1",
+    client: "Caffeine & Cravings",
+    handle: "@caffeineandcravingslko",
+    badge: "Client Production",
+    video: "/videos/reels/DbxlS_CS1rL.mp4",
+    poster: "/images/reels/reel_coffee_rain.jpg",
+    url: "https://www.instagram.com/reel/DbxlS_CS1rL/",
+    likes: "1,981",
+    comments: "18",
+    tag: "AESTHETIC CAFE REEL",
+    caption: "Cinematic rain & coffee visuals crafted for Lucknow's favourite cafe.",
+  },
+  {
+    id: "reel-2",
+    client: "Caffeine & Cravings",
+    handle: "@caffeineandcravingslko",
+    badge: "Viral Campaign",
+    video: "/videos/reels/DSpKibZEtkI.mp4",
+    poster: "/images/reels/reel_cappuccino_offer.jpg",
+    url: "https://www.instagram.com/reel/DSpKibZEtkI/",
+    likes: "8,420",
+    comments: "42",
+    tag: "VIRAL ₹9 OFFER CAMPAIGN",
+    caption: "Lucknow's boldest New Year offer — viral campaign strategy & commercial shoot.",
+  },
+  {
+    id: "reel-3",
+    client: "Caffeine & Cravings",
+    handle: "@caffeineandcravingslko",
+    badge: "Color Grade & Sound",
+    video: "/videos/reels/DbxlS_CS1rL.mp4",
+    poster: "/images/reels/reel_coffee_rain.jpg",
+    url: "https://www.instagram.com/reel/DbxlS_CS1rL/",
+    likes: "14.5K",
+    comments: "89",
+    tag: "CREATIVE DIRECTION",
+    caption: "High-retention reel edits crafted for peak social engagement.",
+  },
+];
+
 export default function SocialMediaScene() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -63,12 +105,6 @@ export default function SocialMediaScene() {
 
   }, []);
 
-  const stats = [
-    { views: "12.8K", likes: "1,842", shares: "327" },
-    { views: "45.2K", likes: "6,102", shares: "891" },
-    { views: "102K", likes: "14.5K", shares: "2.1K" },
-  ];
-
   return (
     <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-brand-bg">
       {/* Ambient Glowing Background */}
@@ -79,40 +115,92 @@ export default function SocialMediaScene() {
       </div>
 
       <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 max-w-full">
-        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">FROM CONTENT TO ATTENTION.</h2>
+        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2 uppercase font-inter-tight">FROM CONTENT TO ATTENTION.</h2>
+        <p className="text-xs sm:text-sm text-brand-accent font-mono">REAL CLIENT PRODUCTIONS &amp; VIRAL SOCIAL REELS</p>
       </div>
 
       <div ref={cardsRef} className="relative z-10 flex items-center justify-center w-full h-full mt-[12%] sm:mt-[10%] px-4">
-        {stats.map((stat, i) => (
-          <div key={i} className="absolute w-[220px] sm:w-[300px] h-[360px] sm:h-[500px] glass rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between shadow-floating border-brand-border-strong bg-[#0a0a0a]/90 backdrop-blur-xl">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-brand-surface border border-brand-border" />
-              <div>
-                <div className="text-sm font-bold text-brand-text">Website Walae</div>
-                <div className="text-xs text-brand-text-muted">Sponsored</div>
+        {CLIENT_REELS.map((reel, i) => (
+          <div key={reel.id + i} className="absolute w-[240px] sm:w-[320px] h-[400px] sm:h-[530px] glass rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between shadow-floating border border-white/10 hover:border-brand-accent/40 bg-[#0a0a0a]/95 backdrop-blur-2xl transition-all duration-300">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-2.5">
+              <div className="flex items-center gap-2.5">
+                <img 
+                  src="/logo.png" 
+                  alt="Website Walae Logo" 
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-brand-accent/40 p-0.5 bg-black" 
+                />
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-brand-text flex items-center gap-1.5 leading-tight">
+                    <span>{reel.client}</span>
+                  </div>
+                  <div className="text-[10px] text-brand-text-muted">{reel.badge} • Lucknow</div>
+                </div>
               </div>
+
+              <a
+                href={reel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-white/5 hover:bg-brand-accent hover:text-black text-white/70 flex items-center justify-center transition-all duration-300 group"
+                title="View on Instagram"
+              >
+                <Share2 className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+              </a>
             </div>
             
-            <div className="flex-1 rounded-xl border border-brand-border/50 mb-4 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-indigo-900/40 via-purple-900/20 to-black">
-               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-bg/80" />
-               <div className="w-12 h-12 rounded-full border border-brand-accent/50 flex items-center justify-center bg-black/50 backdrop-blur-md z-10">
-                 <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-brand-accent border-b-[6px] border-b-transparent ml-1" />
-               </div>
-               <div className="absolute bottom-4 left-4 text-brand-accent font-mono text-[10px] tracking-widest z-10">ENGAGEMENT PEAKING</div>
+            {/* Video Container with Real Video & Poster Thumbnail */}
+            <div className="flex-1 rounded-2xl border border-white/10 mb-2.5 relative overflow-hidden bg-black group/video">
+              <video
+                src={reel.video}
+                poster={reel.poster}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
+              />
+
+              {/* Gradient Overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40 pointer-events-none" />
+
+              {/* Category Pill Tag */}
+              <div className="absolute top-3 left-3 z-10">
+                <span className="text-[9px] sm:text-[10px] font-mono font-bold text-brand-accent px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-brand-accent/40 shadow-lg">
+                  {reel.tag}
+                </span>
+              </div>
+
+              {/* Active Client Badge */}
+              <div className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 text-[9px] sm:text-[10px] font-mono text-white bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping" />
+                <span>CLIENT WORK</span>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-3">
+            {/* Metrics & Actions */}
+            <div className="flex flex-col gap-1.5 pt-0.5">
               <div className="flex items-center justify-between text-brand-text">
-                <div className="flex gap-4">
-                  <Heart className="w-6 h-6 text-pink-500 fill-pink-500/20" />
-                  <MessageCircle className="w-6 h-6" />
-                  <Share2 className="w-6 h-6" />
+                <div className="flex items-center gap-3">
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-pink-500 fill-pink-500" />
+                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
+                  <Share2 className="w-4 h-4 sm:w-5 sm:h-5 text-white/70" />
                 </div>
-                <Bookmark className="w-6 h-6" />
+                <a
+                  href={reel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[10px] font-mono font-bold text-brand-accent hover:text-white transition-colors flex items-center gap-1"
+                  title="Open Original Reel on Instagram"
+                >
+                  <span>REEL</span>
+                  <Bookmark className="w-3.5 h-3.5" />
+                </a>
               </div>
-              <div className="text-sm font-bold text-white">{stat.likes} likes</div>
-              <div className="text-[10px] text-brand-text-muted">
-                Demo metrics for illustrative purposes only.
+              <div className="text-xs sm:text-sm font-bold text-white leading-none">{reel.likes} likes</div>
+              <div className="text-[10px] sm:text-[11px] text-brand-text-secondary leading-snug line-clamp-1">
+                {reel.caption}
               </div>
             </div>
           </div>
