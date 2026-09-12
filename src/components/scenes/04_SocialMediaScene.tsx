@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { Heart, MessageCircle, Share2, Bookmark } from "lucide-react";
@@ -46,6 +46,92 @@ const CLIENT_REELS = [
     caption: "Lucknow's 1st Kids Dandiya festival event production & viral social coverage.",
   },
 ];
+
+// Dedicated 30-Day Client Cache Memory for Section Videos
+function ReelVideo({ src, poster }: { src: string; poster: string }) {
+  const [videoUrl, setVideoUrl] = useState<string>(src);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    let objectUrl: string | null = null;
+
+    async function loadCachedVideo() {
+      if (typeof window === "undefined" || !("caches" in window)) return;
+
+      try {
+        const CACHE_NAME = "ww-reels-v1";
+        const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+        const cache = await caches.open(CACHE_NAME);
+        const cachedResponse = await cache.match(src);
+
+        if (cachedResponse) {
+          const timestamp = cachedResponse.headers.get("x-cache-timestamp");
+          const cachedTime = timestamp ? parseInt(timestamp, 10) : Date.now();
+
+          // Retain for minimum 30 days
+          if (Date.now() - cachedTime < THIRTY_DAYS_MS) {
+            const blob = await cachedResponse.blob();
+            if (isMounted) {
+              objectUrl = URL.createObjectURL(blob);
+              setVideoUrl(objectUrl);
+            }
+            return;
+          } else {
+            // Expired after 30 days, clear old cache entry
+            await cache.delete(src);
+          }
+        }
+
+        // Cache on initial visit for ultra-fast instant playback
+        const res = await fetch(src);
+        if (res.ok) {
+          const blob = await res.blob();
+          const headers = new Headers(res.headers);
+          headers.set("x-cache-timestamp", Date.now().toString());
+          headers.set("Cache-Control", "public, max-age=2592000, immutable");
+
+          const responseToCache = new Response(blob.slice(), {
+            status: res.status,
+            statusText: res.statusText,
+            headers,
+          });
+
+          await cache.put(src, responseToCache);
+          if (isMounted) {
+            objectUrl = URL.createObjectURL(blob);
+            setVideoUrl(objectUrl);
+          }
+        }
+      } catch (err) {
+        // Fallback gracefully to standard direct source
+      }
+    }
+
+    loadCachedVideo();
+
+    return () => {
+      isMounted = false;
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+      }
+    };
+  }, [src]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={videoUrl}
+      poster={poster}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
+    />
+  );
+}
 
 export default function SocialMediaScene() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -149,18 +235,9 @@ export default function SocialMediaScene() {
               </a>
             </div>
             
-            {/* Video Container with Real Video & Poster Thumbnail */}
+            {/* Video Container with 30-Day Cached Video & Poster Thumbnail */}
             <div className="flex-1 rounded-2xl border border-white/10 mb-2.5 relative overflow-hidden bg-black group/video">
-              <video
-                src={reel.video}
-                poster={reel.poster}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
-              />
+              <ReelVideo src={reel.video} poster={reel.poster} />
 
               {/* Gradient Overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40 pointer-events-none" />
