@@ -32,7 +32,13 @@ CREATE POLICY "Allow public read access for articles"
 CREATE POLICY "Allow full access for authenticated users on articles"
   ON public.articles FOR ALL
   USING (auth.role() = 'authenticated')
-  WITH CHECK (auth.role() = 'authenticated');`;
+  WITH CHECK (auth.role() = 'authenticated');
+
+-- 4. GRANT PERMISSIONS TO API ROLES
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO anon, authenticated, service_role;`;
 
 export default async function ArticlesDashboard() {
   const supabase = await createClient();

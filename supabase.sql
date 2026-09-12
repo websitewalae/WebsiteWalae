@@ -89,3 +89,12 @@ CREATE POLICY "Allow full access for authenticated users on packages"
   ON public.packages FOR ALL
   USING (auth.role() = 'authenticated')
   WITH CHECK (auth.role() = 'authenticated');
+
+-- =========================================================================
+-- 4. GRANT ACCESS TO API ROLES (REQUIRED FOR SUPABASE CLIENT ACCESS)
+-- =========================================================================
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO anon, authenticated, service_role;
+
