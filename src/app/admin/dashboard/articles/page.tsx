@@ -75,7 +75,12 @@ export default async function ArticlesDashboard() {
         </header>
 
         {error ? (
-          <SqlSetupBox sql={SETUP_SQL} projectId={projectId} />
+          <SqlSetupBox 
+            sql={SETUP_SQL} 
+            projectId={projectId} 
+            errorMessage={error.message} 
+            errorCode={error.code} 
+          />
         ) : (
           <div className="bg-black/40 border border-white/5 rounded-xl overflow-hidden">
             <table className="w-full text-left text-sm">

@@ -1,19 +1,30 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Check, ExternalLink, Terminal } from "lucide-react";
+import { Copy, Check, ExternalLink, Terminal, ShieldAlert } from "lucide-react";
 
 interface SqlSetupBoxProps {
   sql: string;
   projectId: string;
+  errorMessage?: string;
+  errorCode?: string;
 }
 
-export default function SqlSetupBox({ sql, projectId }: SqlSetupBoxProps) {
+const GRANT_SQL = `-- GRANT API ACCESS PERMISSIONS
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO anon, authenticated, service_role;`;
+
+export default function SqlSetupBox({ sql, projectId, errorMessage, errorCode }: SqlSetupBoxProps) {
   const [copied, setCopied] = useState(false);
+  const isPermissionError = errorCode === "42501" || errorMessage?.includes("permission denied");
+
+  const activeSql = isPermissionError ? GRANT_SQL : sql;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(sql);
+      await navigator.clipboard.writeText(activeSql);
       setCopied(true);
       setTimeout(() => setCopied(false), 3000);
     } catch (err) {
@@ -26,15 +37,17 @@ export default function SqlSetupBox({ sql, projectId }: SqlSetupBoxProps) {
     : `https://supabase.com/dashboard`;
 
   return (
-    <div className="bg-[#0a0a0a] border border-red-500/30 text-white p-6 sm:p-8 rounded-2xl space-y-6 shadow-2xl">
+    <div className="bg-[#0a0a0a] border border-amber-500/30 text-white p-6 sm:p-8 rounded-2xl space-y-6 shadow-2xl">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
           <div className="flex items-center gap-2 text-amber-400 font-bold text-lg mb-1">
-            <Terminal className="w-5 h-5" />
-            <span>One-Time Database Setup Required</span>
+            {isPermissionError ? <ShieldAlert className="w-5 h-5 text-amber-400" /> : <Terminal className="w-5 h-5" />}
+            <span>{isPermissionError ? "Almost Done: Enable API Permissions" : "One-Time Database Setup Required"}</span>
           </div>
           <p className="text-xs sm:text-sm text-brand-text-secondary">
-            The <code className="bg-black/60 px-2 py-0.5 rounded text-brand-accent">public.articles</code> table does not exist in your Supabase project yet.
+            {isPermissionError 
+              ? "Your table was created in Supabase! Now run the grant permissions script below so your website can read and write articles."
+              : "The public.articles table does not exist in your Supabase project yet."}
           </p>
         </div>
 
@@ -51,7 +64,7 @@ export default function SqlSetupBox({ sql, projectId }: SqlSetupBoxProps) {
             ) : (
               <>
                 <Copy className="w-4 h-4 text-brand-accent" />
-                <span>COPY SQL</span>
+                <span>COPY PERMISSION SQL</span>
               </>
             )}
           </button>
@@ -70,13 +83,13 @@ export default function SqlSetupBox({ sql, projectId }: SqlSetupBoxProps) {
 
       <div className="space-y-3">
         <div className="text-xs font-mono text-white/70">
-          <strong>Step 1:</strong> Click <strong className="text-brand-accent">&quot;COPY SQL&quot;</strong> above. <br />
-          <strong>Step 2:</strong> Click <strong className="text-brand-accent">&quot;OPEN SUPABASE SQL EDITOR&quot;</strong> to open your project ({projectId}). <br />
-          <strong>Step 3:</strong> Paste the script into the SQL editor and click <strong className="text-white bg-emerald-700/60 px-2 py-0.5 rounded">Run</strong>. Then refresh this page!
+          <strong>Step 1:</strong> Click <strong className="text-brand-accent">&quot;COPY PERMISSION SQL&quot;</strong> above. <br />
+          <strong>Step 2:</strong> Click <strong className="text-brand-accent">&quot;OPEN SUPABASE SQL EDITOR&quot;</strong> (or go to your open Supabase tab). <br />
+          <strong>Step 3:</strong> Paste into the query box, click <strong className="text-white bg-emerald-700/60 px-2 py-0.5 rounded">Run</strong>, and refresh this page!
         </div>
 
         <div className="bg-black/90 p-4 rounded-xl border border-white/10 font-mono text-xs text-brand-accent/90 overflow-x-auto max-h-72">
-          <pre>{sql}</pre>
+          <pre>{activeSql}</pre>
         </div>
       </div>
     </div>
