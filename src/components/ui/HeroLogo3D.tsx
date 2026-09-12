@@ -51,16 +51,16 @@ export default function HeroLogo3D({
     camera.position.z = 5.2;
     cameraRef.current = camera;
 
-    // 3. Renderer
+    // 3. Renderer (optimized for 60fps)
+    const isHighDpi = typeof window !== "undefined" && window.devicePixelRatio > 1;
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
+      antialias: !isHighDpi, // Antialias is redundant on retina/4k screens and eats fillrate
+      powerPreference: "default",
     });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.shadowMap.enabled = false; // Disable redundant multi-pass shadow map for disks
 
     containerRef.current.innerHTML = "";
     containerRef.current.appendChild(renderer.domElement);
@@ -170,15 +170,19 @@ export default function HeroLogo3D({
 
     window.addEventListener("resize", handleResize);
 
-    // 8. Offscreen Pause Observer
+    // 8. Offscreen Pause Observer (Halt WebGL loop when not visible)
     let isVisible = true;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const wasVisible = isVisible;
           isVisible = entry.isIntersecting;
+          if (!wasVisible && isVisible && !animFrameRef.current) {
+            animFrameRef.current = requestAnimationFrame(animate);
+          }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
     observer.observe(containerRef.current);
 
@@ -186,55 +190,57 @@ export default function HeroLogo3D({
     let time = 0;
 
     const animate = () => {
-      if (isVisible) {
-        time += 0.015;
-
-        if (group) {
-          // Controlled pointer tilt interpolation (max ~5.7 degrees yaw/pitch)
-          currentRotationX.current += (targetRotationX.current - currentRotationX.current) * 0.08;
-          currentRotationY.current += (targetRotationY.current - currentRotationY.current) * 0.08;
-
-          // FRONT FACING GUARANTEE: rotation.y & rotation.x are strictly constrained to pointer tilt
-          group.rotation.y = currentRotationY.current;
-          group.rotation.x = currentRotationX.current;
-
-          // Gentle breathing float on Y-axis
-          group.position.y = Math.sin(time) * 0.06;
-
-          // Z-axis movement on hover
-          const targetZVal = isHovered ? 0.35 : activeServiceIndex !== null ? 0.2 : 0;
-          currentZ.current += (targetZVal - currentZ.current) * 0.08;
-          group.position.z = currentZ.current;
-
-          // Scale animation on hover/service focus
-          const targetScaleVal = isHovered ? 1.12 : activeServiceIndex !== null ? 1.06 : 1.0;
-          currentScale.current += (targetScaleVal - currentScale.current) * 0.08;
-          group.scale.set(currentScale.current, currentScale.current, currentScale.current);
-
-          // Animate surrounding energy rings independently
-          if (ringMesh) {
-            ringMesh.rotation.z += 0.01;
-            ringMesh.rotation.x = Math.sin(time * 0.8) * 0.15;
-          }
-          if (ringMesh2) {
-            ringMesh2.rotation.z -= 0.008;
-            ringMesh2.rotation.y = Math.cos(time * 0.6) * 0.2;
-          }
-        }
-
-        // Boost lighting intensity on hover
-        if (limeLightRef.current) {
-          const targetLightInt = isHovered ? 7 : activeServiceIndex !== null ? 5.5 : 3.5;
-          limeLightRef.current.intensity += (targetLightInt - limeLightRef.current.intensity) * 0.08;
-        }
-
-        renderer.render(scene, camera);
+      if (!isVisible) {
+        animFrameRef.current = null;
+        return;
       }
 
+      time += 0.015;
+
+      if (group) {
+        // Controlled pointer tilt interpolation (max ~5.7 degrees yaw/pitch)
+        currentRotationX.current += (targetRotationX.current - currentRotationX.current) * 0.08;
+        currentRotationY.current += (targetRotationY.current - currentRotationY.current) * 0.08;
+
+        // FRONT FACING GUARANTEE: rotation.y & rotation.x are strictly constrained to pointer tilt
+        group.rotation.y = currentRotationY.current;
+        group.rotation.x = currentRotationX.current;
+
+        // Gentle breathing float on Y-axis
+        group.position.y = Math.sin(time) * 0.06;
+
+        // Z-axis movement on hover
+        const targetZVal = isHovered ? 0.35 : activeServiceIndex !== null ? 0.2 : 0;
+        currentZ.current += (targetZVal - currentZ.current) * 0.08;
+        group.position.z = currentZ.current;
+
+        // Scale animation on hover/service focus
+        const targetScaleVal = isHovered ? 1.12 : activeServiceIndex !== null ? 1.06 : 1.0;
+        currentScale.current += (targetScaleVal - currentScale.current) * 0.08;
+        group.scale.set(currentScale.current, currentScale.current, currentScale.current);
+
+        // Animate surrounding energy rings independently
+        if (ringMesh) {
+          ringMesh.rotation.z += 0.01;
+          ringMesh.rotation.x = Math.sin(time * 0.8) * 0.15;
+        }
+        if (ringMesh2) {
+          ringMesh2.rotation.z -= 0.008;
+          ringMesh2.rotation.y = Math.cos(time * 0.6) * 0.2;
+        }
+      }
+
+      // Boost lighting intensity on hover
+      if (limeLightRef.current) {
+        const targetLightInt = isHovered ? 7 : activeServiceIndex !== null ? 5.5 : 3.5;
+        limeLightRef.current.intensity += (targetLightInt - limeLightRef.current.intensity) * 0.08;
+      }
+
+      renderer.render(scene, camera);
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
       observer.disconnect();

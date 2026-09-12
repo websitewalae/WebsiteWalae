@@ -39,7 +39,7 @@ interface Props {
 export default function CameraInterface({ onEnterSite }: Props) {
   const [activeService, setActiveService] = useState<Service>(SERVICES[0]);
   const [isShutterClosed, setIsShutterClosed] = useState(false);
-  const [timecode, setTimecode] = useState("00:00:00:00");
+  const timecodeRef = useRef<HTMLSpanElement>(null);
   const [isExiting, setIsExiting] = useState(false);
   
   // AI Core Simulation State
@@ -69,7 +69,7 @@ export default function CameraInterface({ onEnterSite }: Props) {
   const rotateX = useSpring(useTransform(mouseY, [-500, 500], [4, -4]), { stiffness: 100, damping: 30 });
   const rotateY = useSpring(useTransform(mouseX, [-500, 500], [-4, 4]), { stiffness: 100, damping: 30 });
 
-  // Simulate Timecode
+  // Simulate Timecode (direct DOM update to avoid 24 re-renders/sec)
   useEffect(() => {
     let frame = 0;
     const interval = setInterval(() => {
@@ -78,7 +78,9 @@ export default function CameraInterface({ onEnterSite }: Props) {
         const s = Math.floor(frame / 24);
         const m = Math.floor(s / 60);
         const f = frame % 24;
-        setTimecode(`00:${m.toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}:${f.toString().padStart(2, '0')}`);
+        if (timecodeRef.current) {
+          timecodeRef.current.textContent = `00:${m.toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}:${f.toString().padStart(2, '0')}`;
+        }
       }
     }, 1000 / 24);
     return () => clearInterval(interval);
@@ -109,20 +111,20 @@ export default function CameraInterface({ onEnterSite }: Props) {
       setIsShutterClosed(true);
 
       tl.to(monitorRef.current, {
-        width: "100vw",
+        width: "100%",
         height: "100vh",
         borderRadius: 0,
         borderWidth: 0,
         rotateX: 0,
         rotateY: 0,
-        duration: 1.2,
+        duration: 0.8,
         ease: "power3.inOut",
-        delay: 0.2
+        delay: 0.1
       })
       .to(containerRef.current, {
         opacity: 0,
-        duration: 0.5,
-      }, "-=0.5");
+        duration: 0.3,
+      }, "-=0.3");
     }
   };
 
@@ -217,7 +219,7 @@ export default function CameraInterface({ onEnterSite }: Props) {
                 {activeService.ui.action}
               </span>
               <span className="text-[9px] sm:text-xs">{activeService.ui.mode}</span>
-              <span className="hidden sm:inline">{timecode}</span>
+              <span ref={timecodeRef} className="hidden sm:inline font-mono">00:00:00:00</span>
             </div>
             <div className="flex items-center gap-3">
               <button 

@@ -64,14 +64,17 @@ export default function Portfolio() {
               data-cursor="project"
             >
               <div className="absolute inset-0 bg-[#0a0a0a] transition-transform duration-700 group-hover:scale-105">
-                {/* Live Website Screenshot Background */}
+                {/* Live Website Screenshot Background with lazy async loading */}
                 <div className="w-full h-full bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-10 absolute inset-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-60" />
-                <div 
-                  className="w-full h-full opacity-40 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700 bg-cover bg-top" 
-                  style={{ 
-                    backgroundImage: `url(https://s0.wordpress.com/mshots/v1/${encodeURIComponent(project.url)}?w=1200)` 
-                  }} 
-                />
+                <div className="w-full h-full bg-[#0d0d0d] bg-[radial-gradient(ellipse_at_top,rgba(199,255,61,0.05),transparent_70%)] absolute inset-0">
+                  <img 
+                    src={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(project.url)}?w=900`}
+                    alt={project.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover object-top opacity-40 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700"
+                  />
+                </div>
               </div>
               
               <div className="absolute inset-0 z-20 p-5 sm:p-8 md:p-12 flex flex-col justify-between">

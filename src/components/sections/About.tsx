@@ -21,7 +21,7 @@ export default function About() {
       rotate: (i) => 10 * (i % 2 === 0 ? 1 : -1),
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top bottom",
+        start: "top 85%",
         end: "bottom top",
         scrub: 1,
       }

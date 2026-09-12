@@ -14,10 +14,10 @@ export default function Footer() {
           <div className="flex flex-col gap-4">
             <span className="text-xs font-bold text-brand-text-muted tracking-widest uppercase">Navigation</span>
             <a href="/" className="text-sm font-medium hover:text-brand-accent transition-colors">Home</a>
-            <a href="/#services" className="text-sm font-medium hover:text-brand-accent transition-colors">Services</a>
-            <a href="/#work" className="text-sm font-medium hover:text-brand-accent transition-colors">Work</a>
+            <a href="/services" className="text-sm font-medium hover:text-brand-accent transition-colors">Services</a>
+            <a href="/work" className="text-sm font-medium hover:text-brand-accent transition-colors">Work</a>
             <a href="/about" className="text-sm font-medium hover:text-brand-accent transition-colors">About</a>
-            <a href="/#contact" className="text-sm font-medium hover:text-brand-accent transition-colors">Contact</a>
+            <a href="/contact" className="text-sm font-medium hover:text-brand-accent transition-colors">Contact</a>
           </div>
           
           <div className="flex flex-col gap-4">
