@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { FileText, Briefcase, Package, Search, LogOut } from "lucide-react";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -27,8 +29,9 @@ export default async function Dashboard() {
           <div className="flex items-center gap-4">
             <div className="text-sm text-brand-text-secondary">{session.user.email}</div>
             <form action="/auth/logout" method="post">
-              <button type="submit" className="text-xs bg-white/10 hover:bg-white/20 px-4 py-2 rounded transition-colors">
-                Sign Out
+              <button type="submit" className="inline-flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 px-4 py-2 rounded transition-colors">
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Sign Out</span>
               </button>
             </form>
           </div>
@@ -37,15 +40,24 @@ export default async function Dashboard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="glass p-6 rounded-2xl border border-white/5 hover:border-brand-accent/50 transition-colors">
-            <h3 className="text-brand-text-secondary text-sm font-medium mb-2">Total Articles</h3>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-brand-text-secondary text-sm font-medium">Total Articles</h3>
+              <FileText className="w-4 h-4 text-brand-accent" />
+            </div>
             <div className="text-5xl font-black text-brand-accent">{articlesCount || 0}</div>
           </div>
           <div className="glass p-6 rounded-2xl border border-white/5 hover:border-brand-accent/50 transition-colors">
-            <h3 className="text-brand-text-secondary text-sm font-medium mb-2">Portfolio Items</h3>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-brand-text-secondary text-sm font-medium">Portfolio Items</h3>
+              <Briefcase className="w-4 h-4 text-brand-accent" />
+            </div>
             <div className="text-5xl font-black text-brand-accent">{portfolioCount || 0}</div>
           </div>
           <div className="glass p-6 rounded-2xl border border-white/5 hover:border-brand-accent/50 transition-colors">
-            <h3 className="text-brand-text-secondary text-sm font-medium mb-2">Active Packages</h3>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-brand-text-secondary text-sm font-medium">Active Packages</h3>
+              <Package className="w-4 h-4 text-brand-accent" />
+            </div>
             <div className="text-5xl font-black text-brand-accent">{packagesCount || 0}</div>
           </div>
         </div>
@@ -53,22 +65,22 @@ export default async function Dashboard() {
         {/* Quick Actions */}
         <h2 className="text-xl font-bold mb-6">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <a href="/admin/dashboard/articles" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group">
-            <span className="block text-xl mb-1 group-hover:-translate-y-1 transition-transform">📝</span>
-            Manage Articles
-          </a>
-          <a href="/admin/dashboard/portfolio" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group">
-            <span className="block text-xl mb-1 group-hover:-translate-y-1 transition-transform">💼</span>
-            Manage Portfolio
-          </a>
-          <a href="/admin/dashboard/packages" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group">
-            <span className="block text-xl mb-1 group-hover:-translate-y-1 transition-transform">📦</span>
-            Manage Packages
-          </a>
-          <a href="/admin/dashboard/seo" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group">
-            <span className="block text-xl mb-1 group-hover:-translate-y-1 transition-transform">🔍</span>
-            Global SEO Settings
-          </a>
+          <Link href="/admin/dashboard/articles" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+            <FileText className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+            <span>Manage Articles</span>
+          </Link>
+          <Link href="/admin/dashboard/portfolio" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+            <Briefcase className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+            <span>Manage Portfolio</span>
+          </Link>
+          <Link href="/admin/dashboard/packages" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+            <Package className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+            <span>Manage Packages</span>
+          </Link>
+          <Link href="/admin/dashboard/seo" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+            <Search className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+            <span>Global SEO Settings</span>
+          </Link>
         </div>
 
       </div>

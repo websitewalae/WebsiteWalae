@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,10 +86,17 @@ export default function Contact() {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="mt-2 self-start flex items-center justify-center gap-2 rounded-full px-6 py-4 sm:px-8 sm:py-5 bg-brand-surface border border-brand-border text-brand-text text-sm font-semibold transition-all hover:bg-[#1a1a1a] hover:border-brand-border-strong disabled:opacity-50"
+                  className="mt-2 self-start flex items-center justify-center gap-2 rounded-full px-6 py-4 sm:px-8 sm:py-5 bg-brand-surface border border-brand-border text-brand-text text-sm font-semibold transition-all hover:bg-[#1a1a1a] hover:border-brand-border-strong disabled:opacity-50 group"
                   data-cursor="button"
                 >
-                  {isSubmitting ? "SENDING..." : "LET'S BUILD THIS →"}
+                  {isSubmitting ? (
+                    <span>SENDING...</span>
+                  ) : (
+                    <>
+                      <span>LET&apos;S BUILD THIS</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
                 </button>
               </motion.form>
             ) : (

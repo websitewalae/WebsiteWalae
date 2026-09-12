@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import gsap from "gsap";
-import { Battery, Maximize, Focus, Sparkles, Send, ArrowRight } from "lucide-react";
+import { Battery, Maximize, Focus, Sparkles, Send, ArrowRight, Play } from "lucide-react";
 
 type Service = {
   id: string;
@@ -19,7 +19,7 @@ type Service = {
 const SERVICES: Service[] = [
   { id: "intro", name: "WEBSITE WALAE", bgUrl: "/images/commercial_shoot_bg.jpg", ui: { mode: "4K RAW", action: "STBY", color: "text-white" } },
   { id: "production", name: "SHOOTING & PRODUCTION", bgUrl: "/images/commercial_shoot_bg.jpg", ui: { mode: "4K RAW", action: "REC", color: "text-red-500" } },
-  { id: "editing", name: "VIDEO EDITING", bgUrl: "/images/editor_pc_bg.jpg", ui: { mode: "PRORES", action: "PLAY ▶", color: "text-brand-accent" } },
+  { id: "editing", name: "VIDEO EDITING", bgUrl: "/images/editor_pc_bg.jpg", ui: { mode: "PRORES", action: "PLAY", color: "text-brand-accent" } },
   { id: "design", name: "UI / UX DESIGN", bgUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop", ui: { mode: "VECTOR", action: "GRID", color: "text-blue-400" } },
   { id: "dev", name: "WEBSITE DEVELOPMENT", bgUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop", ui: { mode: "LIVE", action: "BUILD", color: "text-green-400" } },
   { id: "marketing", name: "SEO & MARKETING", bgUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop", ui: { mode: "DATA", action: "TRACK", color: "text-purple-400" } }
@@ -73,7 +73,7 @@ export default function CameraInterface({ onEnterSite }: Props) {
   useEffect(() => {
     let frame = 0;
     const interval = setInterval(() => {
-      if (activeService.ui.action === "REC" || activeService.ui.action === "PLAY ▶") {
+      if (activeService.ui.action === "REC" || activeService.ui.action === "PLAY") {
         frame++;
         const s = Math.floor(frame / 24);
         const m = Math.floor(s / 60);
@@ -216,6 +216,7 @@ export default function CameraInterface({ onEnterSite }: Props) {
             <div className="flex items-center gap-2 sm:gap-4">
               <span className={`flex items-center gap-1.5 ${activeService.ui.color}`}>
                 {activeService.ui.action === "REC" && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />}
+                {activeService.ui.action === "PLAY" && <Play className="w-2.5 h-2.5 fill-current" />}
                 {activeService.ui.action}
               </span>
               <span className="text-[9px] sm:text-xs">{activeService.ui.mode}</span>
@@ -438,9 +439,10 @@ export default function CameraInterface({ onEnterSite }: Props) {
                 <span>AI THINKS. CAMERA CREATES.</span>
                 <button 
                   onClick={handleEnterSite} 
-                  className="text-brand-accent underline hover:text-white font-bold"
+                  className="inline-flex items-center gap-1.5 text-brand-accent underline hover:text-white font-bold"
                 >
-                  PROCEED TO EXPERIENCE →
+                  <span>PROCEED TO EXPERIENCE</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </motion.div>

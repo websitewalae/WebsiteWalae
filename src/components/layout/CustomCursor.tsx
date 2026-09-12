@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function CustomCursor() {
   const [cursorType, setCursorType] = useState<"default" | "button" | "image" | "project" | "link">("default");
@@ -46,9 +47,9 @@ export default function CustomCursor() {
           lastTypeRef.current = type;
           setCursorType(type);
 
-          if (type === "image") setCursorText("VIEW →");
-          else if (type === "project") setCursorText("OPEN →");
-          else if (type === "link") setCursorText("→");
+          if (type === "image") setCursorText("VIEW");
+          else if (type === "project") setCursorText("OPEN");
+          else if (type === "link") setCursorText("");
           else setCursorText("");
         }
       } else {
@@ -104,8 +105,11 @@ export default function CustomCursor() {
         transform: "translate3d(-100px, -100px, 0) translate(-50%, -50%)",
       }}
     >
-      {isExpanded && cursorText && (
-        <span className="whitespace-nowrap select-none px-1 font-mono">{cursorText}</span>
+      {isExpanded && (cursorText || cursorType === "link") && (
+        <span className="whitespace-nowrap select-none px-1 font-mono inline-flex items-center gap-0.5">
+          {cursorText && <span>{cursorText}</span>}
+          <ArrowUpRight className="w-3 h-3 inline" />
+        </span>
       )}
     </div>
   );

@@ -54,7 +54,7 @@ export default function EditingScene() {
 
     // 70% - Complete export state
     tl.to(progressRef.current, { 
-      onStart: () => { if (progressRef.current) progressRef.current.innerText = "FINAL MASTER EXPORTED ✦" },
+      onStart: () => { if (progressRef.current) progressRef.current.innerText = "FINAL MASTER EXPORTED" },
       color: "#C7FF3D", 
       duration: 0.1 
     });

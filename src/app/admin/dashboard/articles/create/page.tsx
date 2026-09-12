@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createArticle } from "../actions";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { ArrowLeft, AlertTriangle } from "lucide-react";
 
 export default async function CreateArticle(props: { searchParams?: Promise<{ error?: string }> }) {
   const searchParams = await props.searchParams;
@@ -17,14 +18,17 @@ export default async function CreateArticle(props: { searchParams?: Promise<{ er
       <div className="max-w-4xl mx-auto">
         <header className="mb-8 border-b border-white/10 pb-6">
           <div className="text-sm text-brand-text-secondary mb-2">
-            <Link href="/admin/dashboard/articles" className="hover:text-white transition-colors">← Back to Articles</Link>
+            <Link href="/admin/dashboard/articles" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to Articles</span>
+            </Link>
           </div>
           <h1 className="text-3xl font-bold">Draft New Article</h1>
         </header>
 
         {errorMsg && (
           <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-4 rounded-xl mb-6 text-sm flex items-start gap-3">
-            <span className="text-lg">⚠️</span>
+            <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
             <div>
               <div className="font-bold mb-1">Database Error: {errorMsg}</div>
               <p className="text-xs text-white/70">

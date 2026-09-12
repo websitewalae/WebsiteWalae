@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { Check, ArrowRight } from "lucide-react";
 
 export default function DevelopmentScene() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -111,9 +112,18 @@ export default function DevelopmentScene() {
              <div className="absolute bottom-0 left-0 right-0 h-2/5 sm:h-1/3 bg-black/90 border-t border-brand-border p-3 sm:p-4 font-mono text-[10px] sm:text-xs">
                 <div className="text-brand-text-muted mb-1">$ npm run build</div>
                 <div ref={buildStatusRef} className="flex flex-col gap-0.5 sm:gap-1">
-                  <div>✓ Compiled successfully</div>
-                  <div>→ Responsive layout verified</div>
-                  <div>→ Performance 100/100</div>
+                  <div className="flex items-center gap-1.5 text-emerald-400">
+                    <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>Compiled successfully</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-brand-text-secondary">
+                    <ArrowRight className="w-3 h-3 text-white/50 shrink-0" />
+                    <span>Responsive layout verified</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-brand-text-secondary">
+                    <ArrowRight className="w-3 h-3 text-white/50 shrink-0" />
+                    <span>Performance 100/100</span>
+                  </div>
                   <div className="mt-1 text-brand-text text-brand-accent">Ready for production.</div>
                 </div>
              </div>

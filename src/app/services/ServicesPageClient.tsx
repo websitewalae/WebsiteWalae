@@ -327,8 +327,9 @@ export default function ServicesPageClient() {
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight uppercase mb-2 group-hover:text-brand-accent transition-colors duration-300">
                       {service.name}
                     </h2>
-                    <p className="text-xs sm:text-sm font-mono text-brand-accent mb-4">
-                      ✦ {service.tagline}
+                    <p className="text-xs sm:text-sm font-mono text-brand-accent mb-4 flex items-center">
+                      <Sparkles className="w-3.5 h-3.5 inline-block mr-1.5 text-brand-accent shrink-0" />
+                      <span>{service.tagline}</span>
                     </p>
 
                     <p className="text-sm sm:text-base text-brand-text-secondary leading-relaxed mb-6">

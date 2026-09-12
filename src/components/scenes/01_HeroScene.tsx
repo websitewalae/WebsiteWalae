@@ -501,7 +501,7 @@ export default function HeroScene() {
               href="#work"
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors text-white group"
             >
-              <span className="text-xs group-hover:scale-110 transition-transform">✦</span>
+              <Sparkles className="w-3.5 h-3.5 text-brand-accent group-hover:scale-110 transition-transform" />
             </Link>
 
             <Link

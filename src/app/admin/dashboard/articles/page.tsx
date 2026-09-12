@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ArrowLeft, Plus } from "lucide-react";
 import SqlSetupBox from "./SqlSetupBox";
 
 const SETUP_SQL = `-- 1. CREATE ARTICLES TABLE
@@ -65,12 +66,16 @@ export default async function ArticlesDashboard() {
         <header className="flex justify-between items-center mb-8 border-b border-white/10 pb-6">
           <div>
             <div className="text-sm text-brand-text-secondary mb-2">
-              <Link href="/admin/dashboard" className="hover:text-white transition-colors">← Back to Dashboard</Link>
+              <Link href="/admin/dashboard" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Back to Dashboard</span>
+              </Link>
             </div>
             <h1 className="text-3xl font-bold">Manage Articles</h1>
           </div>
-          <Link href="/admin/dashboard/articles/create" className="bg-brand-accent text-black font-bold px-6 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">
-            + New Article
+          <Link href="/admin/dashboard/articles/create" className="inline-flex items-center gap-2 bg-brand-accent text-black font-bold px-6 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">
+            <Plus className="w-4 h-4" />
+            <span>New Article</span>
           </Link>
         </header>
 
