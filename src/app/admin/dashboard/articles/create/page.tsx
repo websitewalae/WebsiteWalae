@@ -3,7 +3,10 @@ import { createArticle } from "../actions";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export default async function CreateArticle() {
+export default async function CreateArticle(props: { searchParams?: Promise<{ error?: string }> }) {
+  const searchParams = await props.searchParams;
+  const errorMsg = searchParams?.error;
+
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
@@ -18,6 +21,18 @@ export default async function CreateArticle() {
           </div>
           <h1 className="text-3xl font-bold">Draft New Article</h1>
         </header>
+
+        {errorMsg && (
+          <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-4 rounded-xl mb-6 text-sm flex items-start gap-3">
+            <span className="text-lg">⚠️</span>
+            <div>
+              <div className="font-bold mb-1">Database Error: {errorMsg}</div>
+              <p className="text-xs text-white/70">
+                Please grant database permissions in your Supabase SQL Editor.
+              </p>
+            </div>
+          </div>
+        )}
 
         <form action={createArticle} className="space-y-8">
           {/* Main Content Section */}

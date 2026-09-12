@@ -45,8 +45,7 @@ export async function createArticle(formData: FormData) {
 
   if (error) {
     console.error("Error inserting article:", error);
-    // You could return an error state here, but for now we'll throw
-    throw new Error(error.message);
+    redirect(`/admin/dashboard/articles/create?error=${encodeURIComponent(error.message)}`);
   }
 
   redirect("/admin/dashboard/articles");
