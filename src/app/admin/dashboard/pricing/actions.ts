@@ -140,3 +140,40 @@ export async function togglePackagePopular(id: string, popular: boolean) {
   revalidatePath("/admin/dashboard/pricing");
   revalidatePath("/pricing");
 }
+
+export async function seedDefaultPackages() {
+  const supabase = await createClient();
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) throw new Error("Unauthorized");
+
+  // import the default pricing array here dynamically or statically
+  const { DEFAULT_PRICING } = await import("@/lib/packages");
+
+  const { error } = await supabase.from("packages").insert(
+    DEFAULT_PRICING.map(pkg => ({
+      name: pkg.name,
+      service_name: pkg.service_name,
+      slug: pkg.slug,
+      category: pkg.category,
+      price: pkg.price,
+      starting_price: pkg.starting_price,
+      pricing_label: pkg.pricing_label,
+      description: pkg.description,
+      features: pkg.features,
+      cta_text: pkg.cta_text,
+      cta_link: pkg.cta_link,
+      popular: pkg.popular,
+      display_order: pkg.display_order,
+      active: pkg.active,
+    }))
+  );
+
+  if (error) {
+    console.error("Error seeding default packages:", error);
+    redirect(`/admin/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/pricing");
+  redirect("/admin/dashboard/pricing");
+}

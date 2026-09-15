@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { type PricingPackage } from "@/lib/packages";
-import { createPackage, updatePackage, deletePackage, togglePackageActive, togglePackagePopular } from "./actions";
-import { Plus, Edit2, Trash2, Check, X, Star } from "lucide-react";
+import { createPackage, updatePackage, deletePackage, togglePackageActive, togglePackagePopular, seedDefaultPackages } from "./actions";
+import { Plus, Edit2, Trash2, Check, X, Star, Upload } from "lucide-react";
 
 export default function PricingAdminClient({ packages }: { packages: PricingPackage[] }) {
   const [isEditing, setIsEditing] = useState<string | null>(null);
@@ -14,13 +14,26 @@ export default function PricingAdminClient({ packages }: { packages: PricingPack
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex justify-end">
-        <button 
-          onClick={() => setIsCreating(true)}
-          className="flex items-center gap-2 bg-brand-accent text-black px-4 py-2 rounded-lg font-bold hover:bg-white transition-colors"
-        >
-          <Plus className="w-4 h-4" /> Add Package
-        </button>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold">Manage Pricing ({packages.length} packages)</h2>
+        <div className="flex gap-4">
+          {packages.length === 0 && (
+            <form action={seedDefaultPackages}>
+              <button 
+                type="submit"
+                className="flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-lg font-bold hover:bg-white/20 transition-colors"
+              >
+                <Upload className="w-4 h-4" /> Seed Default Packages
+              </button>
+            </form>
+          )}
+          <button 
+            onClick={() => setIsCreating(true)}
+            className="flex items-center gap-2 bg-brand-accent text-black px-4 py-2 rounded-lg font-bold hover:bg-white transition-colors"
+          >
+            <Plus className="w-4 h-4" /> Add Package
+          </button>
+        </div>
       </div>
 
       {isCreating && (

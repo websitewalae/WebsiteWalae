@@ -26,6 +26,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function PricingPage() {
   const packages = await getPackages();
   return <PricingPageClient initialPackages={packages} />;

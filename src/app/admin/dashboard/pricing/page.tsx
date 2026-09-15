@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getAllPackages, type PricingPackage } from "@/lib/packages";
 import PricingAdminClient from "./PricingAdminClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function PricingAdminPage() {
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
