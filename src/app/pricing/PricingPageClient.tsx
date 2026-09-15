@@ -52,7 +52,12 @@ export default function PricingPageClient({ initialPackages }: { initialPackages
       {/* Pricing Grid */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-          {initialPackages.map((tier, i) => (
+          {initialPackages.map((tier, i) => {
+            const descriptionParts = (tier.description || "").split("---");
+            const mainDescription = descriptionParts[0].trim();
+            const breakdownText = descriptionParts.length > 1 ? descriptionParts[1].trim() : null;
+
+            return (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
@@ -76,15 +81,32 @@ export default function PricingPageClient({ initialPackages }: { initialPackages
                   {tier.name}
                 </h3>
                 
-                <div className="text-2xl sm:text-3xl font-extrabold text-brand-accent mb-4 flex items-end gap-1">
-                  {tier.pricing_label && tier.pricing_label !== 'Custom Quote' && (
-                    <span className="text-sm text-brand-text-secondary font-medium tracking-wide uppercase mb-1">{tier.pricing_label}</span>
+                <div className="text-2xl sm:text-3xl font-extrabold text-brand-accent mb-4 flex flex-col gap-1">
+                  <div className="flex items-end gap-1">
+                    {tier.pricing_label && tier.pricing_label !== 'Custom Quote' && (
+                      <span className="text-sm text-brand-text-secondary font-medium tracking-wide uppercase mb-1">{tier.pricing_label}</span>
+                    )}
+                    {tier.price}
+                  </div>
+                  
+                  {breakdownText && (
+                    <div className="flex flex-col gap-1 mt-3 mb-1 bg-black/40 p-4 rounded-xl border border-white/5">
+                      {breakdownText.split('\n').map((line, idx) => {
+                        const [label, val] = line.split(':');
+                        if (!val) return <div key={idx} className="text-sm text-white/80 font-medium tracking-wide">{line}</div>;
+                        return (
+                          <div key={idx} className="flex justify-between items-center text-sm py-0.5">
+                            <span className="text-white/80 font-medium">{label.trim()}</span>
+                            <span className="text-brand-accent font-bold">{val.trim()}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   )}
-                  {tier.price}
                 </div>
 
                 <p className="text-sm text-white/50 mb-8 flex-1">
-                  {tier.description}
+                  {mainDescription}
                 </p>
 
                 <div className="flex flex-col gap-3">
@@ -107,7 +129,7 @@ export default function PricingPageClient({ initialPackages }: { initialPackages
                 </Link>
               </div>
             </motion.div>
-          ))}
+          )})}
         </div>
       </section>
 
