@@ -140,11 +140,11 @@ export default async function QueriesDashboard() {
                             name="status" 
                             defaultValue={q.status}
                             onChange={(e) => e.target.form?.requestSubmit()}
-                            className={\`px-3 py-1.5 rounded-lg text-xs font-bold outline-none cursor-pointer \${
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold outline-none cursor-pointer ${
                               q.status === 'new' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : 
                               q.status === 'contacted' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 
                               'bg-white/10 text-white/50 border border-white/10'
-                            }\`}
+                            }`}
                           >
                             <option value="new" className="bg-black text-white">New</option>
                             <option value="contacted" className="bg-black text-white">Contacted</option>
