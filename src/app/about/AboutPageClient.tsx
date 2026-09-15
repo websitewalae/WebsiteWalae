@@ -108,8 +108,66 @@ export default function AboutPageClient() {
         </div>
       </section>
 
+      {/* Entity Details & Knowledge Graph Section */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] py-24 border-t border-white/10" aria-label="Website Walae Official Details">
+        <div className="mb-16 text-center">
+          <h2 className="text-sm font-mono text-brand-accent tracking-widest uppercase mb-4">Official Information</h2>
+          <h3 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight">Who We Are</h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+          {/* Q1 */}
+          <div className="glass p-8 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
+            <h4 className="text-xl font-bold text-white mb-3">Who is Website Walae?</h4>
+            <p className="text-brand-text-secondary leading-relaxed">
+              Website Walae is a premium digital marketing and creative agency. We combine cinematic design, advanced engineering, and data-driven marketing to build high-performance digital ecosystems for brands.
+            </p>
+          </div>
+
+          {/* Q2 */}
+          <div className="glass p-8 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
+            <h4 className="text-xl font-bold text-white mb-3">Where is Website Walae based?</h4>
+            <p className="text-brand-text-secondary leading-relaxed">
+              We are headquartered in the heart of Lucknow, Uttar Pradesh, India (Hazratganj, 226001). While based in Lucknow, we operate globally as a remote-first creative partner for ambitious brands.
+            </p>
+          </div>
+
+          {/* Q3 */}
+          <div className="glass p-8 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
+            <h4 className="text-xl font-bold text-white mb-3">What services does Website Walae provide?</h4>
+            <p className="text-brand-text-secondary leading-relaxed">
+              We provide 9 core digital services: Website Development, UI/UX Design, Social Media Marketing, Content Creation, Video Production, SEO & Growth, Meta Ads, E-commerce Development, and Public Relations (PR).
+            </p>
+          </div>
+
+          {/* Q4 */}
+          <div className="glass p-8 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors">
+            <h4 className="text-xl font-bold text-white mb-3">What type of digital work do we specialize in?</h4>
+            <p className="text-brand-text-secondary leading-relaxed">
+              We specialize in creating premium, high-end digital experiences. This includes fast Next.js & WebGL websites, cinematic 4K commercial videos, highly-converting Meta ad campaigns, and authoritative SEO dominance.
+            </p>
+          </div>
+
+          {/* Q5 */}
+          <div className="glass p-8 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-colors md:col-span-2">
+            <h4 className="text-xl font-bold text-white mb-3">How can someone contact Website Walae?</h4>
+            <p className="text-brand-text-secondary leading-relaxed mb-4">
+              You can contact our official team directly via phone or email for project inquiries, partnerships, or consultations:
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 font-mono text-sm">
+              <a href="tel:+917317782998" className="inline-flex items-center gap-2 text-white hover:text-brand-accent transition-colors bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+                <span className="text-brand-accent">Phone:</span> +91 73177 82998
+              </a>
+              <a href="mailto:websitewalae@gmail.com" className="inline-flex items-center gap-2 text-white hover:text-brand-accent transition-colors bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+                <span className="text-brand-accent">Email:</span> websitewalae@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] py-24">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] py-24 border-t border-white/10">
         <div className="glass p-10 sm:p-16 rounded-3xl border border-white/10 text-center flex flex-col items-center gap-8 bg-gradient-to-t from-brand-accent/[0.02] to-transparent">
           <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight">Ready to start?</h2>
           <Link

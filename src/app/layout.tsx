@@ -141,6 +141,7 @@ const organizationSchema = {
     "Content Creation",
     "Video Production",
     "Meta Ads & Digital Marketing",
+    "E-commerce Development",
     "Public Relations (PR)",
     "Digital Marketing Strategy"
   ],
@@ -155,6 +156,7 @@ const organizationSchema = {
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Creation" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Video Production" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Public Relations" } }
     ]
   }
