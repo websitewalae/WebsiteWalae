@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Globe, Layout, Share2, Sparkles, Video, Search, Target, 
   ArrowRight, CheckCircle2, Cpu, Zap, Layers, BarChart3, 
-  ChevronRight, PhoneCall, Code2, Film, Palette
+  ChevronRight, PhoneCall, Code2, Film, Palette, Megaphone
 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
@@ -124,7 +124,7 @@ const SERVICES: ServiceItem[] = [
       "Influencer & Creator Collaborations",
       "Monthly KPI Tracking & Growth Reports"
     ],
-    techStack: ["Instagram", "LinkedIn", "YouTube", "Meta Business Suite", "Analytics"],
+    techStack: ["Instagram", "LinkedIn", "Facebook", "Meta Business Suite", "Analytics"],
     impactMetric: "+300% Organic Reach Growth // Real Followers",
     idealFor: "Brands looking to dominate their local or global niche"
   },
@@ -167,6 +167,26 @@ const SERVICES: ServiceItem[] = [
     techStack: ["Google Search Console", "Semrush", "JSON-LD Schema", "Lighthouse"],
     impactMetric: "#1 Organic Rankings // Zero Ad Spend Traffic",
     idealFor: "Local Lucknow businesses & national platforms"
+  },
+  {
+    id: "pr-public-relations",
+    num: "08",
+    name: "PR / Public Relations",
+    category: "MARKETING & GROWTH",
+    tagline: "Digital PR, Media Outreach & Brand Authority",
+    description: "Build credibility before you build attention. We secure high-tier media placements, manage online reputation, and execute digital PR strategies that establish your brand as an undeniable industry authority.",
+    icon: Megaphone,
+    accentColor: "#06B6D4",
+    deliverables: [
+      "Digital PR Strategy & Brand Positioning",
+      "High-Tier Media & Publication Outreach",
+      "Press Release Writing & Distribution",
+      "Online Reputation Management",
+      "Crisis Communication Planning"
+    ],
+    techStack: ["Media Outreach", "Press Kits", "Sentiment Analysis", "Brand Monitoring"],
+    impactMetric: "100+ Media Placements // Brand Trust",
+    idealFor: "Brands seeking industry authority and trust"
   }
 ];
 

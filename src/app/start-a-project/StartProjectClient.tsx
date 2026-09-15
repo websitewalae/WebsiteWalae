@@ -13,6 +13,7 @@ const SERVICES = [
   "Video Production",
   "SEO",
   "Meta Ads",
+  "PR / Public Relations",
   "E-commerce",
   "Something Else"
 ];
@@ -108,8 +109,8 @@ export default function StartProjectClient() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
-            LET'S BUILD <br />
-            <span className="text-brand-text-secondary">SOMETHING.</span>
+            LET'S BUILD SOMETHING <br />
+            <span className="text-brand-text-secondary">WORTH TALKING ABOUT.</span>
           </h1>
           <p className="text-xl sm:text-2xl text-brand-text-secondary font-medium mt-4">
             Tell us what you're building. We'll figure out the rest.

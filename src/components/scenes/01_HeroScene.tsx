@@ -20,10 +20,11 @@ import {
   Zap,
   CheckCircle2,
   TrendingUp,
+  Megaphone
 } from "lucide-react";
 import HeroLogo3D from "../ui/HeroLogo3D";
 
-// 7 Core Services Definition
+// 8 Core Services Definition
 const SERVICES = [
   {
     id: "ui-ux",
@@ -144,6 +145,23 @@ const SERVICES = [
       stats: ["+2.4M Views", "85% Engaged"],
     },
   },
+  {
+    id: "pr-public-relations",
+    num: "08",
+    title: "PR / PUBLIC RELATIONS",
+    mobileTitle: "PR",
+    icon: Megaphone,
+    color: "#06B6D4",
+    pos: { bottom: "5%", left: "50%", transform: "translateX(-50%)" },
+    mobilePos: { bottom: "10%", left: "50%", transform: "translateX(-50%)" },
+    lineAngle: 90,
+    preview: {
+      tag: "BRAND AUTHORITY",
+      heading: "Digital PR & Outreach",
+      desc: "High-tier media placements, reputation management & industry dominance.",
+      stats: ["100+ Publications", "Verified Trust"],
+    },
+  }
 ];
 
 export default function HeroScene() {
@@ -272,12 +290,12 @@ export default function HeroScene() {
             const isMobile = windowDims.w < 768;
 
             const targetXPercent = isMobile ?
-              (idx === 0 ? 0.5 : idx === 1 ? 0.82 : idx === 2 ? 0.82 : idx === 3 ? 0.80 : idx === 4 ? 0.20 : idx === 5 ? 0.18 : 0.18) :
-              (idx === 0 ? 0.5 : idx === 1 ? 0.92 : idx === 2 ? 0.95 : idx === 3 ? 0.90 : idx === 4 ? 0.10 : idx === 5 ? 0.05 : 0.08);
+              (idx === 0 ? 0.5 : idx === 1 ? 0.82 : idx === 2 ? 0.82 : idx === 3 ? 0.80 : idx === 4 ? 0.20 : idx === 5 ? 0.18 : idx === 6 ? 0.18 : 0.5) :
+              (idx === 0 ? 0.5 : idx === 1 ? 0.92 : idx === 2 ? 0.95 : idx === 3 ? 0.90 : idx === 4 ? 0.10 : idx === 5 ? 0.05 : idx === 6 ? 0.08 : 0.5);
 
             const targetYPercent = isMobile ?
-              (idx === 0 ? 0.12 : idx === 1 ? 0.19 : idx === 2 ? 0.65 : idx === 3 ? 0.74 : idx === 4 ? 0.74 : idx === 5 ? 0.65 : 0.19) :
-              (idx === 0 ? 0.10 : idx === 1 ? 0.22 : idx === 2 ? 0.50 : idx === 3 ? 0.78 : idx === 4 ? 0.78 : idx === 5 ? 0.50 : 0.22);
+              (idx === 0 ? 0.12 : idx === 1 ? 0.19 : idx === 2 ? 0.65 : idx === 3 ? 0.74 : idx === 4 ? 0.74 : idx === 5 ? 0.65 : idx === 6 ? 0.19 : 0.88) :
+              (idx === 0 ? 0.10 : idx === 1 ? 0.22 : idx === 2 ? 0.50 : idx === 3 ? 0.78 : idx === 4 ? 0.78 : idx === 5 ? 0.50 : idx === 6 ? 0.22 : 0.90);
 
             return (
               <g key={srv.id}>
@@ -343,7 +361,7 @@ export default function HeroScene() {
       </div>
 
       {/* ========================================================================= */}
-      {/* 7 SERVICE NODES & INTERACTIVE PREVIEW CARDS */}
+      {/* 8 SERVICE NODES & INTERACTIVE PREVIEW CARDS */}
       {/* ========================================================================= */}
       <div ref={nodesContainerRef} className="absolute inset-0 z-20 pointer-events-none">
         {SERVICES.map((srv, idx) => {

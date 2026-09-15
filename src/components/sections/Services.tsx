@@ -7,7 +7,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { 
   Globe, Layout, Share2, Camera, Video, Search, Target, 
   Sparkles, ArrowRight, Play, CheckCircle2, Code, Layers, 
-  TrendingUp, Activity, MousePointerClick, Users, Eye, Heart, MessageCircle, Bookmark, Check
+  TrendingUp, Activity, MousePointerClick, Users, Eye, Heart, MessageCircle, Bookmark, Check, Megaphone, Globe2
 } from "lucide-react";
 
 type Service = {
@@ -83,6 +83,15 @@ const SERVICES: Service[] = [
     icon: Target,
     hudStatus: "CAMPAIGN ACTIVE // TARGETING OPTIMIZED // LEADS GENERATING",
     metrics: ["98% AUDIENCE MATCH", "5.2% CTR", "4.8X ROAS"]
+  },
+  {
+    id: "08",
+    name: "PR / Public Relations",
+    category: "REPUTATION",
+    tagline: "Digital PR, media outreach, and online brand authority.",
+    icon: Megaphone,
+    hudStatus: "DIGITAL PR // MEDIA OUTREACH // AUTHORITY BUILDING",
+    metrics: ["100+ PLACEMENTS", "BRAND AUTHORITY", "REPUTATION"]
   }
 ];
 
@@ -242,7 +251,7 @@ export default function Services() {
                 </div>
                 <div className="flex items-center gap-3 text-brand-text-muted">
                   <span className="hidden sm:inline">60 FPS</span>
-                  <span>{activeService.id} / 07</span>
+                  <span>{activeService.id} / 08</span>
                 </div>
               </div>
 
@@ -576,6 +585,57 @@ export default function Services() {
                             <span className="text-[9px] font-mono text-purple-300">LEADS GENERATED</span>
                             <div className="text-xl font-bold font-mono text-white">+142 LEADS</div>
                             <span className="text-[9px] font-bold text-purple-300">CONVERSION PEAKING</span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* ========================================================================= */}
+                  {/* 08 — PR / PUBLIC RELATIONS WORLD */}
+                  {/* ========================================================================= */}
+                  {activeIndex === 7 && (
+                    <motion.div 
+                      key="pr"
+                      initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+                      animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+                      transition={{ duration: 0.4 }}
+                      className="w-full h-full flex flex-col justify-between p-2"
+                    >
+                      <div className="w-full h-full bg-[#0a0a0a] border border-white/10 rounded-xl p-4 flex flex-col justify-between relative overflow-hidden">
+                        <div className="flex justify-between items-center text-[10px] font-mono text-brand-text-muted border-b border-white/10 pb-2">
+                          <span className="text-cyan-400 font-bold flex items-center gap-1.5">
+                            <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
+                            DIGITAL PR // MEDIA OUTREACH
+                          </span>
+                          <span>AUTHORITY SYNC</span>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3 flex-1 items-center">
+                          <div className="glass p-3 rounded-xl border border-cyan-500/40 bg-cyan-900/10 flex flex-col justify-between h-full relative overflow-hidden">
+                            <div className="absolute top-2 right-2"><Globe2 className="w-4 h-4 text-cyan-400/50" /></div>
+                            <span className="text-[9px] font-mono text-cyan-400">MEDIA PLACEMENTS</span>
+                            <div className="text-2xl font-bold font-mono text-white">45+</div>
+                            <span className="text-[9px] font-bold text-cyan-300">TOP TIER PUBLICATIONS</span>
+                          </div>
+
+                          <div className="flex flex-col gap-2 h-full justify-between">
+                            <div className="glass p-3 rounded-xl border border-white/10 bg-black flex flex-col gap-1 text-left flex-1">
+                               <div className="flex justify-between items-center">
+                                  <span className="text-[9px] font-mono text-brand-text-muted">PRESS RELEASE</span>
+                                  <span className="text-[8px] font-mono bg-cyan-500 text-black px-2 py-0.5 rounded">PUBLISHED</span>
+                               </div>
+                               <div className="h-1.5 w-full bg-white/20 rounded mt-1" />
+                               <div className="h-1.5 w-3/4 bg-white/10 rounded" />
+                               <div className="h-1.5 w-1/2 bg-white/10 rounded" />
+                            </div>
+                            <div className="glass p-3 rounded-xl border border-white/10 bg-black flex flex-col gap-1 text-left flex-1">
+                               <div className="flex justify-between items-center">
+                                  <span className="text-[9px] font-mono text-brand-text-muted">SENTIMENT</span>
+                                  <span className="text-[8px] font-mono text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/30">POSITIVE 98%</span>
+                               </div>
+                            </div>
                           </div>
                         </div>
                       </div>

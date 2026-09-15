@@ -1,56 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, IndianRupee, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import type { PricingPackage } from "@/lib/packages";
 
-const PRICING_TIERS = [
-  {
-    category: "WEBSITE DEVELOPMENT",
-    price: "Starting from ₹15,000",
-    isCustom: false,
-    features: ["Custom websites", "Responsive design", "CMS / integrations", "SEO-ready structure"],
-  },
-  {
-    category: "SOCIAL MEDIA",
-    price: "Starting from ₹15,000 / mo",
-    isCustom: false,
-    features: ["Content strategy", "Creative posts", "Reels", "Monthly management"],
-  },
-  {
-    category: "VIDEO PRODUCTION",
-    price: "Starting from ₹15,000",
-    isCustom: false,
-    features: ["Reels", "Product videos", "Commercial content"],
-  },
-  {
-    category: "SEO",
-    price: "Starting from ₹15,000 / mo",
-    isCustom: false,
-    features: ["Technical SEO", "On-page SEO", "Content strategy", "Search visibility"],
-  },
-  {
-    category: "META ADS",
-    price: "Starting from ₹15,000 / mo",
-    isCustom: false,
-    features: ["Campaign setup", "Creative testing", "Audience targeting", "Lead generation"],
-  },
-  {
-    category: "UI / UX DESIGN",
-    price: "Custom Quote",
-    isCustom: true,
-    features: ["Wireframing", "Prototyping", "Design Systems", "User Journeys"],
-  },
-  {
-    category: "CONTENT CREATION",
-    price: "Custom Quote",
-    isCustom: true,
-    features: ["Copywriting", "Brand Photography", "Creative Direction", "Ad Creatives"],
-  },
-];
+export default function PricingPageClient({ initialPackages }: { initialPackages: PricingPackage[] }) {
+  // AEO FAQ for the pricing page
+  const pricingFaq = [
+    {
+      question: "How much does website development cost?",
+      answer: "Custom website development at Website Walae starts from ₹15,000 for standard websites. E-commerce platforms and complex web applications require a custom quote based on features and integrations."
+    },
+    {
+      question: "Do you offer monthly retainers for SEO and Social Media?",
+      answer: "Yes, we offer ongoing monthly retainer packages for SEO, Social Media Management, and Meta Ads starting from ₹15,000 per month."
+    },
+    {
+      question: "Are there any hidden costs in your pricing?",
+      answer: "No, our pricing is completely transparent. For custom projects, you will receive a detailed proposal outlining all costs before we begin any work."
+    }
+  ];
 
-export default function PricingPageClient() {
   return (
     <div className="w-full min-h-screen bg-[#050505] text-brand-text pt-28 pb-16">
       <div className="noise-overlay" />
@@ -80,30 +52,43 @@ export default function PricingPageClient() {
       {/* Pricing Grid */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
-          {PRICING_TIERS.map((tier, i) => (
+          {initialPackages.map((tier, i) => (
             <motion.div
-              key={tier.category}
+              key={tier.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-              className="group glass p-8 sm:p-10 rounded-3xl border border-white/10 hover:border-brand-accent/50 transition-all duration-500 relative overflow-hidden flex flex-col h-full bg-[#0a0a0a]"
+              className={`group p-8 sm:p-10 rounded-3xl border transition-all duration-500 relative overflow-hidden flex flex-col h-full bg-[#0a0a0a] ${tier.popular ? 'border-brand-accent shadow-[0_0_30px_rgba(199,255,61,0.1)]' : 'border-white/10 hover:border-brand-accent/50'}`}
             >
               {/* Subtle hover gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <div className="relative z-10 flex-1 flex flex-col">
+              {tier.popular && (
+                <div className="absolute top-0 right-0 bg-brand-accent text-black text-[10px] font-bold font-mono px-4 py-1.5 rounded-bl-xl uppercase tracking-widest">
+                  POPULAR
+                </div>
+              )}
+
+              <div className="relative z-10 flex-1 flex flex-col mt-2">
+                <div className="text-xs font-mono text-brand-text-muted mb-2">{tier.category}</div>
                 <h3 className="text-xl font-bold uppercase tracking-tight text-white mb-2">
-                  {tier.category}
+                  {tier.name}
                 </h3>
                 
-                <div className="text-2xl sm:text-3xl font-extrabold text-brand-accent mb-8 flex items-end gap-1">
-                  {!tier.isCustom && <span className="text-sm text-brand-text-secondary font-medium tracking-wide uppercase mb-1">From</span>}
+                <div className="text-2xl sm:text-3xl font-extrabold text-brand-accent mb-4 flex items-end gap-1">
+                  {tier.pricing_label && tier.pricing_label !== 'Custom Quote' && (
+                    <span className="text-sm text-brand-text-secondary font-medium tracking-wide uppercase mb-1">{tier.pricing_label}</span>
+                  )}
                   {tier.price}
                 </div>
 
-                <div className="flex-1 flex flex-col gap-3">
-                  {tier.features.map((feat, idx) => (
+                <p className="text-sm text-white/50 mb-8 flex-1">
+                  {tier.description}
+                </p>
+
+                <div className="flex flex-col gap-3">
+                  {tier.features?.map((feat, idx) => (
                     <div key={idx} className="flex items-center gap-3 text-sm text-brand-text-secondary">
                       <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-brand-accent transition-colors" />
                       {feat}
@@ -112,14 +97,32 @@ export default function PricingPageClient() {
                 </div>
 
                 <Link
-                  href={`/start-a-project?service=${encodeURIComponent(tier.category)}`}
-                  className="mt-10 flex items-center justify-between w-full py-4 border-t border-white/10 group-hover:border-brand-accent/30 transition-colors"
+                  href={tier.cta_link || `/start-a-project?service=${encodeURIComponent(tier.name)}`}
+                  className={`mt-10 flex items-center justify-between w-full py-4 border-t transition-colors ${tier.popular ? 'border-brand-accent/30' : 'border-white/10 group-hover:border-brand-accent/30'}`}
                 >
-                  <span className="text-xs font-bold uppercase tracking-widest text-white group-hover:text-brand-accent transition-colors">Select Plan</span>
-                  <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
+                  <span className={`text-xs font-bold uppercase tracking-widest transition-colors ${tier.popular ? 'text-brand-accent' : 'text-white group-hover:text-brand-accent'}`}>
+                    {tier.cta_text || 'Select Plan'}
+                  </span>
+                  <ArrowRight className={`w-4 h-4 transition-all ${tier.popular ? 'text-brand-accent translate-x-1' : 'text-white/50 group-hover:text-brand-accent group-hover:translate-x-1'}`} />
                 </Link>
               </div>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* AEO FAQ Section */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] py-16">
+        <h2 className="text-2xl sm:text-4xl font-extrabold uppercase tracking-tight mb-8">Pricing FAQ</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {pricingFaq.map((faq, i) => (
+            <div key={i} className="glass p-6 sm:p-8 rounded-2xl border border-white/10">
+              <h3 className="text-lg font-bold text-white mb-3 flex items-start gap-3">
+                <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0 mt-0.5" />
+                <span>{faq.question}</span>
+              </h3>
+              <p className="text-brand-text-secondary leading-relaxed ml-8">{faq.answer}</p>
+            </div>
           ))}
         </div>
       </section>

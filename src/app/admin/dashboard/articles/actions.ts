@@ -50,6 +50,8 @@ export async function createArticle(formData: FormData) {
   }
 
   revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/articles");
+  revalidatePath("/sitemap.xml");
   redirect("/admin/dashboard/articles");
 }
 
@@ -101,6 +103,9 @@ export async function updateArticle(id: string, formData: FormData) {
   }
 
   revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/articles");
+  revalidatePath(`/articles/${slug}`);
+  revalidatePath("/sitemap.xml");
   redirect("/admin/dashboard/articles");
 }
 
@@ -120,5 +125,7 @@ export async function deleteArticle(id: string) {
   }
 
   revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/articles");
+  revalidatePath("/sitemap.xml");
   redirect("/admin/dashboard/articles");
 }

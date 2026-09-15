@@ -9,9 +9,10 @@ import { ArrowRight, Menu, X } from "lucide-react";
 const NAV_ITEMS = [
   { name: "Work", href: "/work" },
   { name: "Services", href: "/services" },
+  { name: "Articles", href: "/articles" },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
   { name: "Pricing", href: "/pricing" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navigation() {

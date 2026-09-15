@@ -73,9 +73,9 @@ export default async function Dashboard() {
             <Briefcase className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             <span>Manage Portfolio</span>
           </Link>
-          <Link href="/admin/dashboard/packages" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+          <Link href="/admin/dashboard/pricing" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <Package className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
-            <span>Manage Packages</span>
+            <span>Manage Pricing</span>
           </Link>
           <Link href="/admin/dashboard/seo" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <Search className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />

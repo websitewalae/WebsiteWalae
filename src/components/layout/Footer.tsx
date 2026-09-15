@@ -20,6 +20,7 @@ export default function Footer() {
             <Link href="/" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Home</Link>
             <Link href="/work" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Work</Link>
             <Link href="/services" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Services</Link>
+            <Link href="/articles" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Articles &amp; Insights</Link>
             <Link href="/about" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">About</Link>
             <Link href="/pricing" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Pricing</Link>
             <Link href="/contact" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Contact</Link>
@@ -27,10 +28,13 @@ export default function Footer() {
           
           <div className="flex flex-col gap-3">
             <span className="text-xs font-bold text-brand-text-muted tracking-widest uppercase mb-1">Social</span>
-            <a href="https://instagram.com/websitewalae" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Instagram</a>
-            <a href="https://linkedin.com/company/websitewalae" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">LinkedIn</a>
-            <a href="https://facebook.com/websitewalae" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Facebook</a>
-            <a href="tel:7317782998" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">+91 7317782998</a>
+            <a href="https://www.instagram.com/websitewalae/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors flex items-center gap-1.5">
+              <span>Instagram</span>
+              <span className="text-[10px] text-brand-accent font-mono">@websitewalae</span>
+            </a>
+            <a href="https://www.linkedin.com/company/websitewalae" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">LinkedIn</a>
+            <a href="https://www.facebook.com/websitewalae" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">Facebook</a>
+            <a href="tel:+917317782998" className="text-sm font-medium text-brand-text-secondary hover:text-brand-accent transition-colors">+91 7317782998</a>
           </div>
         </div>
       </div>
