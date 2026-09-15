@@ -70,7 +70,6 @@ export default function Portfolio() {
                   <img 
                     src={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(project.url)}?w=900`}
                     alt={project.name}
-                    loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover object-top opacity-40 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-700"
                   />

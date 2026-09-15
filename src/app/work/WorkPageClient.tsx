@@ -105,13 +105,12 @@ export default function WorkPageClient() {
                 transition={{ duration: 0.3 }}
                 className="group relative bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between hover:border-brand-accent/50 transition-all duration-500 shadow-cinematic"
               >
-                {/* Visual Preview Screenshot Container with lazy async loading */}
+                {/* Visual Preview Screenshot Container with async loading */}
                 <div className="relative w-full h-56 sm:h-64 bg-[#0d0d0d] bg-[radial-gradient(ellipse_at_top,rgba(199,255,61,0.05),transparent_70%)] overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10 pointer-events-none" />
                   <img
                     src={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(project.url)}?w=800`}
                     alt={project.name}
-                    loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover object-top opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 filter group-hover:filter-none grayscale group-hover:grayscale-0"
                   />
