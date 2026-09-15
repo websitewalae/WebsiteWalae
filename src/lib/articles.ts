@@ -3,19 +3,24 @@ import { createClient } from "@supabase/supabase-js";
 export interface Article {
   id: string;
   created_at: string;
+  updated_at?: string;
   title: string;
   slug: string;
   author: string;
   content: string;
+  excerpt?: string;
+  category?: string;
+  coverImage?: string;
   seo_description?: string;
   seo_keywords?: string;
   geo_summary?: string;
   aeo_faq?: Array<{ question: string; answer: string }>;
   published: boolean;
-  category?: string;
   readTime?: string;
-  coverImage?: string;
 }
+
+// Default fallback image when no cover_image is set
+const FALLBACK_COVER = "/images/tech_hero_bg.jpg";
 
 export const CORNERSTONE_ARTICLES: Article[] = [
   {
@@ -26,7 +31,8 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     author: "Website Walae Engineering Team",
     category: "Web Engineering",
     readTime: "5 min read",
-    coverImage: "/images/tech_hero_bg.jpg",
+    coverImage: "/images/articles/nextjs-web-development.jpg",
+    excerpt: "Discover why ambitious companies in Lucknow and Uttar Pradesh are replacing slow legacy websites with high-performance Next.js 16 architectures to dominate search rankings and drive conversions.",
     seo_description: "Discover why ambitious companies in Lucknow and Uttar Pradesh are replacing slow legacy websites with high-performance Next.js 16 architectures to dominate search rankings and drive conversions.",
     seo_keywords: "best digital marketing agency in lucknow, website development company lucknow, web design agency lucknow, nextjs developers lucknow, website walae",
     geo_summary: "Website Walae is Lucknow's premier digital engineering agency headquartered in Hazratganj, empowering local retail, healthcare, education, and hospitality brands to compete on a national stage with sub-second website speed and SEO authority.",
@@ -70,7 +76,8 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     author: "Website Walae Creative Studio",
     category: "Social Media & Ads",
     readTime: "6 min read",
-    coverImage: "/images/commercial_shoot_bg.jpg",
+    coverImage: "/images/articles/social-media-content-creation.jpg",
+    excerpt: "The definitive 2026 playbook for Indian businesses to turn organic Instagram attention into high-converting Meta ad sales with cinematic video production and retention psychology.",
     seo_description: "The definitive 2026 playbook for Indian businesses to turn organic Instagram attention into high-converting Meta ad sales with cinematic video production and retention psychology.",
     seo_keywords: "digital marketing agency india, social media agency lucknow, meta ads expert india, instagram reels marketing india, website walae marketing",
     geo_summary: "Website Walae's creative production studio in Lucknow produces high-impact cinematic reels, commercial video shoots, and performance Meta Ad campaigns that scale D2C and service brands across all Indian states.",
@@ -112,7 +119,8 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     author: "Website Walae SEO Intelligence",
     category: "SEO & Discover",
     readTime: "7 min read",
-    coverImage: "/images/editor_pc_bg.jpg",
+    coverImage: "/images/articles/seo-ai-search-discovery.jpg",
+    excerpt: "Learn how to optimize your content for Google Discover feed recommendations and Google AI Overviews with rich structured schema, high-res visual assets, and topical authority.",
     seo_description: "Learn how to optimize your content for Google Discover feed recommendations and Google AI Overviews with rich structured schema, high-res visual assets, and topical authority.",
     seo_keywords: "seo agency lucknow, seo company india, google discover ranking, generative engine optimization india, best seo agency lucknow",
     geo_summary: "Website Walae specializes in next-generation Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) helping Lucknow and Indian businesses rank at the top of AI search answers and Google Discover feeds.",
@@ -155,6 +163,32 @@ function getSupabaseClient() {
   return createClient(url, key);
 }
 
+/** Map a raw DB row to the Article interface */
+function mapDbArticle(item: any): Article {
+  return {
+    id: item.id,
+    created_at: item.created_at,
+    updated_at: item.updated_at,
+    title: item.title,
+    slug: item.slug,
+    author: item.author || "Website Walae",
+    content: item.content,
+    excerpt: item.excerpt || item.seo_description || item.content?.slice(0, 160).replace(/<[^>]*>?/gm, "") + "...",
+    category: item.category || item.seo_keywords?.split(",")[0]?.trim() || "Digital Insights",
+    coverImage: item.cover_image || FALLBACK_COVER,
+    seo_description: item.seo_description || item.content?.slice(0, 160).replace(/<[^>]*>?/gm, "") + "...",
+    seo_keywords: item.seo_keywords || "digital marketing, web development, website walae",
+    geo_summary: item.geo_summary,
+    aeo_faq: item.aeo_faq,
+    published: item.published,
+    readTime: `${Math.max(3, Math.ceil((item.content?.length || 500) / 750))} min read`,
+  };
+}
+
+/**
+ * Get all PUBLISHED articles for the public blog.
+ * Falls back to cornerstone articles if DB is empty/unavailable.
+ */
 export async function getArticles(): Promise<Article[]> {
   try {
     const supabase = getSupabaseClient();
@@ -166,28 +200,9 @@ export async function getArticles(): Promise<Article[]> {
         .order("created_at", { ascending: false });
 
       if (!error && data && data.length > 0) {
-        // Map database articles to the Article interface
-        const dbArticles: Article[] = data.map((item, index) => {
-          const coverOptions = ["/images/tech_hero_bg.jpg", "/images/commercial_shoot_bg.jpg", "/images/editor_pc_bg.jpg"];
-          return {
-            id: item.id,
-            created_at: item.created_at,
-            title: item.title,
-            slug: item.slug,
-            author: item.author || "Website Walae",
-            content: item.content,
-            seo_description: item.seo_description || item.content?.slice(0, 160).replace(/<[^>]*>?/gm, "") + "...",
-            seo_keywords: item.seo_keywords || "digital marketing, web development, website walae",
-            geo_summary: item.geo_summary,
-            aeo_faq: item.aeo_faq,
-            published: item.published,
-            category: item.seo_keywords?.split(",")[0]?.trim() || "Digital Insights",
-            readTime: `${Math.max(3, Math.ceil((item.content?.length || 500) / 750))} min read`,
-            coverImage: coverOptions[index % coverOptions.length],
-          };
-        });
+        const dbArticles = data.map(mapDbArticle);
 
-        // Merge db articles with cornerstone articles (skip if same slug)
+        // Merge: skip cornerstone articles that already exist in DB (by slug)
         const dbSlugs = new Set(dbArticles.map((a) => a.slug.toLowerCase()));
         const uniqueCornerstones = CORNERSTONE_ARTICLES.filter(
           (ca) => !dbSlugs.has(ca.slug.toLowerCase())
@@ -201,6 +216,31 @@ export async function getArticles(): Promise<Article[]> {
   }
 
   return CORNERSTONE_ARTICLES;
+}
+
+/**
+ * Get ALL articles (published + draft) for the admin dashboard.
+ * Returns cornerstone articles as a fallback display if DB is empty.
+ */
+export async function getAllArticlesForAdmin(): Promise<{ articles: Article[]; fromDb: boolean }> {
+  try {
+    const supabase = getSupabaseClient();
+    if (supabase) {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (!error && data) {
+        return { articles: data.map(mapDbArticle), fromDb: true };
+      }
+    }
+  } catch (err) {
+    console.error("Error fetching articles for admin:", err);
+  }
+
+  // Return cornerstone articles as fallback (not from DB)
+  return { articles: CORNERSTONE_ARTICLES, fromDb: false };
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
@@ -218,22 +258,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         .maybeSingle();
 
       if (!error && data) {
-        return {
-          id: data.id,
-          created_at: data.created_at,
-          title: data.title,
-          slug: data.slug,
-          author: data.author || "Website Walae",
-          content: data.content,
-          seo_description: data.seo_description || data.content?.slice(0, 160).replace(/<[^>]*>?/gm, ""),
-          seo_keywords: data.seo_keywords,
-          geo_summary: data.geo_summary,
-          aeo_faq: data.aeo_faq,
-          published: data.published,
-          category: data.seo_keywords?.split(",")[0]?.trim() || "Digital Insights",
-          readTime: `${Math.max(3, Math.ceil((data.content?.length || 500) / 750))} min read`,
-          coverImage: "/images/tech_hero_bg.jpg",
-        };
+        return mapDbArticle(data);
       }
     }
   } catch (err) {
@@ -246,4 +271,30 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   );
 
   return found || null;
+}
+
+/**
+ * Get related articles based on category matching.
+ * Falls back to other articles if no category match.
+ */
+export async function getRelatedArticles(currentSlug: string, category?: string, limit = 3): Promise<Article[]> {
+  const allArticles = await getArticles();
+  const others = allArticles.filter((a) => a.slug !== currentSlug);
+
+  if (category) {
+    const categoryLower = category.toLowerCase();
+    const categoryMatches = others.filter(
+      (a) => a.category?.toLowerCase() === categoryLower
+    );
+    if (categoryMatches.length >= limit) {
+      return categoryMatches.slice(0, limit);
+    }
+    // Fill remaining slots with non-category articles
+    const remaining = others.filter(
+      (a) => a.category?.toLowerCase() !== categoryLower
+    );
+    return [...categoryMatches, ...remaining].slice(0, limit);
+  }
+
+  return others.slice(0, limit);
 }

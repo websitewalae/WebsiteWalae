@@ -16,6 +16,9 @@ export async function createArticle(formData: FormData) {
   const slug = formData.get("slug") as string;
   const author = formData.get("author") as string;
   const content = formData.get("content") as string;
+  const excerpt = formData.get("excerpt") as string;
+  const category = formData.get("category") as string;
+  const cover_image = formData.get("cover_image") as string;
   const seo_description = formData.get("seo_description") as string;
   const seo_keywords = formData.get("seo_keywords") as string;
   const geo_summary = formData.get("geo_summary") as string;
@@ -37,6 +40,9 @@ export async function createArticle(formData: FormData) {
     slug,
     author,
     content,
+    excerpt: excerpt || null,
+    category: category || null,
+    cover_image: cover_image || null,
     seo_description,
     seo_keywords,
     geo_summary,
@@ -67,6 +73,9 @@ export async function updateArticle(id: string, formData: FormData) {
   const slug = formData.get("slug") as string;
   const author = formData.get("author") as string;
   const content = formData.get("content") as string;
+  const excerpt = formData.get("excerpt") as string;
+  const category = formData.get("category") as string;
+  const cover_image = formData.get("cover_image") as string;
   const seo_description = formData.get("seo_description") as string;
   const seo_keywords = formData.get("seo_keywords") as string;
   const geo_summary = formData.get("geo_summary") as string;
@@ -89,11 +98,15 @@ export async function updateArticle(id: string, formData: FormData) {
       slug,
       author,
       content,
+      excerpt: excerpt || null,
+      category: category || null,
+      cover_image: cover_image || null,
       seo_description,
       seo_keywords,
       geo_summary,
       aeo_faq,
       published,
+      updated_at: new Date().toISOString(),
     })
     .eq("id", id);
 
@@ -143,6 +156,9 @@ export async function seedDefaultArticles() {
       slug: a.slug,
       author: a.author,
       content: a.content,
+      excerpt: a.excerpt || a.seo_description || null,
+      category: a.category || null,
+      cover_image: a.coverImage || null,
       seo_description: a.seo_description,
       seo_keywords: a.seo_keywords,
       geo_summary: a.geo_summary,

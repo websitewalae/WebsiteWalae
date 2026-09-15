@@ -2,12 +2,14 @@ import Link from "next/link";
 import { updateArticle, deleteArticle } from "../actions";
 import { createClient } from "@/utils/supabase/server";
 import { redirect, notFound } from "next/navigation";
-import { Trash2, ArrowLeft, Save } from "lucide-react";
+import { Trash2, ArrowLeft, Save, ExternalLink } from "lucide-react";
 
 interface EditArticleProps {
   params: Promise<{ id: string }>;
   searchParams?: Promise<{ error?: string }>;
 }
+
+const CATEGORY_OPTIONS = ["Web Engineering", "Social Media & Ads", "SEO & Discover", "Digital Strategy", "Content Marketing", "UI/UX Design"];
 
 export default async function EditArticle(props: EditArticleProps) {
   const { id } = await props.params;
@@ -64,15 +66,27 @@ export default async function EditArticle(props: EditArticleProps) {
             <h1 className="text-3xl font-bold">Edit Article</h1>
           </div>
 
-          <form action={deleteAction}>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono font-bold hover:bg-red-500/20 transition-all"
-            >
-              <Trash2 className="w-4 h-4" />
-              <span>DELETE ARTICLE</span>
-            </button>
-          </form>
+          <div className="flex items-center gap-3">
+            {article.published && (
+              <Link
+                href={`/articles/${article.slug}`}
+                target="_blank"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-brand-text-secondary text-xs font-mono hover:bg-white/10 transition-all"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Preview</span>
+              </Link>
+            )}
+            <form action={deleteAction}>
+              <button
+                type="submit"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono font-bold hover:bg-red-500/20 transition-all"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>DELETE ARTICLE</span>
+              </button>
+            </form>
+          </div>
         </header>
 
         {errorMsg && (
@@ -110,14 +124,58 @@ export default async function EditArticle(props: EditArticleProps) {
               </div>
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-brand-text-secondary mb-1">Author *</label>
+                <input
+                  type="text"
+                  name="author"
+                  defaultValue={article.author || "Website Walae"}
+                  required
+                  className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-brand-text-secondary mb-1">Category</label>
+                <select
+                  name="category"
+                  defaultValue={article.category || ""}
+                  className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all text-white"
+                >
+                  <option value="">Select a category</option>
+                  {CATEGORY_OPTIONS.map((cat) => (
+                    <option key={cat} value={cat} className="bg-black text-white">{cat}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Featured Image */}
             <div>
-              <label className="block text-sm font-medium text-brand-text-secondary mb-1">Author *</label>
+              <label className="block text-sm font-medium text-brand-text-secondary mb-1">Featured Image URL</label>
               <input
                 type="text"
-                name="author"
-                defaultValue={article.author || "Website Walae"}
-                required
+                name="cover_image"
+                defaultValue={article.cover_image || ""}
                 className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all"
+                placeholder="e.g. /images/articles/my-article.jpg or https://..."
+              />
+              {article.cover_image && (
+                <div className="mt-3 w-full max-w-md aspect-video rounded-lg overflow-hidden bg-white/5 border border-white/10">
+                  <img src={article.cover_image} alt="Featured image preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </div>
+
+            {/* Excerpt */}
+            <div>
+              <label className="block text-sm font-medium text-brand-text-secondary mb-1">Excerpt / Summary</label>
+              <textarea
+                name="excerpt"
+                defaultValue={article.excerpt || ""}
+                rows={2}
+                className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all text-sm"
+                placeholder="A brief 1-2 sentence summary shown on article cards."
               />
             </div>
 

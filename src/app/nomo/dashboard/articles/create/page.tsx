@@ -4,6 +4,8 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
 
+const CATEGORY_OPTIONS = ["Web Engineering", "Social Media & Ads", "SEO & Discover", "Digital Strategy", "Content Marketing", "UI/UX Design"];
+
 export default async function CreateArticle(props: { searchParams?: Promise<{ error?: string }> }) {
   const searchParams = await props.searchParams;
   const errorMsg = searchParams?.error;
@@ -54,9 +56,33 @@ export default async function CreateArticle(props: { searchParams?: Promise<{ er
               </div>
             </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-brand-text-secondary mb-1">Author *</label>
+                <input type="text" name="author" defaultValue="Website Walae" required className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-brand-text-secondary mb-1">Category</label>
+                <select name="category" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all text-white">
+                  <option value="">Select a category</option>
+                  {CATEGORY_OPTIONS.map((cat) => (
+                    <option key={cat} value={cat} className="bg-black text-white">{cat}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Featured Image */}
             <div>
-              <label className="block text-sm font-medium text-brand-text-secondary mb-1">Author *</label>
-              <input type="text" name="author" defaultValue="Website Walae" required className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all" />
+              <label className="block text-sm font-medium text-brand-text-secondary mb-1">Featured Image URL</label>
+              <input type="text" name="cover_image" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all" placeholder="e.g. /images/articles/my-article.jpg or https://..." />
+              <p className="text-[11px] text-white/40 mt-1">Use a path like /images/articles/filename.jpg for local images, or a full URL for external images.</p>
+            </div>
+
+            {/* Excerpt */}
+            <div>
+              <label className="block text-sm font-medium text-brand-text-secondary mb-1">Excerpt / Summary</label>
+              <textarea name="excerpt" rows={2} className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-all text-sm" placeholder="A brief 1-2 sentence summary shown on article cards."></textarea>
             </div>
 
             <div>

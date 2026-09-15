@@ -26,6 +26,13 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: A
     return matchesCategory && matchesSearch;
   });
 
+  // Determine grid layout based on article count for balanced composition
+  const getGridClass = () => {
+    if (filteredArticles.length === 1) return "grid grid-cols-1 max-w-2xl mx-auto gap-8";
+    if (filteredArticles.length === 2) return "grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8";
+    return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8";
+  };
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       {/* Category Pills & Search Bar */}
@@ -80,14 +87,19 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: A
       )}
 
       {/* Articles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      <div className={getGridClass()}>
         {filteredArticles.map((article, index) => {
-          const isFeatured = index === 0 && selectedCategory === "All" && !searchQuery;
+          const isFeatured = index === 0 && selectedCategory === "All" && !searchQuery && filteredArticles.length >= 3;
           const formattedDate = new Date(article.created_at).toLocaleDateString("en-IN", {
             day: "numeric",
             month: "short",
             year: "numeric",
           });
+
+          // Build meaningful alt text based on article topic
+          const altText = article.category
+            ? `${article.category} — ${article.title}`
+            : article.title;
 
           return (
             <Link
@@ -105,8 +117,9 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: A
               >
                 <img
                   src={article.coverImage || "/images/tech_hero_bg.jpg"}
-                  alt={article.title}
+                  alt={altText}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-60" />
                 
@@ -145,7 +158,7 @@ export default function ArticlesClient({ initialArticles }: { initialArticles: A
 
                   {/* Excerpt */}
                   <p className="text-brand-text-secondary text-xs sm:text-sm line-clamp-3 leading-relaxed mb-6">
-                    {article.seo_description || "Read the latest digital growth and engineering insights from Website Walae."}
+                    {article.excerpt || article.seo_description || "Read the latest digital growth and engineering insights from Website Walae."}
                   </p>
                 </div>
 

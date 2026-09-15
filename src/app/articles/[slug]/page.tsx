@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getArticleBySlug, getArticles } from "@/lib/articles";
+import { getArticleBySlug, getRelatedArticles } from "@/lib/articles";
 import ShareButtons from "./ShareButtons";
 import Footer from "@/components/layout/Footer";
 import { ArrowLeft, ArrowRight, Calendar, Clock, MapPin, Sparkles, HelpCircle, CheckCircle2 } from "lucide-react";
@@ -23,7 +23,8 @@ export async function generateMetadata(props: {
     article.seo_description ||
     "Authoritative insights on web development, digital marketing, and business scaling in Lucknow and India from Website Walae.";
   const canonicalUrl = `https://websitewalae.com/articles/${article.slug}`;
-  const imageUrl = `https://websitewalae.com${article.coverImage || "/images/tech_hero_bg.jpg"}`;
+  const coverPath = article.coverImage || "/images/tech_hero_bg.jpg";
+  const imageUrl = coverPath.startsWith("http") ? coverPath : `https://websitewalae.com${coverPath}`;
 
   return {
     title,
@@ -43,13 +44,16 @@ export async function generateMetadata(props: {
       siteName: "Website Walae",
       type: "article",
       publishedTime: article.created_at,
+      modifiedTime: article.updated_at || article.created_at,
       authors: [article.author || "Website Walae"],
       images: [
         {
           url: imageUrl,
           width: 1200,
           height: 675,
-          alt: article.title,
+          alt: article.category
+            ? `${article.category} — ${article.title}`
+            : article.title,
         },
       ],
     },
@@ -82,10 +86,8 @@ export default async function ArticlePage(props: {
     notFound();
   }
 
-  const allArticles = await getArticles();
-  const relatedArticles = allArticles
-    .filter((a) => a.slug !== article.slug)
-    .slice(0, 3);
+  // Get related articles by category for intelligent matching
+  const relatedArticles = await getRelatedArticles(article.slug, article.category, 3);
 
   const formattedDate = new Date(article.created_at).toLocaleDateString("en-IN", {
     day: "numeric",
@@ -94,7 +96,13 @@ export default async function ArticlePage(props: {
   });
 
   const fullUrl = `https://websitewalae.com/articles/${article.slug}`;
-  const imageUrl = `https://websitewalae.com${article.coverImage || "/images/tech_hero_bg.jpg"}`;
+  const coverPath = article.coverImage || "/images/tech_hero_bg.jpg";
+  const imageUrl = coverPath.startsWith("http") ? coverPath : `https://websitewalae.com${coverPath}`;
+
+  // Meaningful alt text based on topic
+  const imageAlt = article.category
+    ? `${article.category} — ${article.title}`
+    : article.title;
 
   // Article JSON-LD Structured Data (Google Discover & SEO)
   const structuredData: any = {
@@ -104,7 +112,7 @@ export default async function ArticlePage(props: {
     "description": article.seo_description,
     "image": [imageUrl],
     "datePublished": article.created_at,
-    "dateModified": article.created_at,
+    "dateModified": article.updated_at || article.created_at,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": fullUrl,
@@ -212,7 +220,7 @@ export default async function ArticlePage(props: {
         <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-white/5 border border-white/10 mb-10 shadow-2xl">
           <img
             src={article.coverImage || "/images/tech_hero_bg.jpg"}
-            alt={article.title}
+            alt={imageAlt}
             className="w-full h-full object-cover"
             loading="eager"
           />
@@ -283,7 +291,7 @@ export default async function ArticlePage(props: {
               Ready to scale your brand in Lucknow or nationwide?
             </h3>
             <p className="text-xs sm:text-sm text-brand-text-secondary mt-1 max-w-lg">
-              Partner with Lucknow's premier digital agency for websites that convert and campaigns that dominate.
+              Partner with Lucknow&apos;s premier digital agency for websites that convert and campaigns that dominate.
             </p>
           </div>
           <Link
@@ -294,7 +302,7 @@ export default async function ArticlePage(props: {
           </Link>
         </div>
 
-        {/* Related Articles */}
+        {/* Related Articles — Matched by Category */}
         {relatedArticles.length > 0 && (
           <div className="my-16 border-t border-white/10 pt-12">
             <h3 className="text-xl font-bold text-white uppercase tracking-tight mb-8">
@@ -305,19 +313,30 @@ export default async function ArticlePage(props: {
                 <Link
                   key={rel.id || rel.slug}
                   href={`/articles/${rel.slug}`}
-                  className="group flex flex-col justify-between bg-white/[0.02] border border-white/5 rounded-xl p-5 hover:border-brand-accent/40 transition-all hover:-translate-y-1"
+                  className="group flex flex-col justify-between bg-white/[0.02] border border-white/5 rounded-xl overflow-hidden hover:border-brand-accent/40 transition-all hover:-translate-y-1"
                 >
-                  <div>
-                    <span className="text-[10px] font-mono text-brand-accent block mb-2">
-                      {rel.category || "Digital Marketing"}
-                    </span>
-                    <h4 className="font-bold text-white group-hover:text-brand-accent text-sm leading-snug line-clamp-2">
-                      {rel.title}
-                    </h4>
+                  {/* Related article cover image */}
+                  <div className="w-full h-32 overflow-hidden bg-white/5">
+                    <img
+                      src={rel.coverImage || "/images/tech_hero_bg.jpg"}
+                      alt={rel.category ? `${rel.category} — ${rel.title}` : rel.title}
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                      loading="lazy"
+                    />
                   </div>
-                  <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-white/50">
-                    <span>{rel.readTime || "5 min read"}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-brand-accent group-hover:translate-x-1 transition-transform" />
+                  <div className="p-5 flex flex-col justify-between flex-1">
+                    <div>
+                      <span className="text-[10px] font-mono text-brand-accent block mb-2">
+                        {rel.category || "Digital Marketing"}
+                      </span>
+                      <h4 className="font-bold text-white group-hover:text-brand-accent text-sm leading-snug line-clamp-2">
+                        {rel.title}
+                      </h4>
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-white/50">
+                      <span>{rel.readTime || "5 min read"}</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-brand-accent group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </Link>
               ))}
