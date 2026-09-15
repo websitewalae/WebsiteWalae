@@ -144,7 +144,7 @@ function SocialCard({ reel, isActive }: { reel: any; isActive: boolean }) {
         <div className="flex items-center gap-2.5">
           <img 
             src="/logo.png" 
-            alt="Website Walae Logo" 
+            alt={`${reel.client} — ${reel.caption}`} 
             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-brand-accent/40 p-0.5 bg-black" 
           />
           <div>

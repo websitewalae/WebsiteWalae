@@ -14,11 +14,11 @@ export async function generateMetadata(props: {
 
   if (!article) {
     return {
-      title: "Article Not Found | Website Walae",
+      title: "Article Not Found",
     };
   }
 
-  const title = `${article.title} | Website Walae Insights`;
+  const title = `${article.title} Insights`;
   const description =
     article.seo_description ||
     "Authoritative insights on web development, digital marketing, and business scaling in Lucknow and India from Website Walae.";

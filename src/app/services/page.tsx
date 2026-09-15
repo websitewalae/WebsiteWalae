@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import ServicesPageClient from "./ServicesPageClient";
 
 export const metadata: Metadata = {
-  title: "Digital Marketing & Creative Services | Website Walae Lucknow",
-  description: "Explore our premium services including Website Development, UI/UX Design, SEO, Social Media Marketing, Content Creation, Video Production, PR, and Meta Ads.",
-  keywords: ["Digital Marketing Services", "Web Development Agency", "UI UX Design", "SEO Services", "Video Production", "Meta Ads"],
+  title: "Digital Marketing & Creative Services",
+  description: "Website Walae provides end-to-end digital marketing and creative services in Lucknow including website development, UI/UX design, SEO, social media marketing, Meta Ads, video production, and PR.",
+  keywords: ["Website Walae Services", "Digital Marketing Services Lucknow", "Website Development Lucknow", "SEO Services India"],
   alternates: {
     canonical: "https://websitewalae.com/services",
   },
   openGraph: {
-    title: "Digital Marketing & Creative Services | Website Walae Lucknow",
-    description: "Explore our premium services including Website Development, UI/UX Design, SEO, Social Media Marketing, Content Creation, Video Production, PR, and Meta Ads.",
+    title: "Digital Marketing & Creative Services",
+    description: "Website Walae provides end-to-end digital marketing and creative services in Lucknow including website development, UI/UX design, SEO, social media marketing, Meta Ads, video production, and PR.",
     url: "https://websitewalae.com/services",
     siteName: "Website Walae",
     locale: "en_IN",
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digital Marketing & Creative Services | Website Walae Lucknow",
-    description: "Explore our premium digital marketing and creative services.",
+    title: "Digital Marketing & Creative Services",
+    description: "Website Walae provides end-to-end digital marketing and creative services in Lucknow including website development, UI/UX design, SEO, social media marketing, Meta Ads, video production, and PR.",
     images: ["https://websitewalae.com/og-image.png"],
   },
 };

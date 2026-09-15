@@ -29,7 +29,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "website-development-lucknow": {
     slug: "website-development-lucknow",
     title: "Website Development",
-    metaTitle: "Website Development Company in Lucknow | Website Walae",
+    metaTitle: "Website Development Company in Lucknow",
     metaDescription: "Website Walae is a website development company in Lucknow building custom Next.js websites, e-commerce platforms, and high-performance web applications for businesses.",
     h1: "Website Development Services in Lucknow",
     tagline: "Custom, high-performance websites built with modern technology.",
@@ -77,7 +77,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "digital-marketing-lucknow": {
     slug: "digital-marketing-lucknow",
     title: "Digital Marketing",
-    metaTitle: "Digital Marketing Agency in Lucknow | Website Walae",
+    metaTitle: "Digital Marketing Agency in Lucknow",
     metaDescription: "Website Walae is a digital marketing agency in Lucknow providing SEO, social media marketing, content creation, Meta Ads, and comprehensive digital growth strategies for businesses.",
     h1: "Digital Marketing Services in Lucknow",
     tagline: "Full-stack digital marketing that drives real business growth.",
@@ -124,7 +124,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "seo-lucknow": {
     slug: "seo-lucknow",
     title: "SEO",
-    metaTitle: "SEO Agency in Lucknow | Website Walae",
+    metaTitle: "SEO Agency in Lucknow",
     metaDescription: "Website Walae is an SEO agency in Lucknow providing technical SEO, local SEO, on-page optimization, and organic search ranking growth for businesses in Lucknow and India.",
     h1: "SEO Services in Lucknow",
     tagline: "Organic search dominance through technical excellence.",
@@ -171,7 +171,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "social-media-marketing-lucknow": {
     slug: "social-media-marketing-lucknow",
     title: "Social Media Marketing",
-    metaTitle: "Social Media Marketing Agency in Lucknow | Website Walae",
+    metaTitle: "Social Media Marketing Agency in Lucknow",
     metaDescription: "Website Walae is a social media marketing agency in Lucknow managing Instagram, Facebook, and LinkedIn growth strategies, content creation, and community engagement for businesses.",
     h1: "Social Media Marketing Services in Lucknow",
     tagline: "Strategic social media growth that builds real audiences.",
@@ -218,7 +218,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "ui-ux-design-lucknow": {
     slug: "ui-ux-design-lucknow",
     title: "UI/UX Design",
-    metaTitle: "UI UX Design Agency in Lucknow | Website Walae",
+    metaTitle: "UI UX Design Agency in Lucknow",
     metaDescription: "Website Walae is a UI/UX design agency in Lucknow creating intuitive interfaces, design systems, and interactive prototypes for websites, apps, and digital products.",
     h1: "UI/UX Design Services in Lucknow",
     tagline: "Intuitive, beautiful interfaces designed for conversion.",
@@ -265,7 +265,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "video-production-lucknow": {
     slug: "video-production-lucknow",
     title: "Video Production",
-    metaTitle: "Video Production Company in Lucknow | Website Walae",
+    metaTitle: "Video Production Company in Lucknow",
     metaDescription: "Website Walae is a video production company in Lucknow creating cinematic commercials, product videos, Instagram reels, and brand films for businesses.",
     h1: "Video Production Services in Lucknow",
     tagline: "Cinematic video content that captures attention and drives engagement.",
@@ -312,7 +312,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "content-creation-lucknow": {
     slug: "content-creation-lucknow",
     title: "Content Creation",
-    metaTitle: "Content Creation Agency in Lucknow | Website Walae",
+    metaTitle: "Content Creation Agency in Lucknow",
     metaDescription: "Website Walae is a content creation agency in Lucknow providing brand photography, copywriting, creative direction, and multi-format content production for businesses.",
     h1: "Content Creation Services in Lucknow",
     tagline: "Creative content that tells your brand story and drives action.",
@@ -358,7 +358,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "meta-ads-lucknow": {
     slug: "meta-ads-lucknow",
     title: "Meta Ads",
-    metaTitle: "Meta Ads Agency in Lucknow | Website Walae",
+    metaTitle: "Meta Ads Agency in Lucknow",
     metaDescription: "Website Walae is a Meta Ads agency in Lucknow managing Facebook and Instagram advertising campaigns with audience targeting, creative testing, and ROI optimization.",
     h1: "Meta Ads Services in Lucknow",
     tagline: "Precision paid advertising engineered for measurable ROI.",
@@ -405,7 +405,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
   "pr-lucknow": {
     slug: "pr-lucknow",
     title: "PR / Public Relations",
-    metaTitle: "PR Agency in Lucknow | Website Walae",
+    metaTitle: "PR Agency in Lucknow",
     metaDescription: "Website Walae is a PR agency in Lucknow providing digital PR, media outreach, press release support, brand PR, and reputation management services for businesses.",
     h1: "Public Relations Services in Lucknow",
     tagline: "Build credibility before you build attention.",

@@ -3,7 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Admin Login | Website Walae",
+  title: "Admin Login",
   robots: "noindex, nofollow", // Keep Google out of the admin panel
 };
 

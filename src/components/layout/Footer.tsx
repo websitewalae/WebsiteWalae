@@ -197,7 +197,7 @@ export default function Footer() {
               { label: "Content Creation", path: "/services/content-creation-lucknow" },
               { label: "Video Production", path: "/services/video-production-lucknow" },
               { label: "SEO & Growth", path: "/services/seo-lucknow" },
-              { label: "Meta Ads", path: "/services/performance-marketing-lucknow" },
+              { label: "Meta Ads", path: "/services/meta-ads-lucknow" },
               { label: "Public Relations", path: "/services/pr-lucknow" },
             ].map((service) => (
               <Link 

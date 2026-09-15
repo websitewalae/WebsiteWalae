@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Flame } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Articles & Digital Insights | Website Walae - Lucknow & India Agency",
+  title: "Articles & Digital Insights - Lucknow & India Agency",
   description: "Read authoritative articles, case studies, and engineering playbooks on website development, SEO, viral Instagram reels, and AI search engines in Lucknow and across India.",
   keywords: [
     "Website Walae Articles",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     canonical: "https://websitewalae.com/articles",
   },
   openGraph: {
-    title: "Articles & Digital Insights | Website Walae - Lucknow & India Agency",
+    title: "Articles & Digital Insights - Lucknow & India Agency",
     description: "Read authoritative articles, case studies, and engineering playbooks on website development, SEO, viral Instagram reels, and AI search engines in Lucknow and across India.",
     url: "https://websitewalae.com/articles",
     siteName: "Website Walae",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Articles & Digital Insights | Website Walae",
+    title: "Articles & Digital Insights",
     description: "Read authoritative articles, case studies, and engineering playbooks on website development, SEO, viral Instagram reels, and AI search engines in Lucknow and across India.",
     images: ["https://websitewalae.com/images/tech_hero_bg.jpg"],
   },
