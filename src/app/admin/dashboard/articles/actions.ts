@@ -129,3 +129,34 @@ export async function deleteArticle(id: string) {
   revalidatePath("/sitemap.xml");
   redirect("/admin/dashboard/articles");
 }
+
+export async function seedDefaultArticles() {
+  const supabase = await createClient();
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) throw new Error("Unauthorized");
+
+  const { CORNERSTONE_ARTICLES } = await import("@/lib/articles");
+
+  const { error } = await supabase.from("articles").insert(
+    CORNERSTONE_ARTICLES.map(a => ({
+      title: a.title,
+      slug: a.slug,
+      author: a.author,
+      content: a.content,
+      seo_description: a.seo_description,
+      seo_keywords: a.seo_keywords,
+      geo_summary: a.geo_summary,
+      aeo_faq: a.aeo_faq,
+      published: a.published,
+    }))
+  );
+
+  if (error) {
+    console.error("Error seeding articles:", error);
+    redirect(`/admin/dashboard/articles?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/articles");
+  redirect("/admin/dashboard/articles");
+}

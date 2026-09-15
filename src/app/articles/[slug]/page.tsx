@@ -72,6 +72,8 @@ export async function generateMetadata(props: {
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function ArticlePage(props: {
   params: Promise<{ slug: string }>;
 }) {

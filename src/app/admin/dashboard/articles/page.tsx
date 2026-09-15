@@ -1,8 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowLeft, Plus } from "lucide-react";
+import { ArrowLeft, Plus, Upload } from "lucide-react";
 import SqlSetupBox from "./SqlSetupBox";
+import { seedDefaultArticles } from "./actions";
+
+export const dynamic = "force-dynamic";
 
 const SETUP_SQL = `-- 1. CREATE ARTICLES TABLE
 CREATE TABLE IF NOT EXISTS public.articles (
@@ -73,10 +76,23 @@ export default async function ArticlesDashboard() {
             </div>
             <h1 className="text-3xl font-bold">Manage Articles</h1>
           </div>
-          <Link href="/admin/dashboard/articles/create" className="inline-flex items-center gap-2 bg-brand-accent text-black font-bold px-6 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">
-            <Plus className="w-4 h-4" />
-            <span>New Article</span>
-          </Link>
+          <div className="flex gap-4">
+            {articles?.length === 0 && (
+              <form action={seedDefaultArticles}>
+                <button 
+                  type="submit"
+                  className="inline-flex items-center gap-2 bg-white/10 text-white font-bold px-6 py-3 rounded-lg hover:bg-white/20 transition-colors"
+                >
+                  <Upload className="w-4 h-4" />
+                  <span>Seed Default Articles</span>
+                </button>
+              </form>
+            )}
+            <Link href="/admin/dashboard/articles/create" className="inline-flex items-center gap-2 bg-brand-accent text-black font-bold px-6 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">
+              <Plus className="w-4 h-4" />
+              <span>New Article</span>
+            </Link>
+          </div>
         </header>
 
         {error ? (
