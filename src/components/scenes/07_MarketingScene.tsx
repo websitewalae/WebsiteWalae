@@ -16,49 +16,90 @@ export default function MarketingScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const stats = analyticsRef.current.children;
+    let mm = gsap.matchMedia();
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=130%",
-        scrub: 0.4,
-        pin: true,
-        pinSpacing: true,
-      },
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=130%",
+          scrub: 0.4,
+          pin: true,
+          pinSpacing: true,
+        },
+      });
+
+      // 0% - Viewport entry: text & search engine enter immediately
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(searchRef.current, 
+        { opacity: 0, y: 60, scale: 0.92 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" },
+        "<"
+      );
+
+      // 25% - Search result ranking highlight (#1 position)
+      if (searchRef.current) {
+        const resultItem = searchRef.current.querySelector('.search-result');
+        if (resultItem) {
+          tl.to(resultItem, { y: -50, color: "#C7FF3D", duration: 0.6 });
+        }
+      }
+
+      // 45% - Search UI dissolves as analytics metric grid powers on
+      tl.to(searchRef.current, { opacity: 0, scale: 1.05, duration: 0.4 });
+      
+      if (analyticsRef.current) {
+        const stats = analyticsRef.current.children;
+        tl.fromTo(stats, 
+          { opacity: 0, y: 40, scale: 0.85 }, 
+          { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.6, ease: "back.out(1.5)" }
+        );
+      }
+
+      // 75% - Morph exit into Services overview
+      tl.to([analyticsRef.current, textRef.current], {
+        opacity: 0,
+        y: -30,
+        scale: 0.95,
+        duration: 0.5,
+        ease: "power2.in"
+      }, "+=0.2");
+
+      return () => tl.kill();
     });
 
-    // 0% - Viewport entry: text & search engine enter immediately
-    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
-    tl.fromTo(searchRef.current, 
-      { opacity: 0, y: 60, scale: 0.92 }, 
-      { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" },
-      "<"
-    );
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
 
-    // 25% - Search result ranking highlight (#1 position)
-    const resultItem = searchRef.current.querySelector('.search-result');
-    if (resultItem) {
-      tl.to(resultItem, { y: -50, color: "#C7FF3D", duration: 0.6 });
-    }
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.6 });
+      
+      tl.fromTo(searchRef.current, 
+        { opacity: 0, y: 40, scale: 0.95 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.2"
+      );
 
-    // 45% - Search UI dissolves as analytics metric grid powers on
-    tl.to(searchRef.current, { opacity: 0, scale: 1.05, duration: 0.4 });
-    
-    tl.fromTo(stats, 
-      { opacity: 0, y: 40, scale: 0.85 }, 
-      { opacity: 1, y: 0, scale: 1, stagger: 0.08, duration: 0.6, ease: "back.out(1.5)" }
-    );
+      tl.to(searchRef.current, { opacity: 0, duration: 0.4 }, "+=0.5");
 
-    // 75% - Morph exit into Services overview
-    tl.to([analyticsRef.current, textRef.current], {
-      opacity: 0,
-      y: -30,
-      scale: 0.95,
-      duration: 0.5,
-      ease: "power2.in"
-    }, "+=0.2");
+      if (analyticsRef.current) {
+        const stats = analyticsRef.current.children;
+        tl.fromTo(stats, 
+          { opacity: 0, y: 30, scale: 0.9 }, 
+          { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.6, ease: "back.out(1.2)" },
+          "-=0.2"
+        );
+      }
+
+      return () => tl.kill();
+    });
+
+    return () => mm.revert();
 
   }, []);
 
@@ -70,9 +111,9 @@ export default function MarketingScene() {
   ];
 
   return (
-    <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
-      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 max-w-full">
-        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">BUILT TO BE FOUND.<br/>BUILT TO CONVERT.</h2>
+    <section ref={sectionRef} className="relative w-full md:h-screen min-h-[90vh] py-20 md:py-0 overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
+      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 w-full">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">BUILT TO BE FOUND.<br className="md:hidden" />BUILT TO CONVERT.</h2>
       </div>
 
       {/* Search Engine UI */}

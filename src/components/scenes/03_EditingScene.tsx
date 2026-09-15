@@ -16,63 +16,110 @@ export default function EditingScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=130%",
-        scrub: 0.4,
-        pin: true,
-        pinSpacing: true,
-      },
-    });
+    let mm = gsap.matchMedia();
 
-    // 0% - Viewport entry: Fade in text and UI immediately
-    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
-    tl.fromTo(uiRef.current, 
-      { opacity: 0, scale: 0.92, rotateX: -8, y: 60 }, 
-      { opacity: 1, scale: 1, rotateX: 0, y: 0, duration: 0.6, ease: "power2.out" },
-      "<"
-    );
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=130%",
+          scrub: 0.4,
+          pin: true,
+          pinSpacing: true,
+        },
+      });
 
-    // 20% - Playhead moves across timeline
-    tl.fromTo(playheadRef.current, 
-      { x: "0%" }, 
-      { x: "92%", duration: 1.2, ease: "none" }
-    );
+      // 0% - Viewport entry: Fade in text and UI immediately
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(uiRef.current, 
+        { opacity: 0, scale: 0.92, rotateX: -8, y: 60 }, 
+        { opacity: 1, scale: 1, rotateX: 0, y: 0, duration: 0.6, ease: "power2.out" },
+        "<"
+      );
 
-    // 40% - Exporting status progress simulation
-    tl.to({}, {
-      duration: 0.8,
-      onUpdate: function() {
-        const progress = Math.floor(this.progress() * 100);
-        if (progressRef.current) {
-          progressRef.current.innerText = `EXPORTING MASTER... ${progress}%`;
+      // 20% - Playhead moves across timeline
+      tl.fromTo(playheadRef.current, 
+        { x: "0%" }, 
+        { x: "92%", duration: 1.2, ease: "none" }
+      );
+
+      // 40% - Exporting status progress simulation
+      tl.to({}, {
+        duration: 0.8,
+        onUpdate: function() {
+          const progress = Math.floor(this.progress() * 100);
+          if (progressRef.current) {
+            progressRef.current.innerText = `EXPORTING MASTER... ${progress}%`;
+          }
         }
-      }
-    }, "<");
+      }, "<");
 
-    // 70% - Complete export state
-    tl.to(progressRef.current, { 
-      onStart: () => { if (progressRef.current) progressRef.current.innerText = "FINAL MASTER EXPORTED" },
-      color: "#C7FF3D", 
-      duration: 0.1 
+      // 70% - Complete export state
+      tl.to(progressRef.current, { 
+        onStart: () => { if (progressRef.current) progressRef.current.innerText = "FINAL MASTER EXPORTED" },
+        color: "#C7FF3D", 
+        duration: 0.1 
+      });
+
+      // 80% - Exit transition into Social Media Engine
+      tl.to([uiRef.current, textRef.current], {
+        opacity: 0,
+        scale: 0.94,
+        y: -40,
+        duration: 0.5,
+        ease: "power2.in"
+      }, "+=0.2");
+
+      return () => tl.kill();
     });
 
-    // 80% - Exit transition into Social Media Engine
-    tl.to([uiRef.current, textRef.current], {
-      opacity: 0,
-      scale: 0.94,
-      y: -40,
-      duration: 0.5,
-      ease: "power2.in"
-    }, "+=0.2");
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.6 });
+      tl.fromTo(uiRef.current, 
+        { opacity: 0, y: 40, scale: 0.95 }, 
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.2"
+      );
+
+      tl.fromTo(playheadRef.current, 
+        { x: "0%" }, 
+        { x: "92%", duration: 1.5, ease: "none" }
+      );
+
+      tl.to({}, {
+        duration: 1.5,
+        onUpdate: function() {
+          const progress = Math.floor(this.progress() * 100);
+          if (progressRef.current) {
+            progressRef.current.innerText = `EXPORTING MASTER... ${progress}%`;
+          }
+        }
+      }, "<");
+
+      tl.to(progressRef.current, { 
+        onStart: () => { if (progressRef.current) progressRef.current.innerText = "FINAL MASTER EXPORTED" },
+        color: "#C7FF3D", 
+        duration: 0.1 
+      });
+
+      return () => tl.kill();
+    });
+
+    return () => mm.revert();
 
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
-      <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 max-w-full">
+    <section ref={sectionRef} className="relative w-full md:h-screen min-h-[85vh] py-20 md:py-0 overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
+      <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 w-full">
         <h2 className="text-xl sm:text-3xl md:text-5xl text-white font-black tracking-tight mb-2">
           THEN WE TURN RAW <br/> FOOTAGE INTO CONTENT.
         </h2>

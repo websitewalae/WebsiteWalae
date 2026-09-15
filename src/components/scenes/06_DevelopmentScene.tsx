@@ -145,62 +145,110 @@ export default function DevelopmentScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const codeLines = codeLinesRef.current.children;
-    const buildStatuses = buildStatusRef.current.children;
+    let mm = gsap.matchMedia();
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=130%",
-        scrub: 0.4,
-        pin: true,
-        pinSpacing: true,
-      },
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=130%",
+          scrub: 0.4,
+          pin: true,
+          pinSpacing: true,
+        },
+      });
+
+      // 0% - Viewport entry: text & editor rotate in immediately
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(editorRef.current, 
+        { opacity: 0, rotateY: 15, scale: 0.9, x: 40 }, 
+        { opacity: 1, rotateY: 0, scale: 1, x: 0, duration: 0.6, ease: "power2.out" },
+        "<"
+      );
+
+      // 20% - Rapid code typing lines
+      if (codeLinesRef.current) {
+        const codeLines = codeLinesRef.current.children;
+        tl.fromTo(codeLines, 
+          { opacity: 0, x: -15 }, 
+          { opacity: 1, x: 0, stagger: 0.05, duration: 0.8 }
+        );
+      }
+
+      // 45% - Terminal status checklist lights up
+      if (buildStatusRef.current) {
+        const buildStatuses = buildStatusRef.current.children;
+        tl.fromTo(buildStatuses,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, stagger: 0.12, duration: 0.6, color: "#C7FF3D" }
+        );
+      }
+
+      // 75% - Morph exit into Marketing Engine
+      tl.to([editorRef.current, textRef.current], {
+        opacity: 0,
+        scale: 0.94,
+        y: -40,
+        duration: 0.5,
+        ease: "power2.in"
+      }, "+=0.2");
+
+      return () => tl.kill();
     });
 
-    // 0% - Viewport entry: text & editor rotate in immediately
-    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
-    tl.fromTo(editorRef.current, 
-      { opacity: 0, rotateY: 15, scale: 0.9, x: 40 }, 
-      { opacity: 1, rotateY: 0, scale: 1, x: 0, duration: 0.6, ease: "power2.out" },
-      "<"
-    );
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
 
-    // 20% - Rapid code typing lines
-    tl.fromTo(codeLines, 
-      { opacity: 0, x: -15 }, 
-      { opacity: 1, x: 0, stagger: 0.05, duration: 0.8 }
-    );
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.6 });
+      
+      tl.fromTo(editorRef.current, 
+        { opacity: 0, scale: 0.9, y: 30 }, 
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: "power2.out" },
+        "-=0.2"
+      );
 
-    // 45% - Terminal status checklist lights up
-    tl.fromTo(buildStatuses,
-      { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, stagger: 0.12, duration: 0.6, color: "#C7FF3D" }
-    );
+      if (codeLinesRef.current) {
+        const codeLines = codeLinesRef.current.children;
+        tl.fromTo(codeLines, 
+          { opacity: 0, x: -10 }, 
+          { opacity: 1, x: 0, stagger: 0.1, duration: 0.8 },
+          "-=0.2"
+        );
+      }
 
-    // 75% - Morph exit into Marketing Engine
-    tl.to([editorRef.current, textRef.current], {
-      opacity: 0,
-      scale: 0.94,
-      y: -40,
-      duration: 0.5,
-      ease: "power2.in"
-    }, "+=0.2");
+      if (buildStatusRef.current) {
+        const buildStatuses = buildStatusRef.current.children;
+        tl.fromTo(buildStatuses,
+          { opacity: 0, y: 8 },
+          { opacity: 1, y: 0, stagger: 0.15, duration: 0.6, color: "#C7FF3D" },
+          "-=0.2"
+        );
+      }
+
+      return () => tl.kill();
+    });
+
+    return () => mm.revert();
 
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
+    <section ref={sectionRef} className="relative w-full md:h-screen min-h-[90vh] py-20 md:py-0 overflow-hidden flex flex-col items-center justify-center bg-[#050505]">
       {/* Ambient background glow */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
         <div className="absolute top-[30%] left-[50%] -translate-x-1/2 w-[45vw] h-[45vw] bg-brand-accent/15 rounded-full blur-[140px] mix-blend-screen" />
       </div>
 
       {/* Header Headline */}
-      <div ref={textRef} className="absolute top-[6%] sm:top-[8%] text-center px-4 z-20 max-w-full">
-        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-1.5 uppercase font-inter-tight">
-          DESIGN IS ONLY <br /> THE BEGINNING.
+      <div ref={textRef} className="absolute top-[6%] sm:top-[8%] text-center px-4 z-20 w-full">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-1.5 uppercase font-inter-tight">
+          DESIGN IS ONLY <br className="md:hidden" /> THE BEGINNING.
         </h2>
         <p className="text-xs sm:text-sm text-brand-accent font-mono">HIGH-PERFORMANCE CODE ENGINE • NEXT.JS 16 &amp; TURBOPACK</p>
       </div>

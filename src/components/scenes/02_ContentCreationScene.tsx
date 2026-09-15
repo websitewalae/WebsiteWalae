@@ -19,71 +19,116 @@ export default function ContentCreationScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const cards = cardsContainerRef.current.children;
+    let mm = gsap.matchMedia();
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=130%",
-        scrub: 0.4,
-        pin: true,
-        pinSpacing: true,
-      },
-    });
+    mm.add("(min-width: 768px)", () => {
+      const cards = cardsContainerRef.current?.children;
+      if (!cards) return;
 
-    // 0% - Immediate entry: REC indicator lights up & headline enters
-    tl.fromTo(recRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3 });
-    tl.fromTo(textRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=130%",
+          scrub: 0.4,
+          pin: true,
+          pinSpacing: true,
+        },
+      });
 
-    // 10%-40% - Staggered card sequence (CONTENT -> DISTRIBUTION -> ATTENTION)
-    tl.fromTo(cards, 
-      { opacity: 0, y: 90, scale: 0.82, rotateX: 20 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        scale: 1, 
-        rotateX: 0, 
-        stagger: 0.15, 
-        duration: 0.8, 
-        ease: "power2.out" 
-      },
-      "-=0.2"
-    );
+      // 0% - Immediate entry: REC indicator lights up & headline enters
+      tl.fromTo(recRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3 });
+      tl.fromTo(textRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
 
-    // 40%-60% - Headline splits & Attention Signal Thread activates
-    if (textLeftRef.current && textRightRef.current) {
-      tl.to(textLeftRef.current, { x: "-20px", duration: 0.5 }, "<");
-      tl.to(textRightRef.current, { x: "20px", duration: 0.5 }, "<");
-    }
-
-    if (signalLineRef.current) {
-      tl.fromTo(signalLineRef.current, 
-        { opacity: 0, scaleX: 0 },
-        { opacity: 1, scaleX: 1, duration: 0.6, ease: "easeInOut" },
-        "<"
+      // 10%-40% - Staggered card sequence (CONTENT -> DISTRIBUTION -> ATTENTION)
+      tl.fromTo(cards, 
+        { opacity: 0, y: 90, scale: 0.82, rotateX: 20 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          scale: 1, 
+          rotateX: 0, 
+          stagger: 0.15, 
+          duration: 0.8, 
+          ease: "power2.out" 
+        },
+        "-=0.2"
       );
-    }
 
-    // 60%-80% - Orbital lock
-    tl.to(cards, {
-      rotateZ: (i) => [-3, 0, 3][i],
-      y: (i) => [-8, 8, -8][i],
-      duration: 0.4,
+      // 40%-60% - Headline splits & Attention Signal Thread activates
+      if (textLeftRef.current && textRightRef.current) {
+        tl.to(textLeftRef.current, { x: "-20px", duration: 0.5 }, "<");
+        tl.to(textRightRef.current, { x: "20px", duration: 0.5 }, "<");
+      }
+
+      if (signalLineRef.current) {
+        tl.fromTo(signalLineRef.current, 
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.6, ease: "easeInOut" },
+          "<"
+        );
+      }
+
+      // 60%-80% - Orbital lock
+      tl.to(cards, {
+        rotateZ: (i) => [-3, 0, 3][i],
+        y: (i) => [-8, 8, -8][i],
+        duration: 0.4,
+      });
+
+      // 80%-100% - Cards compress into flowing data stream transitioning into Editing Scene
+      tl.to(cards, {
+        z: -500,
+        y: -200,
+        scale: 0.35,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.7,
+        ease: "power2.in"
+      });
+
+      tl.to(textRef.current, { opacity: 0, y: -30, duration: 0.4 }, "<");
+
+      return () => tl.kill();
     });
 
-    // 80%-100% - Cards compress into flowing data stream transitioning into Editing Scene
-    tl.to(cards, {
-      z: -500,
-      y: -200,
-      scale: 0.35,
-      opacity: 0,
-      stagger: 0.06,
-      duration: 0.7,
-      ease: "power2.in"
+    mm.add("(max-width: 767px)", () => {
+      const cards = cardsContainerRef.current?.children;
+      if (!cards) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      tl.fromTo(recRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3 });
+      tl.fromTo(textRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
+
+      tl.fromTo(cards, 
+        { opacity: 0, y: 50, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.6, ease: "power2.out" },
+        "-=0.1"
+      );
+      
+      if (textLeftRef.current && textRightRef.current) {
+        tl.to(textLeftRef.current, { x: "-10px", duration: 0.4 }, "-=0.2");
+        tl.to(textRightRef.current, { x: "10px", duration: 0.4 }, "<");
+      }
+
+      if (signalLineRef.current) {
+        tl.fromTo(signalLineRef.current, 
+          { opacity: 0, scaleX: 0 },
+          { opacity: 1, scaleX: 1, duration: 0.6, ease: "easeInOut" },
+          "<"
+        );
+      }
+
+      return () => tl.kill();
     });
 
-    tl.to(textRef.current, { opacity: 0, y: -30, duration: 0.4 }, "<");
+    return () => mm.revert();
 
   }, []);
 
@@ -120,7 +165,7 @@ export default function ContentCreationScene() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-[#050505] selection:bg-brand-accent selection:text-black max-w-full"
+      className="relative w-full md:h-screen min-h-[95vh] py-24 md:py-0 overflow-hidden flex flex-col items-center justify-center bg-[#050505] selection:bg-brand-accent selection:text-black max-w-full"
     >
       {/* Background Ambient Glow */}
       <div className="absolute inset-0 pointer-events-none opacity-25">
@@ -157,7 +202,7 @@ export default function ContentCreationScene() {
       </div>
 
       {/* Content Story Cards Container */}
-      <div ref={cardsContainerRef} className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-2.5 sm:gap-6 mt-12 sm:mt-8 px-4 max-w-full perspective-[1000px]">
+      <div ref={cardsContainerRef} className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6 mt-16 md:mt-8 px-4 w-full max-w-full perspective-[1000px]">
         {storyCards.map((card, i) => {
           const CardIcon = card.icon;
           return (

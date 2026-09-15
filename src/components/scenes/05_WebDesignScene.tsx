@@ -16,52 +16,93 @@ export default function WebDesignScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=130%",
-        scrub: 0.4,
-        pin: true,
-        pinSpacing: true,
-      },
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=130%",
+          scrub: 0.4,
+          pin: true,
+          pinSpacing: true,
+        },
+      });
+
+      // 0% - Immediate entry: headline & screen expansion start together
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      
+      tl.fromTo(screenRef.current, 
+        { scale: 0.35, y: 120, opacity: 0, borderRadius: "40px" },
+        { scale: 1, y: 0, opacity: 1, borderRadius: "16px", duration: 0.7, ease: "power2.out" },
+        "<"
+      );
+
+      // 35% - Wireframe morphs into polished UI Design
+      tl.to(wireframeRef.current, { opacity: 0, duration: 0.3 });
+      tl.fromTo(uiRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
+
+      // 50% - Stagger UI component build elements
+      if (uiRef.current) {
+        const uiElements = uiRef.current.children;
+        tl.fromTo(uiElements, 
+          { opacity: 0, y: 15 }, 
+          { opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: "back.out(1.5)" }
+        );
+      }
+
+      // 75% - Morph exit into Development Code Editor
+      tl.to([screenRef.current, textRef.current], {
+        opacity: 0,
+        scale: 1.05,
+        y: -30,
+        duration: 0.5,
+        ease: "power2.in"
+      }, "+=0.2");
+
+      return () => tl.kill();
     });
 
-    // 0% - Immediate entry: headline & screen expansion start together
-    tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
-    
-    tl.fromTo(screenRef.current, 
-      { scale: 0.35, y: 120, opacity: 0, borderRadius: "40px" },
-      { scale: 1, y: 0, opacity: 1, borderRadius: "16px", duration: 0.7, ease: "power2.out" },
-      "<"
-    );
+    mm.add("(max-width: 767px)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
 
-    // 35% - Wireframe morphs into polished UI Design
-    tl.to(wireframeRef.current, { opacity: 0, duration: 0.3 });
-    tl.fromTo(uiRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
+      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.6 });
+      
+      tl.fromTo(screenRef.current, 
+        { scale: 0.9, y: 40, opacity: 0, borderRadius: "20px" },
+        { scale: 1, y: 0, opacity: 1, borderRadius: "16px", duration: 0.7, ease: "power2.out" },
+        "-=0.3"
+      );
 
-    // 50% - Stagger UI component build elements
-    const uiElements = uiRef.current.children;
-    tl.fromTo(uiElements, 
-      { opacity: 0, y: 15 }, 
-      { opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: "back.out(1.5)" }
-    );
+      tl.to(wireframeRef.current, { opacity: 0, duration: 0.3 });
+      tl.fromTo(uiRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
 
-    // 75% - Morph exit into Development Code Editor
-    tl.to([screenRef.current, textRef.current], {
-      opacity: 0,
-      scale: 1.05,
-      y: -30,
-      duration: 0.5,
-      ease: "power2.in"
-    }, "+=0.2");
+      if (uiRef.current) {
+        const uiElements = uiRef.current.children;
+        tl.fromTo(uiElements, 
+          { opacity: 0, y: 15 }, 
+          { opacity: 1, y: 0, stagger: 0.1, duration: 0.5, ease: "back.out(1.5)" },
+          "-=0.2"
+        );
+      }
+
+      return () => tl.kill();
+    });
+
+    return () => mm.revert();
 
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center bg-brand-bg">
-      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 max-w-full">
-        <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">THEN WE BUILD <br /> THE DIGITAL HOME.</h2>
+    <section ref={sectionRef} className="relative w-full md:h-screen min-h-[90vh] py-20 md:py-0 overflow-hidden flex flex-col items-center justify-center bg-brand-bg">
+      <div ref={textRef} className="absolute top-[8%] sm:top-[10%] text-center px-4 z-20 w-full">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2">THEN WE BUILD <br className="md:hidden" /> THE DIGITAL HOME.</h2>
       </div>
 
       <div ref={screenRef} className="w-[94%] sm:w-[90%] max-w-6xl h-[52vh] sm:h-[65vh] bg-brand-surface border border-brand-border-strong rounded-2xl mt-[12%] sm:mt-[5%] shadow-cinematic overflow-hidden relative flex flex-col">
