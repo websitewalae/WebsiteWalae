@@ -46,13 +46,13 @@ export async function createArticle(formData: FormData) {
 
   if (error) {
     console.error("Error inserting article:", error);
-    redirect(`/admin/dashboard/articles/create?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/articles/create?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/nomo/dashboard/articles");
   revalidatePath("/articles");
   revalidatePath("/sitemap.xml");
-  redirect("/admin/dashboard/articles");
+  redirect("/nomo/dashboard/articles");
 }
 
 export async function updateArticle(id: string, formData: FormData) {
@@ -99,14 +99,14 @@ export async function updateArticle(id: string, formData: FormData) {
 
   if (error) {
     console.error("Error updating article:", error);
-    redirect(`/admin/dashboard/articles/${id}?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/articles/${id}?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/nomo/dashboard/articles");
   revalidatePath("/articles");
   revalidatePath(`/articles/${slug}`);
   revalidatePath("/sitemap.xml");
-  redirect("/admin/dashboard/articles");
+  redirect("/nomo/dashboard/articles");
 }
 
 export async function deleteArticle(id: string) {
@@ -121,13 +121,13 @@ export async function deleteArticle(id: string) {
 
   if (error) {
     console.error("Error deleting article:", error);
-    redirect(`/admin/dashboard/articles?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/articles?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/nomo/dashboard/articles");
   revalidatePath("/articles");
   revalidatePath("/sitemap.xml");
-  redirect("/admin/dashboard/articles");
+  redirect("/nomo/dashboard/articles");
 }
 
 export async function seedDefaultArticles() {
@@ -153,10 +153,10 @@ export async function seedDefaultArticles() {
 
   if (error) {
     console.error("Error seeding articles:", error);
-    redirect(`/admin/dashboard/articles?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/articles?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/articles");
+  revalidatePath("/nomo/dashboard/articles");
   revalidatePath("/articles");
-  redirect("/admin/dashboard/articles");
+  redirect("/nomo/dashboard/articles");
 }

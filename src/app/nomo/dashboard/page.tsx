@@ -8,7 +8,7 @@ export default async function Dashboard() {
   const { data: { session } } = await supabase.auth.getSession();
 
   if (!session) {
-    redirect("/admin");
+    redirect("/nomo");
   }
 
   // Fetch quick stats
@@ -65,19 +65,19 @@ export default async function Dashboard() {
         {/* Quick Actions */}
         <h2 className="text-xl font-bold mb-6">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link href="/admin/dashboard/articles" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+          <Link href="/nomo/dashboard/articles" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <FileText className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             <span>Manage Articles</span>
           </Link>
-          <Link href="/admin/dashboard/portfolio" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+          <Link href="/nomo/dashboard/portfolio" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <Briefcase className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             <span>Manage Portfolio</span>
           </Link>
-          <Link href="/admin/dashboard/pricing" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+          <Link href="/nomo/dashboard/pricing" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <Package className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             <span>Manage Pricing</span>
           </Link>
-          <Link href="/admin/dashboard/seo" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+          <Link href="/nomo/dashboard/seo" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <Search className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             <span>Global SEO Settings</span>
           </Link>

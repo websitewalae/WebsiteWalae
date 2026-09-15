@@ -11,14 +11,14 @@ export default async function CreateArticle(props: { searchParams?: Promise<{ er
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
-  if (!session) redirect("/admin");
+  if (!session) redirect("/nomo");
 
   return (
     <div className="min-h-screen bg-brand-bg text-brand-text p-8">
       <div className="max-w-4xl mx-auto">
         <header className="mb-8 border-b border-white/10 pb-6">
           <div className="text-sm text-brand-text-secondary mb-2">
-            <Link href="/admin/dashboard/articles" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
+            <Link href="/nomo/dashboard/articles" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Articles</span>
             </Link>
@@ -101,7 +101,7 @@ export default async function CreateArticle(props: { searchParams?: Promise<{ er
           </div>
 
           <div className="flex justify-end gap-4 pb-12">
-            <Link href="/admin/dashboard/articles" className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 font-medium transition-colors">
+            <Link href="/nomo/dashboard/articles" className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 font-medium transition-colors">
               Cancel
             </Link>
             <button type="submit" className="bg-brand-accent text-black font-bold px-8 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">

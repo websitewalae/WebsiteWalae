@@ -48,7 +48,7 @@ export default async function ArticlesDashboard() {
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
-  if (!session) redirect("/admin");
+  if (!session) redirect("/nomo");
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
   let projectId = "ypksozcsjuxobxyzqtmy";
@@ -69,7 +69,7 @@ export default async function ArticlesDashboard() {
         <header className="flex justify-between items-center mb-8 border-b border-white/10 pb-6">
           <div>
             <div className="text-sm text-brand-text-secondary mb-2">
-              <Link href="/admin/dashboard" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
+              <Link href="/nomo/dashboard" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Back to Dashboard</span>
               </Link>
@@ -88,7 +88,7 @@ export default async function ArticlesDashboard() {
                 </button>
               </form>
             )}
-            <Link href="/admin/dashboard/articles/create" className="inline-flex items-center gap-2 bg-brand-accent text-black font-bold px-6 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">
+            <Link href="/nomo/dashboard/articles/create" className="inline-flex items-center gap-2 bg-brand-accent text-black font-bold px-6 py-3 rounded-lg hover:bg-brand-accent/90 transition-colors">
               <Plus className="w-4 h-4" />
               <span>New Article</span>
             </Link>
@@ -133,7 +133,7 @@ export default async function ArticlesDashboard() {
                       <td className="p-4 text-brand-text-secondary">{article.author}</td>
                       <td className="p-4 text-brand-text-secondary">{new Date(article.created_at).toLocaleDateString()}</td>
                       <td className="p-4 text-right">
-                        <Link href={`/admin/dashboard/articles/${article.id}`} className="text-brand-accent hover:underline text-xs">
+                        <Link href={`/nomo/dashboard/articles/${article.id}`} className="text-brand-accent hover:underline text-xs">
                           Edit
                         </Link>
                       </td>

@@ -34,7 +34,7 @@ export default function Navigation() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  if (pathname.startsWith("/admin")) return null;
+  if (pathname.startsWith("/nomo")) return null;
 
   return (
     <motion.header

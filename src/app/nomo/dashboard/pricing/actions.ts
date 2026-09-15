@@ -36,12 +36,12 @@ export async function createPackage(formData: FormData) {
 
   if (error) {
     console.error("Error creating package:", error);
-    redirect(`/admin/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/nomo/dashboard/pricing");
   revalidatePath("/pricing");
-  redirect("/admin/dashboard/pricing");
+  redirect("/nomo/dashboard/pricing");
 }
 
 export async function updatePackage(id: string, formData: FormData) {
@@ -80,12 +80,12 @@ export async function updatePackage(id: string, formData: FormData) {
 
   if (error) {
     console.error("Error updating package:", error);
-    redirect(`/admin/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/nomo/dashboard/pricing");
   revalidatePath("/pricing");
-  redirect("/admin/dashboard/pricing");
+  redirect("/nomo/dashboard/pricing");
 }
 
 export async function deletePackage(id: string) {
@@ -97,12 +97,12 @@ export async function deletePackage(id: string) {
 
   if (error) {
     console.error("Error deleting package:", error);
-    redirect(`/admin/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/nomo/dashboard/pricing");
   revalidatePath("/pricing");
-  redirect("/admin/dashboard/pricing");
+  redirect("/nomo/dashboard/pricing");
 }
 
 export async function togglePackageActive(id: string, active: boolean) {
@@ -119,7 +119,7 @@ export async function togglePackageActive(id: string, active: boolean) {
     console.error("Error toggling package:", error);
   }
 
-  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/nomo/dashboard/pricing");
   revalidatePath("/pricing");
 }
 
@@ -137,7 +137,7 @@ export async function togglePackagePopular(id: string, popular: boolean) {
     console.error("Error toggling popular:", error);
   }
 
-  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/nomo/dashboard/pricing");
   revalidatePath("/pricing");
 }
 
@@ -170,10 +170,10 @@ export async function seedDefaultPackages() {
 
   if (error) {
     console.error("Error seeding default packages:", error);
-    redirect(`/admin/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
+    redirect(`/nomo/dashboard/pricing?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/admin/dashboard/pricing");
+  revalidatePath("/nomo/dashboard/pricing");
   revalidatePath("/pricing");
-  redirect("/admin/dashboard/pricing");
+  redirect("/nomo/dashboard/pricing");
 }

@@ -26,7 +26,7 @@ export default async function AdminLogin(props: { searchParams?: Promise<{ error
 
   // If already logged in, redirect to the dashboard
   if (session) {
-    redirect("/admin/dashboard");
+    redirect("/nomo/dashboard");
   }
 
   if (!isConfigured) {

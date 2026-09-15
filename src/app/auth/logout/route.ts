@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   const proto = request.headers.get('x-forwarded-proto') || (cleanHost.includes('localhost') || cleanHost.includes('127.0.0.1') ? 'http' : 'https')
   const origin = `${proto}://${cleanHost}`
 
-  return NextResponse.redirect(`${origin}/admin`, {
+  return NextResponse.redirect(`${origin}/nomo`, {
     status: 303,
   })
 }

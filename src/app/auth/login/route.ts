@@ -21,13 +21,13 @@ export async function POST(request: Request) {
   const origin = `${proto}://${cleanHost}`
 
   if (error) {
-    return NextResponse.redirect(`${origin}/admin?error=${encodeURIComponent(error.message)}`, {
+    return NextResponse.redirect(`${origin}/nomo?error=${encodeURIComponent(error.message)}`, {
       status: 303,
     })
   }
 
   // Redirect to dashboard with 303 (See Other)
-  return NextResponse.redirect(`${origin}/admin/dashboard`, {
+  return NextResponse.redirect(`${origin}/nomo/dashboard`, {
     status: 303,
   })
 }

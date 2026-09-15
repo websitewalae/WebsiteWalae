@@ -34,7 +34,7 @@ export default async function PricingAdminPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <Link href="/admin/dashboard" className="text-xs font-mono text-brand-text-muted hover:text-brand-accent transition-colors mb-2 block">
+            <Link href="/nomo/dashboard" className="text-xs font-mono text-brand-text-muted hover:text-brand-accent transition-colors mb-2 block">
               ← Back to Dashboard
             </Link>
             <h1 className="text-3xl font-black uppercase tracking-tight">

@@ -17,7 +17,7 @@ export default async function EditArticle(props: EditArticleProps) {
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
-  if (!session) redirect("/admin");
+  if (!session) redirect("/nomo");
 
   const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
   const query = supabase.from("articles").select("*");
@@ -29,7 +29,7 @@ export default async function EditArticle(props: EditArticleProps) {
         <div className="min-h-screen bg-brand-bg text-brand-text p-8">
           <div className="max-w-4xl mx-auto">
             <header className="mb-8 border-b border-white/10 pb-6">
-              <Link href="/admin/dashboard/articles" className="inline-flex items-center gap-1.5 text-brand-text-secondary hover:text-white transition-colors mb-4">
+              <Link href="/nomo/dashboard/articles" className="inline-flex items-center gap-1.5 text-brand-text-secondary hover:text-white transition-colors mb-4">
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Back to Articles
               </Link>
@@ -56,7 +56,7 @@ export default async function EditArticle(props: EditArticleProps) {
         <header className="mb-8 border-b border-white/10 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="text-sm text-brand-text-secondary mb-2">
-              <Link href="/admin/dashboard/articles" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
+              <Link href="/nomo/dashboard/articles" className="inline-flex items-center gap-1.5 hover:text-white transition-colors">
                 <ArrowLeft className="w-3.5 h-3.5" />
                 Back to Articles
               </Link>
@@ -202,7 +202,7 @@ export default async function EditArticle(props: EditArticleProps) {
           {/* Action Buttons */}
           <div className="flex justify-end gap-4 pb-12">
             <Link
-              href="/admin/dashboard/articles"
+              href="/nomo/dashboard/articles"
               className="px-6 py-3 rounded-lg border border-white/10 hover:bg-white/5 font-medium transition-colors"
             >
               Cancel
