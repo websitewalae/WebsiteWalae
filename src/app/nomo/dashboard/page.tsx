@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { FileText, Briefcase, Package, Search, LogOut } from "lucide-react";
+import { FileText, Briefcase, Package, Search, LogOut, MessageSquare } from "lucide-react";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -15,6 +15,7 @@ export default async function Dashboard() {
   const { count: articlesCount } = await supabase.from('articles').select('*', { count: 'exact', head: true });
   const { count: portfolioCount } = await supabase.from('portfolio').select('*', { count: 'exact', head: true });
   const { count: packagesCount } = await supabase.from('packages').select('*', { count: 'exact', head: true });
+  const { count: queriesCount } = await supabase.from('queries').select('*', { count: 'exact', head: true });
 
   return (
     <div className="min-h-screen bg-brand-bg text-brand-text p-8 relative">
@@ -64,7 +65,16 @@ export default async function Dashboard() {
 
         {/* Quick Actions */}
         <h2 className="text-xl font-bold mb-6">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <Link href="/nomo/dashboard/queries" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
+            <div className="flex justify-between w-full">
+              <MessageSquare className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+              {queriesCount !== null && queriesCount > 0 && (
+                <span className="bg-brand-accent text-black text-xs font-bold px-2 py-0.5 rounded-full">{queriesCount}</span>
+              )}
+            </div>
+            <span>Manage Queries</span>
+          </Link>
           <Link href="/nomo/dashboard/articles" className="bg-white/5 hover:bg-brand-accent text-white hover:text-black p-4 rounded-xl font-medium transition-all group flex flex-col items-start justify-between min-h-[90px]">
             <FileText className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
             <span>Manage Articles</span>

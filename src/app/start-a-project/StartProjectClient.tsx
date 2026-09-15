@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
 import Footer from "@/components/layout/Footer";
+import { submitProjectQuery } from "./actions";
 
 const SERVICES = [
   "Website Development",
@@ -47,6 +48,7 @@ export default function StartProjectClient() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleServiceToggle = (service: string) => {
@@ -78,20 +80,20 @@ export default function StartProjectClient() {
       return;
     }
 
+    setSubmitError(null);
     setIsSubmitting(true);
     
-    // Simulate API call for future backend integration
-    // Replace this block with actual fetch to your API endpoint
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
-      setIsSuccess(true);
+      const result = await submitProjectQuery(formData);
+      
+      if (result.success) {
+        setIsSuccess(true);
+      } else {
+        setSubmitError(result.error || "Failed to submit. Please try again.");
+      }
     } catch (error) {
       console.error("Submission failed", error);
+      setSubmitError("Failed to submit. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -145,6 +147,12 @@ export default function StartProjectClient() {
               onSubmit={handleSubmit}
               className="glass p-6 sm:p-12 rounded-3xl border border-white/10 flex flex-col gap-10"
             >
+              {submitError && (
+                <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl flex items-center gap-3 text-sm">
+                  <AlertCircle className="w-5 h-5 shrink-0" />
+                  <p>{submitError}</p>
+                </div>
+              )}
               {/* Personal Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
