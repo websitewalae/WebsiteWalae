@@ -67,6 +67,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://websitewalae.com",
   },
+  other: {
+    "geo.placename": "Lucknow",
+    "geo.position": "26.8467;80.9462",
+    "geo.region": "IN-UP",
+  },
   robots: {
     index: true,
     follow: true,
@@ -126,6 +131,14 @@ const organizationSchema = {
     {
       "@type": "Country",
       "name": "India"
+    }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "10:00",
+      "closes": "19:00"
     }
   ],
   "sameAs": [
