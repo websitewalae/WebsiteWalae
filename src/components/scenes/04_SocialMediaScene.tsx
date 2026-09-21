@@ -59,7 +59,7 @@ function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isA
     } else {
       videoRef.current.pause();
     }
-  }, [isActive]);
+  }, [isActive, videoUrl]);
 
   useEffect(() => {
     let isMounted = true;
@@ -130,6 +130,7 @@ function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isA
       loop
       muted
       playsInline
+      autoPlay={isActive}
       preload="metadata"
       className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
     />
