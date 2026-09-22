@@ -70,6 +70,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
       images: [`${baseUrl}/images/tech_hero_bg.jpg`],
     },
+    {
+      url: `${baseUrl}/best-digital-marketing-agency-in-hazratganj`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      images: [`${baseUrl}/images/articles/hazratganj-digital-marketing.jpg`],
+    },
     ...[
       "website-development-lucknow",
       "digital-marketing-lucknow",
