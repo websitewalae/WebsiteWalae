@@ -295,7 +295,26 @@ export default function Home() {
               📍 Hazratganj, Lucknow, Uttar Pradesh 226001, India
             </span>
           </div>
-          <div className="mt-6 flex flex-wrap gap-4 text-xs sm:text-sm">
+
+          {/* Hostinger Verified Partner */}
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <a
+              href="https://www.hostinger.com/partners"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block hover:opacity-90 hover:scale-105 transition-all duration-300"
+              title="Website Walae is a Verified Hostinger Partner"
+            >
+              <img
+                src="/hostinger-partner-badge.jpg"
+                alt="Hostinger Partner — Website Walae"
+                className="h-9 w-auto object-contain rounded-xl"
+                style={{ mixBlendMode: "screen" }}
+              />
+            </a>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-4 text-xs sm:text-sm">
             <Link href="/start-a-project" className="text-brand-accent hover:text-white transition-colors font-medium">Start a Project →</Link>
             <Link href="/work" className="text-brand-text-secondary hover:text-white transition-colors">View Our Work</Link>
             <Link href="/pricing" className="text-brand-text-secondary hover:text-white transition-colors">Pricing</Link>

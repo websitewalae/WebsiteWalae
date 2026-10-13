@@ -170,6 +170,22 @@ export default function Footer() {
                 We build premium digital experiences that move people. Websites, content, design and marketing.
               </p>
             </div>
+
+            {/* Hostinger Verified Partner Badge */}
+            <a
+              href="https://www.hostinger.com/partners"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-1 hover:opacity-90 hover:scale-105 transition-all duration-300"
+              title="Website Walae — Verified Hostinger Partner"
+            >
+              <img
+                src="/hostinger-partner-badge.jpg"
+                alt="Hostinger Partner — Website Walae"
+                className="h-9 w-auto object-contain rounded-xl"
+                style={{ mixBlendMode: "screen" }}
+              />
+            </a>
           </div>
 
           {/* Col 2: NAVIGATION */}
