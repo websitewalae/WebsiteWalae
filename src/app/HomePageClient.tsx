@@ -22,9 +22,9 @@ import Footer from "@/components/layout/Footer";
 import CameraInterface from "@/components/scenes/CameraInterface";
 
 export default function HomePageClient() {
-  const [cameraModeActive, setCameraModeActive] = useState(true);
+  const [cameraModeActive, setCameraModeActive] = useState(false);
 
-  // Lock scroll on the body when camera mode is active
+  // Lock scroll on the body only when camera mode is explicitly opened
   useEffect(() => {
     if (cameraModeActive) {
       document.body.style.overflow = "hidden";
@@ -36,25 +36,15 @@ export default function HomePageClient() {
 
   return (
     <>
-      {/* Interactive Camera Intro — overlay only, does NOT hide DOM content from crawlers */}
+      {/* Interactive Camera Mode (optional overlay) */}
       <AnimatePresence>
         {cameraModeActive && (
           <CameraInterface onEnterSite={() => setCameraModeActive(false)} />
         )}
       </AnimatePresence>
       
-      {/* Main Site Content — always rendered in DOM for crawlers. 
-          Camera mode only controls visual opacity + pointer-events, 
-          NOT visibility:hidden which blocks crawlers */}
-      <div 
-        className="w-full"
-        style={{ 
-          opacity: cameraModeActive ? 0 : 1, 
-          pointerEvents: cameraModeActive ? 'none' : 'auto',
-          transition: 'opacity 1s ease-in-out'
-        }}
-        aria-hidden={cameraModeActive ? "true" : undefined}
-      >
+      {/* Main Site Content — immediately visible */}
+      <div className="w-full">
         <SceneController>
           <HeroScene />
           <ContentCreationScene />
