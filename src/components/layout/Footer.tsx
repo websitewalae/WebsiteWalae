@@ -17,7 +17,7 @@ export default function Footer() {
     
     gsap.registerPlugin(ScrollTrigger);
     
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     // Responsive Animations
     mm.add("(min-width: 768px)", () => {

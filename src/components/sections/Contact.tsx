@@ -114,7 +114,7 @@ export default function Contact() {
                   <CheckCircle2 className="w-20 h-20 text-brand-accent mb-6" />
                 </motion.div>
                 <h3 className="text-3xl font-bold mb-4">Request Received</h3>
-                <p className="text-brand-text-secondary">We'll review your project details and get back to you within 24 hours.</p>
+                <p className="text-brand-text-secondary">We&apos;ll review your project details and get back to you within 24 hours.</p>
               </motion.div>
             )}
           </AnimatePresence>

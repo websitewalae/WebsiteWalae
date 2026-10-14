@@ -109,7 +109,9 @@ function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isA
             setVideoUrl(objectUrl);
           }
         }
-      } catch (err) {}
+      } catch {
+        // Ignore cache lookup errors
+      }
     }
 
     loadCachedVideo();
@@ -137,7 +139,9 @@ function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isA
   );
 }
 
-function SocialCard({ reel, isActive }: { reel: any; isActive: boolean }) {
+type ReelItem = (typeof CLIENT_REELS)[number];
+
+function SocialCard({ reel, isActive }: { reel: ReelItem; isActive: boolean }) {
   return (
     <div className={`w-[290px] sm:w-[320px] shrink-0 h-[500px] sm:h-[530px] glass rounded-3xl p-3.5 sm:p-4 flex flex-col justify-between shadow-floating border transition-all duration-500 bg-[#0a0a0a]/95 backdrop-blur-2xl ${isActive ? 'scale-100 opacity-100 border-brand-accent/60 shadow-[0_0_30px_rgba(199,255,61,0.15)] z-20' : 'scale-[0.92] opacity-40 border-white/10 z-10'}`}>
       {/* Header */}
@@ -230,7 +234,7 @@ export default function SocialMediaScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
       // DESKTOP: Cinematic Pinning & Scrubbing

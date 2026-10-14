@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Home, Layout, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Home, Layout, Search } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 
 export default function NotFound() {
@@ -19,7 +19,7 @@ export default function NotFound() {
         </h1>
         
         <p className="text-base sm:text-lg text-brand-text-secondary max-w-lg mb-12">
-          The page you are looking for has been moved, deleted, or possibly never existed. Let's get you back on track.
+          The page you are looking for has been moved, deleted, or possibly never existed. Let&apos;s get you back on track.
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl">

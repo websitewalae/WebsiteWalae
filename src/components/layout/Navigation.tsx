@@ -31,7 +31,10 @@ export default function Navigation() {
 
   // Close mobile menu on route change
   useEffect(() => {
-    setMobileMenuOpen(false);
+    const handle = requestAnimationFrame(() => {
+      setMobileMenuOpen(false);
+    });
+    return () => cancelAnimationFrame(handle);
   }, [pathname]);
 
   if (pathname.startsWith("/nomo")) return null;

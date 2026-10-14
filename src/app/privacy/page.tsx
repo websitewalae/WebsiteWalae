@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Shield, Lock, Eye, FileText, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Shield, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             PRIVACY <span className="text-brand-accent">POLICY</span>
           </h1>
           <p className="text-sm font-mono text-brand-text-muted">
-            Last Updated: {lastUpdated} // Website Walae Studio
+            Last Updated: {lastUpdated} • Website Walae Studio
           </p>
         </div>
 

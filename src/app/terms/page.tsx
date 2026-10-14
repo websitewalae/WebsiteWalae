@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Scale, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowLeft, Scale, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function TermsPage() {
             TERMS & <span className="text-brand-accent">CONDITIONS</span>
           </h1>
           <p className="text-sm font-mono text-brand-text-muted">
-            Last Updated: {lastUpdated} // Website Walae Studio Agreement
+            Last Updated: {lastUpdated} • Website Walae Studio Agreement
           </p>
         </div>
 

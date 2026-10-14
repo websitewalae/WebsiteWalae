@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { Sparkles, ArrowRight, Activity, Share2, Eye } from "lucide-react";
+import { Sparkles, Share2, Eye } from "lucide-react";
 
 export default function ContentCreationScene() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -19,7 +19,7 @@ export default function ContentCreationScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
       const cards = cardsContainerRef.current?.children;

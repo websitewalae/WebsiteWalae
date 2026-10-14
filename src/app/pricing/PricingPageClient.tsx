@@ -157,7 +157,7 @@ export default function PricingPageClient({ initialPackages }: { initialPackages
               CUSTOM PROJECT?
             </h2>
             <p className="text-brand-text-secondary text-lg sm:text-xl max-w-xl">
-              Need a full-stack solution encompassing multiple services? Let's discuss a tailored package that fits your exact requirements.
+              Need a full-stack solution encompassing multiple services? Let&apos;s discuss a tailored package that fits your exact requirements.
             </p>
           </div>
           <Link

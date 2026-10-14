@@ -145,7 +145,7 @@ export default function DevelopmentScene() {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
       const tl = gsap.timeline({

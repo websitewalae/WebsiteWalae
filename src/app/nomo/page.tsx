@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import { Metadata } from "next";
 
@@ -19,7 +20,7 @@ export default async function AdminLogin(props: { searchParams?: Promise<{ error
     const { data } = await supabase.auth.getSession();
     session = data.session;
     isConfigured = true;
-  } catch (error) {
+  } catch {
     // If createClient throws, it means the URL is invalid or missing
     isConfigured = false;
   }
@@ -37,7 +38,7 @@ export default async function AdminLogin(props: { searchParams?: Promise<{ error
           <p className="text-brand-text-secondary mb-6">
             Your Supabase environment variables are missing or invalid. Please open <code className="bg-black/50 px-2 py-1 rounded text-white">.env.local</code> and add your <strong>NEXT_PUBLIC_SUPABASE_URL</strong> and <strong>NEXT_PUBLIC_SUPABASE_ANON_KEY</strong>.
           </p>
-          <a href="/" className="inline-block bg-brand-accent text-black font-bold px-6 py-2 rounded-lg">Return Home</a>
+          <Link href="/" className="inline-block bg-brand-accent text-black font-bold px-6 py-2 rounded-lg">Return Home</Link>
         </div>
       </div>
     );

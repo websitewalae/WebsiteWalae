@@ -22,7 +22,7 @@ export default function ContactPageClient() {
           </div>
           
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tighter uppercase leading-none">
-            Let's talk about <br />
+            Let&apos;s talk about <br />
             <span className="text-brand-text-secondary">your next project.</span>
           </h1>
           

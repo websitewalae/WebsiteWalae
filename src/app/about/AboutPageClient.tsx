@@ -34,7 +34,7 @@ export default function AboutPageClient() {
             <span className="text-brand-text-secondary">DIGITAL CREATIVE STUDIO.</span>
           </h1>
           <p className="text-xl sm:text-2xl text-brand-text-secondary max-w-3xl font-medium mt-12 leading-relaxed">
-            We are a collective of digital craftsmen. We don't just build websites; we build digital ecosystems.
+            We are a collective of digital craftsmen. We don&apos;t just build websites; we build digital ecosystems.
           </p>
         </motion.div>
       </section>
