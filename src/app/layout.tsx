@@ -71,6 +71,7 @@ export const metadata: Metadata = {
     "geo.placename": "Lucknow",
     "geo.position": "26.8467;80.9462",
     "geo.region": "IN-UP",
+    "facebook-domain-verification": "mqq17fjbmvhhso3widxxe6hwfn44j2",
   },
   robots: {
     index: true,
