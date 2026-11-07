@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -194,6 +194,16 @@ export default function HeroScene() {
   const springMouseX = useSpring(mouseX, { stiffness: 120, damping: 25 });
   const springMouseY = useSpring(mouseY, { stiffness: 120, damping: 25 });
 
+  // Derived state for HeroLogo3D — read on render from spring values
+  const [logoMouseX, setLogoMouseX] = React.useState(0);
+  const [logoMouseY, setLogoMouseY] = React.useState(0);
+
+  useEffect(() => {
+    const unsubX = springMouseX.on("change", (v) => setLogoMouseX(v));
+    const unsubY = springMouseY.on("change", (v) => setLogoMouseY(v));
+    return () => { unsubX(); unsubY(); };
+  }, [springMouseX, springMouseY]);
+
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = sectionRef.current?.getBoundingClientRect();
     if (rect) {
@@ -335,8 +345,8 @@ export default function HeroScene() {
         <HeroLogo3D
           isHovered={isLogoHovered}
           onHoverChange={setIsLogoHovered}
-          mouseX={springMouseX.get()}
-          mouseY={springMouseY.get()}
+          mouseX={logoMouseX}
+          mouseY={logoMouseY}
           activeServiceIndex={activeServiceIndex}
         />
 
@@ -356,6 +366,46 @@ export default function HeroScene() {
               : activeServiceIndex !== null
               ? `SERVICE: ${SERVICES[activeServiceIndex].title}`
               : "WEBSITE WALAE • CREATIVE SYSTEM"}
+          </span>
+        </motion.div>
+
+        {/* START HERE CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9 }}
+          className="mt-5 flex flex-col items-center gap-3 pointer-events-auto"
+        >
+          <Link
+            href="/start-a-project"
+            className="group relative inline-flex items-center gap-2 bg-brand-accent text-black font-bold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_0_30px_rgba(199,255,61,0.45)] hover:shadow-[0_0_50px_rgba(199,255,61,0.7)] hover:scale-105 transition-all duration-300"
+          >
+            <Zap className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            Start Here
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
+            Free Consultation · No Commitment
+          </span>
+        </motion.div>
+
+        {/* START HERE CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9 }}
+          className="mt-5 flex flex-col items-center gap-3 pointer-events-auto"
+        >
+          <Link
+            href="/start-a-project"
+            className="group relative inline-flex items-center gap-2 bg-brand-accent text-black font-bold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_0_30px_rgba(199,255,61,0.45)] hover:shadow-[0_0_50px_rgba(199,255,61,0.7)] hover:scale-105 transition-all duration-300"
+          >
+            <Zap className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            Start Here
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
+            Free Consultation · No Commitment
           </span>
         </motion.div>
       </div>
@@ -536,6 +586,30 @@ export default function HeroScene() {
           </div>
         </motion.div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* START HERE CTA — Independent layer, not affected by GSAP scroll fade */}
+      {/* ========================================================================= */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 1.0 }}
+        className="absolute bottom-[88px] sm:bottom-[96px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-auto"
+      >
+        <Link
+          href="/start-a-project"
+          className="group inline-flex items-center gap-2 bg-brand-accent text-black font-bold text-sm sm:text-base px-6 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-[0_0_30px_rgba(199,255,61,0.5)] hover:shadow-[0_0_55px_rgba(199,255,61,0.8)] hover:scale-105 transition-all duration-300"
+          data-cursor="button"
+        >
+          <Zap className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+          Start Here
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
+        <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-white/35 uppercase">
+          Free Consultation · No Commitment
+        </span>
+      </motion.div>
+
     </section>
   );
 }
