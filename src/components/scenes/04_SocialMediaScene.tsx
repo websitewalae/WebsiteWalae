@@ -49,9 +49,11 @@ const CLIENT_REELS = [
 
 // Dedicated 30-Day Client Cache Memory for Section Videos
 function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isActive: boolean }) {
-  const [videoUrl, setVideoUrl] = useState<string>(src);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Only the active reel downloads and plays. The server already sends
+  // 30-day Cache-Control headers for /videos/reels, so the browser's HTTP
+  // cache handles repeat visits without pre-fetching every reel up front.
   useEffect(() => {
     if (!videoRef.current) return;
     if (isActive) {
@@ -59,81 +61,18 @@ function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isA
     } else {
       videoRef.current.pause();
     }
-  }, [isActive, videoUrl]);
-
-  useEffect(() => {
-    let isMounted = true;
-    let objectUrl: string | null = null;
-
-    async function loadCachedVideo() {
-      if (typeof window === "undefined" || !("caches" in window)) return;
-
-      try {
-        const CACHE_NAME = "ww-reels-v1";
-        const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
-        const cache = await caches.open(CACHE_NAME);
-        const cachedResponse = await cache.match(src);
-
-        if (cachedResponse) {
-          const timestamp = cachedResponse.headers.get("x-cache-timestamp");
-          const cachedTime = timestamp ? parseInt(timestamp, 10) : Date.now();
-
-          if (Date.now() - cachedTime < THIRTY_DAYS_MS) {
-            const blob = await cachedResponse.blob();
-            if (isMounted) {
-              objectUrl = URL.createObjectURL(blob);
-              setVideoUrl(objectUrl);
-            }
-            return;
-          } else {
-            await cache.delete(src);
-          }
-        }
-
-        const res = await fetch(src);
-        if (res.ok) {
-          const blob = await res.blob();
-          const headers = new Headers(res.headers);
-          headers.set("x-cache-timestamp", Date.now().toString());
-          headers.set("Cache-Control", "public, max-age=2592000, immutable");
-
-          const responseToCache = new Response(blob.slice(), {
-            status: res.status,
-            statusText: res.statusText,
-            headers,
-          });
-
-          await cache.put(src, responseToCache);
-          if (isMounted) {
-            objectUrl = URL.createObjectURL(blob);
-            setVideoUrl(objectUrl);
-          }
-        }
-      } catch {
-        // Ignore cache lookup errors
-      }
-    }
-
-    loadCachedVideo();
-
-    return () => {
-      isMounted = false;
-      if (objectUrl) {
-        URL.revokeObjectURL(objectUrl);
-      }
-    };
-  }, [src]);
+  }, [isActive]);
 
   return (
     <video
       ref={videoRef}
-      src={videoUrl}
+      src={src}
       poster={poster}
       loop
       muted
       playsInline
       autoPlay={isActive}
-      preload="metadata"
+      preload={isActive ? "metadata" : "none"}
       className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
     />
   );
@@ -149,7 +88,7 @@ function SocialCard({ reel, isActive }: { reel: ReelItem; isActive: boolean }) {
         <div className="flex items-center gap-2.5">
           <img 
             src="/logo.png" 
-            alt={`${reel.client} — ${reel.caption}`} 
+            alt="Website Walae" 
             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover border border-brand-accent/40 p-0.5 bg-black" 
           />
           <div>

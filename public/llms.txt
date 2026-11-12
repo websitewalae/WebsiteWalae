@@ -1,0 +1,30 @@
+# Website Walae
+
+> Website Walae is a digital marketing and creative agency in Halwasiya Market, Hazratganj, Lucknow, Uttar Pradesh, India (226001). It helps startups, SMEs and established brands with website development, UI/UX design, SEO, social media marketing, content creation, video production, Meta Ads and PR.
+
+- Phone: +91 73177 82998
+- Email: websitewalae@gmail.com
+- Hours: Monday to Saturday, 10:00 to 19:00 IST
+- Instagram: https://www.instagram.com/websitewalae/
+- LinkedIn: https://www.linkedin.com/company/websitewalae
+
+## Services
+
+- [Website Development](https://websitewalae.com/services/website-development-lucknow): custom Next.js, WordPress and Shopify websites
+- [UI/UX Design](https://websitewalae.com/services/ui-ux-design-lucknow)
+- [SEO](https://websitewalae.com/services/seo-lucknow)
+- [Social Media Marketing](https://websitewalae.com/services/social-media-marketing-lucknow)
+- [Content Creation](https://websitewalae.com/services/content-creation-lucknow)
+- [Video Production](https://websitewalae.com/services/video-production-lucknow)
+- [Meta Ads](https://websitewalae.com/services/meta-ads-lucknow)
+- [Public Relations](https://websitewalae.com/services/pr-lucknow)
+- [Digital Marketing Strategy](https://websitewalae.com/services/digital-marketing-lucknow)
+
+## Key pages
+
+- [Pricing](https://websitewalae.com/pricing): service packages in INR
+- [Work](https://websitewalae.com/work): client projects and reels
+- [About](https://websitewalae.com/about)
+- [Articles](https://websitewalae.com/articles)
+- [Start a Project](https://websitewalae.com/start-a-project)
+- [Contact](https://websitewalae.com/contact)

@@ -76,10 +76,10 @@ export default function Contact() {
                 </select>
                 <select required defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
                   <option value="" disabled>Budget</option>
-                  <option value="small">Under $5k</option>
-                  <option value="medium">$5k - $10k</option>
-                  <option value="large">$10k - $25k</option>
-                  <option value="enterprise">$25k+</option>
+                  <option value="small">Under ₹25K</option>
+                  <option value="medium">₹25K – ₹50K</option>
+                  <option value="large">₹50K – ₹1L</option>
+                  <option value="enterprise">₹1L+</option>
                 </select>
                 <textarea required placeholder="Message" rows={4} className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full resize-none" />
                 

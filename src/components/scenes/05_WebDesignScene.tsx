@@ -147,7 +147,7 @@ export default function WebDesignScene() {
             </div>
             {/* Hero */}
             <div className="flex-1 flex flex-col items-center justify-center text-center px-2">
-              <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4 text-white">THE FUTURE IS NOW.</h1>
+              <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-2 sm:mb-4 text-white">THE FUTURE IS NOW.</h2>
               <p className="text-xs sm:text-base text-brand-text-secondary max-w-md mb-4 sm:mb-8">A fully realized digital experience built from the ground up to convert.</p>
               <button className="px-6 py-2.5 sm:px-8 sm:py-4 bg-brand-accent text-brand-bg font-bold text-xs sm:text-sm rounded-full">Explore</button>
             </div>
