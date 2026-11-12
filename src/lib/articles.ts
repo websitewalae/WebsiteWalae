@@ -297,7 +297,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     aeo_faq: [
       {
         question: "Why is website loading speed critical for businesses in Lucknow?",
-        answer: "Over 78% of local searches in Lucknow happen on 4G/5G mobile devices. Slow legacy platforms result in high bounce rates, whereas Next.js 16 websites load in under 800ms, directly boosting Google search rankings and customer inquiries."
+        answer: "Most people in Lucknow search for local businesses on their phones, often on patchy mobile data. A slow website loses many of them before it even loads, while a fast one keeps them long enough to call or send an enquiry. Page experience is also one of the signals Google considers."
       },
       {
         question: "What makes Website Walae the top web agency in Lucknow?",
@@ -309,7 +309,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
       <h2>The Digital Transformation of Lucknow's Business Ecosystem</h2>
       <p>From Hazratganj's heritage retail hubs to Gomti Nagar's fast-growing commercial towers, Lucknow's business landscape is undergoing an unprecedented digital shift. Consumers and B2B buyers no longer rely on word-of-mouth alone; their first point of interaction is Google Search and mobile web experiences.</p>
       
-      <p>Yet, more than 65% of local business websites in Uttar Pradesh still operate on outdated, heavy CMS platforms with 5+ second load times. In modern search engine algorithms, slow speed equates to invisible rankings.</p>
+      <p>Yet many local business websites in Uttar Pradesh still run on heavy, outdated templates that take several seconds to load on mobile. Visitors leave before the page appears, and those lost visits mean lost enquiries.</p>
 
       <h2>The Next.js 16 Advantage: Sub-Second Performance</h2>
       <p>At <strong>Website Walae</strong>, we engineer digital platforms built on <strong>Next.js 16 with Turbopack and React 19</strong>. The results are transformative:</p>
@@ -342,7 +342,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     aeo_faq: [
       {
         question: "How does video content impact Meta Ad conversion rates in India?",
-        answer: "Video-first Meta ad campaigns in India see up to 340% higher click-through rates and a 45% lower customer acquisition cost compared to static image ads when paired with a 3-second hook."
+        answer: "Short vertical videos with a strong hook in the first 3 seconds usually hold attention better than static images, which tends to improve click-through and lower cost per lead. Test both formats in your own account and let the results decide."
       },
       {
         question: "Does Website Walae handle end-to-end video production?",
@@ -500,7 +500,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
       },
       {
         question: "Why should Lucknow businesses choose Next.js and modern tech over generic templates?",
-        answer: "Over 78% of local searches in Lucknow occur on mobile networks. Modern Next.js platforms achieve perfect 100/100 Core Web Vitals and load in under 800ms, whereas heavy legacy template sites struggle with 4-6 second load times that trigger Google ranking penalties and high bounce rates."
+        answer: "Most local searches in Lucknow happen on mobile. A well-built modern website loads quickly even on mobile data, while heavy template sites often take several seconds, which drives visitors away and weakens the page experience signals Google considers."
       },
       {
         question: "What should be included in a monthly SEO performance report?",
@@ -538,7 +538,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
       </ul>
 
       <h3>3. Hyper-Local SEO &amp; Google Maps 3-Pack Domination</h3>
-      <p>For service businesses, healthcare providers, and local retailers in Lucknow, local search represents over 60% of inbound calls. High-impact local SEO includes:</p>
+      <p>For service businesses, healthcare providers, and local retailers in Lucknow, local search is often the biggest source of new enquiries and calls. High-impact local SEO includes:</p>
       <ul>
         <li><strong>Google Business Profile (GBP) Precision:</strong> Strict category selection, high-resolution geotagged photographic assets, weekly updates, and comprehensive service catalogue listing.</li>
         <li><strong>Locational Citations with Consistent NAP:</strong> Ensuring your Name, Address, and Phone number match identically across Google, Apple Maps, Justdial, Sulekha, IndiaMART, and trade registries.</li>
