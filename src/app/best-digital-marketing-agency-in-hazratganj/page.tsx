@@ -502,11 +502,11 @@ export default function BestDigitalMarketingAgencyHazratganj() {
                   <div className="text-sm text-white font-medium">7317782998</div>
                 </div>
               </a>
-              <a href="mailto:websitewalae@gmail.com" className="p-5 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-3 hover:border-brand-accent/30 transition-colors">
+              <a href="mailto:support@websitewalae.com" className="p-5 rounded-xl bg-white/[0.03] border border-white/5 flex items-center gap-3 hover:border-brand-accent/30 transition-colors">
                 <Mail className="w-5 h-5 text-brand-accent shrink-0" />
                 <div>
                   <div className="text-xs text-white/40 font-mono">Email</div>
-                  <div className="text-sm text-white font-medium">websitewalae@gmail.com</div>
+                  <div className="text-sm text-white font-medium">support@websitewalae.com</div>
                 </div>
               </a>
             </div>

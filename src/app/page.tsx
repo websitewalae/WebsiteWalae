@@ -59,7 +59,7 @@ const homepageFaq = [
   {
     question: "Where is Website Walae located?",
     answer:
-      "Website Walae is located in Halwasiya Market, Hazratganj, Lucknow, Uttar Pradesh, India (226001). You can reach the team at +91 73177 82998 or websitewalae@gmail.com.",
+      "Website Walae is located in Halwasiya Market, Hazratganj, Lucknow, Uttar Pradesh, India (226001). You can reach the team at +91 73177 82998 or support@websitewalae.com.",
   },
   {
     question: "What services does Website Walae provide?",
@@ -289,7 +289,7 @@ export default function Home() {
               📞 <a href="tel:+917317782998" className="text-brand-text-secondary hover:text-white transition-colors">+91 73177 82998</a>
             </span>
             <span>
-              ✉️ <a href="mailto:websitewalae@gmail.com" className="text-brand-text-secondary hover:text-white transition-colors">websitewalae@gmail.com</a>
+              ✉️ <a href="mailto:support@websitewalae.com" className="text-brand-text-secondary hover:text-white transition-colors">support@websitewalae.com</a>
             </span>
             <span>
               📍 Halwasiya Market, Hazratganj, Lucknow, Uttar Pradesh 226001, India

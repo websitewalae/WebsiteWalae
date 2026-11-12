@@ -524,7 +524,7 @@ export default async function ServicePage({ params }: Props) {
       name: "Website Walae",
       url: "https://websitewalae.com",
       telephone: "+917317782998",
-      email: "websitewalae@gmail.com",
+      email: "support@websitewalae.com",
       address: {
         "@type": "PostalAddress",
         streetAddress: "Halwasiya Market",

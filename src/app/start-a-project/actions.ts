@@ -3,6 +3,13 @@
 import { createClient } from "@/utils/supabase/server";
 import { Resend } from "resend";
 
+const escapeHtml = (value: unknown) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
 export async function submitProjectQuery(formData: any) {
   try {
     const supabase = await createClient();
@@ -39,15 +46,15 @@ export async function submitProjectQuery(formData: any) {
       
       const emailHtml = `
         <h2>New Project Inquiry from Website Walae</h2>
-        <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Business/Brand:</strong> ${formData.business}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
-        <p><strong>Phone:</strong> ${formData.phone}</p>
-        <p><strong>Services Needed:</strong> ${formData.services.join(", ")}</p>
-        <p><strong>Budget:</strong> ${formData.budget || "Not Specified"}</p>
-        <p><strong>Timeline:</strong> ${formData.timeline || "Not Specified"}</p>
+        <p><strong>Name:</strong> ${escapeHtml(formData.name)}</p>
+        <p><strong>Business/Brand:</strong> ${escapeHtml(formData.business)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(formData.phone)}</p>
+        <p><strong>Services Needed:</strong> ${escapeHtml((formData.services || []).join(", "))}</p>
+        <p><strong>Budget:</strong> ${escapeHtml(formData.budget || "Not Specified")}</p>
+        <p><strong>Timeline:</strong> ${escapeHtml(formData.timeline || "Not Specified")}</p>
         <h3>Project Details:</h3>
-        <p>${formData.details.replace(/\n/g, '<br/>')}</p>
+        <p>${escapeHtml(formData.details).replace(/\n/g, '<br/>')}</p>
         <hr/>
         <p>Log in to the <a href="https://websitewalae.com/nomo">Admin Dashboard</a> to manage this lead.</p>
       `;
