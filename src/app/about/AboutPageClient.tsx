@@ -158,8 +158,8 @@ export default function AboutPageClient() {
               <a href="tel:+917317782998" className="inline-flex items-center gap-2 text-white hover:text-brand-accent transition-colors bg-white/5 px-4 py-2 rounded-lg border border-white/10">
                 <span className="text-brand-accent">Phone:</span> +91 73177 82998
               </a>
-              <a href="mailto:websitewalae@gmail.com" className="inline-flex items-center gap-2 text-white hover:text-brand-accent transition-colors bg-white/5 px-4 py-2 rounded-lg border border-white/10">
-                <span className="text-brand-accent">Email:</span> websitewalae@gmail.com
+              <a href="mailto:support@websitewalae.com" className="inline-flex items-center gap-2 text-white hover:text-brand-accent transition-colors bg-white/5 px-4 py-2 rounded-lg border border-white/10">
+                <span className="text-brand-accent">Email:</span> support@websitewalae.com
               </a>
             </div>
           </div>

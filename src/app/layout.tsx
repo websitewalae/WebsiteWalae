@@ -5,6 +5,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import CustomCursor from "@/components/layout/CustomCursor";
 import Navigation from "@/components/layout/Navigation";
+import QuickContact from "@/components/layout/QuickContact";
 
 
 const interTight = Inter_Tight({
@@ -104,7 +105,7 @@ const organizationSchema = {
   "logo": "https://websitewalae.com/logo.png",
   "image": "https://websitewalae.com/og-image.png",
   "description": "Website Walae is a digital marketing and creative agency based in Lucknow, Uttar Pradesh, India. The agency provides website development, UI/UX design, SEO, social media marketing, content creation, video production, Meta Ads and public relations services.",
-  "email": "websitewalae@gmail.com",
+  "email": "support@websitewalae.com",
   "telephone": "+917317782998",
   "priceRange": "₹₹",
   "address": {
@@ -217,6 +218,7 @@ export default function RootLayout({
           <Navigation />
           <div className="relative min-h-screen w-full overflow-x-hidden">{children}</div>
         </SmoothScroll>
+        <QuickContact />
         
         {/* Google Analytics Injection */}
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (

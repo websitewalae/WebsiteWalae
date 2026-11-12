@@ -175,7 +175,7 @@ export default function ContentCreationScene() {
       {/* Participating Headline */}
       <div ref={textRef} className="absolute top-[8%] sm:top-[12%] text-center px-4 z-20 max-w-full">
         <h2 className="text-xl sm:text-3xl md:text-5xl text-white font-black tracking-tight flex flex-wrap justify-center gap-2">
-          <span ref={textLeftRef} className="inline-block">FROM CONTENT</span>
+          <span ref={textLeftRef} className="inline-block">FROM CONTENT</span>{" "}
           <span ref={textRightRef} className="inline-block text-brand-accent">TO ATTENTION.</span>
         </h2>
       </div>

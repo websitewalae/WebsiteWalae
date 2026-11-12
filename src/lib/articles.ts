@@ -24,6 +24,264 @@ const FALLBACK_COVER = "/images/tech_hero_bg.jpg";
 
 export const CORNERSTONE_ARTICLES: Article[] = [
   {
+    id: "cornerstone-6",
+    created_at: "2026-11-13T09:00:00Z",
+    title: "Website Development Cost in Lucknow (2026 Price Guide)",
+    slug: "website-development-cost-in-lucknow",
+    author: "Website Walae",
+    category: "Web Engineering",
+    readTime: "7 min read",
+    coverImage: "/images/articles/nextjs-web-development.jpg",
+    excerpt: "Real 2026 prices for business websites, WordPress sites, Shopify stores and custom builds in Lucknow, what each budget gets you, and the hidden costs to ask about before you pay.",
+    seo_description: "How much does a website cost in Lucknow in 2026? WordPress from ₹7,000, Shopify from ₹20,000, custom websites from ₹15,000. See what each budget includes and the hidden costs to check.",
+    seo_keywords: "website development cost in lucknow, website design price lucknow, website cost lucknow 2026, wordpress website cost lucknow, shopify store cost lucknow, website walae",
+    geo_summary: "Website Walae, a Hazratganj-based agency, builds WordPress websites from ₹7,000, Shopify stores from ₹20,000 and custom websites from ₹15,000 for businesses in Lucknow.",
+    aeo_faq: [
+      {
+        question: "How much does a website cost in Lucknow in 2026?",
+        answer: "At Website Walae, a WordPress business website costs ₹7,000 to ₹30,000+, a Shopify store ₹20,000 to ₹50,000+, and a custom-built website ₹15,000 to ₹40,000+. The final price depends on the number of pages, features like payments or bookings, and whether you need content and photos created."
+      },
+      {
+        question: "Is WordPress or Shopify cheaper for a small business?",
+        answer: "WordPress is usually cheaper to build for a service business or brochure site. Shopify costs more upfront and has a monthly plan fee, but it is easier to run if you sell products online and want payments, inventory and shipping in one place."
+      },
+      {
+        question: "What hidden costs should I ask about?",
+        answer: "Ask whether the quote includes the domain, hosting, SSL, business email, content writing, product uploads, premium plugins or themes, and maintenance after launch. These are often billed separately and can change the real cost of the project."
+      },
+      {
+        question: "How long does it take to build a website?",
+        answer: "A simple business website usually takes 1 to 3 weeks once content is ready. An online store or custom website with integrations typically takes 3 to 8 weeks. The biggest delay is usually waiting for content, photos and approvals."
+      }
+    ],
+    published: true,
+    content: `
+      <p><strong>Short answer:</strong> In Lucknow, a business website from Website Walae costs ₹7,000–₹30,000+ on WordPress, ₹20,000–₹50,000+ as a Shopify store, and ₹15,000–₹40,000+ as a custom build. What moves the price is the number of pages, features such as payments or bookings, and whether we also create your content.</p>
+
+      <h2>Website Prices at a Glance</h2>
+      <p>These are the same ranges listed on our <a href="/pricing">pricing page</a>. Every project gets a fixed written quote before work starts.</p>
+      <table>
+        <thead>
+          <tr><th>Website type</th><th>Price range</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>WordPress business website</td><td>₹7,000 – ₹30,000+</td><td>Clinics, coaching centres, consultants, local services</td></tr>
+          <tr><td>Shopify online store</td><td>₹20,000 – ₹50,000+</td><td>Brands selling products online with payments and shipping</td></tr>
+          <tr><td>Custom-built website (Next.js)</td><td>₹15,000 – ₹40,000+</td><td>Businesses that need speed, unique design or custom features</td></tr>
+          <tr><td>UI/UX design for apps and platforms</td><td>₹25,000 – ₹1,00,000+</td><td>Startups designing a product before development</td></tr>
+        </tbody>
+      </table>
+
+      <h2>What Your Budget Actually Gets You</h2>
+      <h3>₹7,000 – ₹15,000: A clean starter site</h3>
+      <p>A 4–6 page WordPress site on a customised theme: Home, About, Services, Gallery and Contact, with a WhatsApp button, a Google Map and a contact form. This suits a new business that mainly needs to look credible when a customer searches its name.</p>
+
+      <h3>₹15,000 – ₹30,000: A website built to bring enquiries</h3>
+      <p>Separate pages for each service, basic on-page SEO (titles, descriptions, headings), Google Business Profile linking, faster loading, and lead tracking so you can see which page brings calls. For most Lucknow service businesses this is the range where a website starts paying for itself.</p>
+
+      <h3>₹20,000 – ₹50,000+: An online store</h3>
+      <p>A Shopify store with product and category setup, payment gateway, shipping rules, and order notifications. Price rises with the number of products we upload, custom sections, and integrations such as COD verification or WhatsApp order updates.</p>
+
+      <h3>Custom builds: When templates hold you back</h3>
+      <p>We build custom websites on Next.js when a business needs very fast pages, a design no template can match, or features like dashboards, calculators or booking flows. This website, websitewalae.com, is built this way.</p>
+
+      <h2>The Hidden Costs to Ask About</h2>
+      <p>Two quotes of ₹10,000 and ₹25,000 are often not comparing the same thing. Before you decide, ask each agency whether these are included:</p>
+      <ul>
+        <li><strong>Domain and hosting:</strong> usually renewed every year; check who owns the account.</li>
+        <li><strong>Business email:</strong> an address like you@yourbusiness.com instead of Gmail.</li>
+        <li><strong>Content and photos:</strong> writing the pages and shooting your shop, team or products.</li>
+        <li><strong>Paid themes or plugins:</strong> some carry yearly licence fees.</li>
+        <li><strong>Maintenance:</strong> updates, backups and small changes after launch.</li>
+        <li><strong>Ownership:</strong> make sure the domain, hosting and website files are in your name.</li>
+      </ul>
+
+      <h2>WordPress, Shopify or Custom: How to Choose</h2>
+      <ul>
+        <li><strong>Choose WordPress</strong> if you sell services and want to add blog posts and pages yourself.</li>
+        <li><strong>Choose Shopify</strong> if you sell products and want payments, stock and shipping handled in one dashboard. Remember Shopify has its own monthly plan fee.</li>
+        <li><strong>Choose custom</strong> if speed, a distinctive brand experience or special features matter more than a template.</li>
+      </ul>
+
+      <h2>Why Cheapest Is Rarely Cheapest</h2>
+      <p>The most expensive website is one that gets no enquiries. Before comparing price, ask the agency to show you a site they built that ranks on Google for its city and service, and how the client receives leads from it (calls, WhatsApp or form). A slightly higher one-time cost for proper service pages and tracking usually pays back faster than a cheap site you replace in a year.</p>
+
+      <h2>Get a Fixed Quote</h2>
+      <p>Tell us what your business does and what the website must achieve, and we'll send a fixed written quote. See our <a href="/services/website-development-lucknow">website development service in Lucknow</a>, or <a href="/start-a-project">start a project</a> and we'll reply within 24 hours.</p>
+    `
+  },
+  {
+    id: "cornerstone-7",
+    created_at: "2026-11-13T09:30:00Z",
+    title: "Social Media Marketing Packages in Lucknow: What You Get for Your Budget",
+    slug: "social-media-marketing-packages-lucknow",
+    author: "Website Walae",
+    category: "Social Media",
+    readTime: "6 min read",
+    coverImage: "/images/articles/social-media-content-creation.jpg",
+    excerpt: "What social media marketing costs in Lucknow in 2026, what's included at each budget, how ad spend differs from management fees, and the questions to ask before you sign a monthly package.",
+    seo_description: "Social media marketing packages in Lucknow start at ₹10,000/month. See what posts, reels and ads each budget includes, how ad spend works, and what to ask an agency before signing.",
+    seo_keywords: "social media marketing packages lucknow, social media marketing cost lucknow, instagram marketing lucknow, social media agency lucknow, smm packages lucknow, website walae",
+    geo_summary: "Website Walae offers social media marketing in Lucknow from ₹10,000 to ₹40,000 per month, covering content strategy, creative posts, reels and monthly management. Meta Ads management starts at ₹8,000 per month.",
+    aeo_faq: [
+      {
+        question: "How much does social media marketing cost in Lucknow?",
+        answer: "At Website Walae, social media marketing costs ₹10,000 to ₹40,000 per month depending on the number of posts and reels, platforms managed, and whether shoots are included. Paid ads are separate: Meta Ads management starts at ₹8,000 per month, and the ad budget is paid directly to Meta."
+      },
+      {
+        question: "Is ad spend included in a social media package?",
+        answer: "Usually not. A social media package pays for planning, content and management. Ad spend is the money paid to Meta (Facebook and Instagram) to show your ads, and it is billed separately so you control the budget."
+      },
+      {
+        question: "How long before social media marketing shows results?",
+        answer: "Consistent posting typically needs 2 to 3 months before organic reach and enquiries build. Paid ads can bring enquiries within days of launch, which is why many local businesses combine both."
+      },
+      {
+        question: "Should a Lucknow business be on Instagram or Facebook?",
+        answer: "Most consumer businesses in Lucknow such as cafes, salons, clinics and boutiques get the most from Instagram reels. Facebook remains useful for ads targeting older audiences and for local community groups. B2B businesses should add LinkedIn."
+      }
+    ],
+    published: true,
+    content: `
+      <p><strong>Short answer:</strong> Social media marketing with Website Walae costs ₹10,000–₹40,000 per month in Lucknow. That covers strategy, designed posts, reels and account management. Paid ads are separate: Meta Ads management starts at ₹8,000 per month, and your ad budget goes directly to Meta.</p>
+
+      <h2>Package Ranges at a Glance</h2>
+      <table>
+        <thead>
+          <tr><th>Service</th><th>Monthly cost</th><th>What it covers</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Social media marketing</td><td>₹10,000 – ₹40,000</td><td>Content strategy, creative posts, reels, monthly management</td></tr>
+          <tr><td>Content creation</td><td>₹10,000 – ₹30,000</td><td>Copywriting, brand photography, creative direction, ad creatives</td></tr>
+          <tr><td>Meta Ads management</td><td>₹8,000 – ₹25,000+</td><td>Campaign setup, audience targeting, creative testing, lead generation</td></tr>
+          <tr><td>Video production</td><td>₹15,000 – ₹80,000+ per project</td><td>Reels, product videos, commercial shoots</td></tr>
+        </tbody>
+      </table>
+      <p>Full details are on our <a href="/pricing">pricing page</a>.</p>
+
+      <h2>Management Fee vs Ad Spend</h2>
+      <p>This is the most common confusion we see. A <strong>management fee</strong> pays the agency to plan, create and run your content and campaigns. <strong>Ad spend</strong> is the money Meta charges to show your ads to people. Ask any agency to quote these separately, and make sure ads run from an ad account you own, so you can see exactly what was spent.</p>
+
+      <h2>What Changes the Price</h2>
+      <ul>
+        <li><strong>Number of reels:</strong> reels need scripting, shooting and editing, so they cost more than static posts and usually bring the most reach.</li>
+        <li><strong>On-location shoots:</strong> shooting at your cafe, clinic or showroom gives far better content than stock images.</li>
+        <li><strong>Platforms:</strong> Instagram alone costs less than Instagram, Facebook and LinkedIn together.</li>
+        <li><strong>Community management:</strong> replying to comments and DMs daily takes ongoing time.</li>
+        <li><strong>Reporting:</strong> a monthly report on reach, enquiries and what to change next.</li>
+      </ul>
+
+      <h2>What Good Local Content Looks Like</h2>
+      <p>For Lucknow's Caffeine &amp; Cravings cafe, we shot cinematic rain-and-coffee visuals and a New Year offer campaign. For Frisky Panda, we produced coverage of the city's first kids' Dandiya festival. In both cases the content was shot on location with real people, which is what makes local audiences stop scrolling. You can see these reels on our <a href="/work">work page</a>.</p>
+
+      <h2>Questions to Ask Before You Sign</h2>
+      <ol>
+        <li>How many posts and reels per month, exactly?</li>
+        <li>Are shoots included, or charged per visit?</li>
+        <li>Who owns the Instagram account, Meta ad account and the content created?</li>
+        <li>How will you measure results: enquiries, DMs, calls, or just likes?</li>
+        <li>Is there a lock-in period, and what is the notice period?</li>
+      </ol>
+      <p>Be cautious of any package that promises a fixed number of followers. Followers can be bought; customers can't.</p>
+
+      <h2>Start With a Plan</h2>
+      <p>Tell us your business, your audience and your monthly budget, and we'll suggest the mix of content and ads that fits it. Learn more about our <a href="/services/social-media-marketing-lucknow">social media marketing in Lucknow</a> or <a href="/start-a-project">start a project</a>.</p>
+    `
+  },
+  {
+    id: "cornerstone-8",
+    created_at: "2026-11-13T10:00:00Z",
+    title: "How to Rank Your Business on Google Maps in Lucknow",
+    slug: "how-to-rank-on-google-maps-lucknow",
+    author: "Website Walae",
+    category: "SEO & Growth",
+    readTime: "8 min read",
+    coverImage: "/images/articles/hazratganj-digital-marketing.jpg",
+    excerpt: "A step-by-step guide for Lucknow businesses to appear in the Google Maps top 3: set up your Business Profile correctly, choose the right category, earn reviews, and keep your details consistent.",
+    seo_description: "Step-by-step guide to ranking on Google Maps in Lucknow: set up your Google Business Profile, pick the right category, get genuine reviews, and fix your listings on Justdial and other directories.",
+    seo_keywords: "rank on google maps lucknow, google business profile lucknow, local seo lucknow, google my business lucknow, google maps ranking, website walae",
+    geo_summary: "To rank on Google Maps in Lucknow, a business needs a verified and complete Google Business Profile with the correct primary category, steady genuine reviews, consistent name, address and phone across directories, and a website with a page for each service.",
+    aeo_faq: [
+      {
+        question: "How does Google decide which businesses show on Google Maps?",
+        answer: "Google ranks local results on three factors: relevance (how well your profile matches the search), distance (how close you are to the searcher or the area searched), and prominence (how well known your business is, including reviews and mentions across the web)."
+      },
+      {
+        question: "How long does it take to rank on Google Maps?",
+        answer: "A newly verified, fully completed profile can start appearing for its own name within days. Ranking in the top 3 for competitive searches like 'cafe in Gomti Nagar' usually takes a few months of steady reviews, photos and updates."
+      },
+      {
+        question: "Can I rank on Google Maps without a shop?",
+        answer: "Yes. Service businesses that visit customers, such as home tutors, electricians or caterers, can set up a service-area business profile and hide their address while listing the areas they serve."
+      },
+      {
+        question: "Is it allowed to ask customers for Google reviews?",
+        answer: "Yes, asking every customer for an honest review is allowed. What Google prohibits is paying for reviews, offering discounts in exchange for them, writing fake reviews, or only asking customers you know are happy."
+      }
+    ],
+    published: true,
+    content: `
+      <p><strong>Short answer:</strong> To rank on Google Maps in Lucknow, verify and fully complete your Google Business Profile, choose the most accurate primary category, earn genuine reviews every month, keep your name, address and phone identical everywhere online, and link the profile to a website with a page for each service.</p>
+
+      <h2>How Google Maps Ranking Works</h2>
+      <p>Google says local results are based on three things:</p>
+      <ul>
+        <li><strong>Relevance:</strong> how well your profile matches what the person searched.</li>
+        <li><strong>Distance:</strong> how far your business is from the searcher or the area they typed, such as "Aliganj".</li>
+        <li><strong>Prominence:</strong> how well known you are, including reviews, ratings and mentions on other websites.</li>
+      </ul>
+      <p>You can't move your shop closer to every customer, so the work is in relevance and prominence.</p>
+
+      <h2>Step 1: Claim and Verify Your Profile</h2>
+      <p>Search your business name on Google Maps. If a listing already exists, claim it; if not, create one at business.google.com. Complete verification (often a short video of your shop sign, workspace and proof of business). An unverified profile rarely ranks.</p>
+
+      <h2>Step 2: Pick the Right Primary Category</h2>
+      <p>The primary category is one of the strongest signals you control. Choose the most specific one that's true: "Dental clinic" rather than "Doctor", "Cafe" rather than "Restaurant" if you're mainly a cafe. Add a few secondary categories for other genuine services.</p>
+
+      <h2>Step 3: Fill Every Field</h2>
+      <ul>
+        <li>Exact business name as on your signboard (no extra keywords; Google can suspend profiles for this).</li>
+        <li>Full address with landmark, for example "Halwasiya Market, Hazratganj".</li>
+        <li>Phone number that customers can actually reach, and your WhatsApp if possible.</li>
+        <li>Opening hours, including holiday hours for Diwali, Eid and other closures.</li>
+        <li>Services or products with short descriptions and prices where you can.</li>
+        <li>A business description that says what you do, for whom, and where in Lucknow.</li>
+      </ul>
+
+      <h2>Step 4: Add Real Photos, Regularly</h2>
+      <p>Upload your shopfront (so people can find you from the road), interior, team and real work. Add new photos every month. Stock images do little; customers want to see the place they're about to visit.</p>
+
+      <h2>Step 5: Build a Steady Flow of Genuine Reviews</h2>
+      <p>Reviews influence both ranking and whether people choose you. A steady flow every month is better than a burst once a year.</p>
+      <ul>
+        <li>Ask every customer, not only the happy ones. Selectively asking satisfied customers ("review gating") breaks Google's rules.</li>
+        <li>Share your review link on WhatsApp right after the service, when the experience is fresh.</li>
+        <li>Reply to every review, positive and negative, politely and within a few days.</li>
+        <li>Never buy reviews or offer discounts in exchange for them. Google removes them and can restrict your profile.</li>
+      </ul>
+
+      <h2>Step 6: Make Your Details Match Everywhere</h2>
+      <p>Your business name, address and phone (often called NAP) should be identical on your website, Google, Justdial, Sulekha, IndiaMART (for B2B), Facebook and Instagram. Small differences like an old phone number on Justdial confuse Google about which details are correct.</p>
+
+      <h2>Step 7: Connect a Website That Supports the Profile</h2>
+      <p>Link your profile to a website that has a separate page for each main service, shows the same address and phone, and loads fast on mobile. When your website clearly says "dental implants in Gomti Nagar", Google is more confident showing your profile for that search.</p>
+
+      <h2>Step 8: Keep the Profile Active</h2>
+      <p>Post updates and offers, answer common customer questions in your description and on your website, and update hours before festivals. Active, accurate profiles are what customers trust, and they tend to perform better.</p>
+
+      <h2>Common Mistakes We See in Lucknow</h2>
+      <ul>
+        <li>Two listings for the same business, splitting reviews between them.</li>
+        <li>Keyword-stuffed names like "Best Cafe Lucknow Hazratganj Pizza", which risk suspension.</li>
+        <li>The pin placed on the wrong building or lane.</li>
+        <li>A mobile number nobody answers.</li>
+      </ul>
+
+      <h2>Want Us to Set It Up?</h2>
+      <p>We set up and optimise Google Business Profiles as part of our <a href="/services/seo-lucknow">SEO services in Lucknow</a>, starting from ₹12,000 per month. <a href="/start-a-project">Start a project</a> and we'll review your current listing.</p>
+    `
+  },
+  {
     id: "cornerstone-1",
     created_at: "2026-03-01T10:00:00Z",
     title: "Why Lucknow Businesses Are Upgrading to Next.js Web Platforms in 2026",
@@ -39,7 +297,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     aeo_faq: [
       {
         question: "Why is website loading speed critical for businesses in Lucknow?",
-        answer: "Over 78% of local searches in Lucknow happen on 4G/5G mobile devices. Slow legacy platforms result in high bounce rates, whereas Next.js 16 websites load in under 800ms, directly boosting Google search rankings and customer inquiries."
+        answer: "Most people in Lucknow search for local businesses on their phones, often on patchy mobile data. A slow website loses many of them before it even loads, while a fast one keeps them long enough to call or send an enquiry. Page experience is also one of the signals Google considers."
       },
       {
         question: "What makes Website Walae the top web agency in Lucknow?",
@@ -51,7 +309,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
       <h2>The Digital Transformation of Lucknow's Business Ecosystem</h2>
       <p>From Hazratganj's heritage retail hubs to Gomti Nagar's fast-growing commercial towers, Lucknow's business landscape is undergoing an unprecedented digital shift. Consumers and B2B buyers no longer rely on word-of-mouth alone; their first point of interaction is Google Search and mobile web experiences.</p>
       
-      <p>Yet, more than 65% of local business websites in Uttar Pradesh still operate on outdated, heavy CMS platforms with 5+ second load times. In modern search engine algorithms, slow speed equates to invisible rankings.</p>
+      <p>Yet many local business websites in Uttar Pradesh still run on heavy, outdated templates that take several seconds to load on mobile. Visitors leave before the page appears, and those lost visits mean lost enquiries.</p>
 
       <h2>The Next.js 16 Advantage: Sub-Second Performance</h2>
       <p>At <strong>Website Walae</strong>, we engineer digital platforms built on <strong>Next.js 16 with Turbopack and React 19</strong>. The results are transformative:</p>
@@ -84,7 +342,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     aeo_faq: [
       {
         question: "How does video content impact Meta Ad conversion rates in India?",
-        answer: "Video-first Meta ad campaigns in India see up to 340% higher click-through rates and a 45% lower customer acquisition cost compared to static image ads when paired with a 3-second hook."
+        answer: "Short vertical videos with a strong hook in the first 3 seconds usually hold attention better than static images, which tends to improve click-through and lower cost per lead. Test both formats in your own account and let the results decide."
       },
       {
         question: "Does Website Walae handle end-to-end video production?",
@@ -242,7 +500,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
       },
       {
         question: "Why should Lucknow businesses choose Next.js and modern tech over generic templates?",
-        answer: "Over 78% of local searches in Lucknow occur on mobile networks. Modern Next.js platforms achieve perfect 100/100 Core Web Vitals and load in under 800ms, whereas heavy legacy template sites struggle with 4-6 second load times that trigger Google ranking penalties and high bounce rates."
+        answer: "Most local searches in Lucknow happen on mobile. A well-built modern website loads quickly even on mobile data, while heavy template sites often take several seconds, which drives visitors away and weakens the page experience signals Google considers."
       },
       {
         question: "What should be included in a monthly SEO performance report?",
@@ -280,7 +538,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
       </ul>
 
       <h3>3. Hyper-Local SEO &amp; Google Maps 3-Pack Domination</h3>
-      <p>For service businesses, healthcare providers, and local retailers in Lucknow, local search represents over 60% of inbound calls. High-impact local SEO includes:</p>
+      <p>For service businesses, healthcare providers, and local retailers in Lucknow, local search is often the biggest source of new enquiries and calls. High-impact local SEO includes:</p>
       <ul>
         <li><strong>Google Business Profile (GBP) Precision:</strong> Strict category selection, high-resolution geotagged photographic assets, weekly updates, and comprehensive service catalogue listing.</li>
         <li><strong>Locational Citations with Consistent NAP:</strong> Ensuring your Name, Address, and Phone number match identically across Google, Apple Maps, Justdial, Sulekha, IndiaMART, and trade registries.</li>

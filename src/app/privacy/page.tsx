@@ -129,7 +129,7 @@ export default function PrivacyPage() {
               <div className="font-bold text-brand-accent">WEBSITE WALAE CREATIVE STUDIO</div>
               <div>Halwasiya Market, Hazratganj, Lucknow, Uttar Pradesh, 226001, India</div>
               <div>Direct Phone: +91 7317782998</div>
-              <div>Email: support@websitewalae.com / websitewalae@gmail.com</div>
+              <div>Email: support@websitewalae.com</div>
             </div>
           </section>
 

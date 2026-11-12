@@ -315,7 +315,7 @@ export default function CameraInterface({ onEnterSite }: Props) {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 w-[90%]"
              >
-               <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tighter mb-3 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">WEBSITE WALAE</h1>
+               <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-white tracking-tighter mb-3 drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)]">WEBSITE WALAE</h2>
                <p className="text-xs sm:text-sm md:text-xl font-mono text-brand-accent tracking-widest uppercase bg-black/60 backdrop-blur-md py-1.5 px-4 rounded-full inline-block border border-brand-accent/30">
                  Digital Creative Agency
                </p>

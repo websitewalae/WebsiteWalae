@@ -142,3 +142,29 @@ html.lenis, html.lenis body {
   backface-visibility: hidden;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
+
+/* Article body typography.
+   Article pages use `prose` classes, but @tailwindcss/typography isn't
+   installed, so headings, lists and tables rendered unstyled. These rules
+   give article HTML readable structure. */
+@layer components {
+  .prose { color: var(--color-brand-text-secondary); font-size: 1.0625rem; line-height: 1.8; }
+  .prose > * + * { margin-top: 1.25em; }
+  .prose h2 { color: #fff; font-size: 1.75rem; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; margin-top: 2.5em; margin-bottom: 0.75em; }
+  .prose h3 { color: #fff; font-size: 1.3rem; line-height: 1.35; font-weight: 700; margin-top: 2em; margin-bottom: 0.5em; }
+  .prose p { margin: 1em 0; }
+  .prose strong { color: var(--color-brand-text); font-weight: 700; }
+  .prose a { color: var(--color-brand-accent); text-decoration: underline; text-underline-offset: 3px; }
+  .prose a:hover { color: #fff; }
+  .prose ul { list-style: disc; padding-left: 1.5em; margin: 1em 0; }
+  .prose ol { list-style: decimal; padding-left: 1.5em; margin: 1em 0; }
+  .prose li { margin: 0.4em 0; padding-left: 0.25em; }
+  .prose li::marker { color: var(--color-brand-accent); }
+  .prose blockquote { border-left: 3px solid var(--color-brand-accent); padding-left: 1em; font-style: italic; }
+  .prose table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-size: 0.95rem; margin: 1.5em 0; }
+  .prose thead th { color: #fff; font-weight: 700; text-align: left; border-bottom: 1px solid var(--color-brand-border-strong); }
+  .prose th, .prose td { padding: 0.75em 1em; vertical-align: top; }
+  .prose tbody tr { border-bottom: 1px solid var(--color-brand-border); }
+  .prose td:first-child { color: var(--color-brand-text); font-weight: 600; }
+  @media (min-width: 640px) { .prose h2 { font-size: 2rem; } .prose { font-size: 1.125rem; } }
+}

@@ -239,7 +239,7 @@ export default function Footer() {
             <div className="h-4" /> {/* Spacer */}
             
             <a href="tel:+917317782998" className="text-sm font-bold text-white hover:text-brand-accent transition-colors w-fit">+91 7317782998</a>
-            <a href="mailto:websitewalae@gmail.com" className="text-sm font-bold text-white hover:text-brand-accent transition-colors w-fit">websitewalae@gmail.com</a>
+            <a href="mailto:support@websitewalae.com" className="text-sm font-bold text-white hover:text-brand-accent transition-colors w-fit">support@websitewalae.com</a>
           </div>
 
         </div>

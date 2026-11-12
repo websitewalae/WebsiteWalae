@@ -64,11 +64,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/terms`,
       lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.9,
-      images: [`${baseUrl}/images/tech_hero_bg.jpg`],
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     {
       url: `${baseUrl}/best-digital-marketing-agency-in-hazratganj`,

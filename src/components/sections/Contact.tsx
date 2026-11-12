@@ -3,26 +3,44 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
+import { submitProjectQuery } from "@/app/start-a-project/actions";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const get = (key: string) => String(data.get(key) ?? "").trim();
+    const serviceSelect = form.elements.namedItem("service") as HTMLSelectElement | null;
+    const budgetSelect = form.elements.namedItem("budget") as HTMLSelectElement | null;
+
     setIsSubmitting(true);
-    
-    // Simulate network request
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setError(null);
+
+    const result = await submitProjectQuery({
+      name: get("name"),
+      business: get("business"),
+      email: get("email"),
+      phone: get("phone"),
+      services: serviceSelect?.selectedOptions[0]?.text ? [serviceSelect.selectedOptions[0].text] : [],
+      budget: budgetSelect?.selectedOptions[0]?.text ?? "",
+      timeline: "",
+      details: get("message"),
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
       setIsSuccess(true);
-      
-      // Reset form after a few seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-        (e.target as HTMLFormElement).reset();
-      }, 5000);
-    }, 1500);
+      form.reset();
+    } else {
+      setError("Something went wrong. Please call or WhatsApp us at +91 73177 82998.");
+    }
   };
 
   return (
@@ -40,7 +58,7 @@ export default function Contact() {
           
           <div className="mt-8 lg:mt-0">
             <p className="text-[10px] sm:text-xs font-mono tracking-widest text-brand-text-muted mb-2 sm:mb-4">OR CALL US DIRECTLY</p>
-            <a href="tel:7317782998" className="text-2xl sm:text-3xl font-bold tracking-tighter hover:text-brand-accent transition-colors" data-cursor="link">
+            <a href="tel:+917317782998" className="text-2xl sm:text-3xl font-bold tracking-tighter hover:text-brand-accent transition-colors" data-cursor="link">
               7317782998
             </a>
           </div>
@@ -59,14 +77,14 @@ export default function Contact() {
                 className="flex flex-col gap-4 sm:gap-6"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <input required type="text" placeholder="Name" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
-                  <input required type="text" placeholder="Business / Brand" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="name" type="text" autoComplete="name" placeholder="Name" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="business" type="text" autoComplete="organization" placeholder="Business / Brand" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <input required type="email" placeholder="Email" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
-                  <input required type="tel" placeholder="Phone" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="email" type="email" autoComplete="email" placeholder="Email" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="phone" type="tel" autoComplete="tel" placeholder="Phone" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
                 </div>
-                <select required defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
+                <select required name="service" defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
                   <option value="" disabled>What do you need?</option>
                   <option value="website">Website Development</option>
                   <option value="design">UI/UX Design</option>
@@ -74,15 +92,18 @@ export default function Contact() {
                   <option value="content">Content Creation</option>
                   <option value="other">Multiple Services / Other</option>
                 </select>
-                <select required defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
+                <select required name="budget" defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
                   <option value="" disabled>Budget</option>
-                  <option value="small">Under $5k</option>
-                  <option value="medium">$5k - $10k</option>
-                  <option value="large">$10k - $25k</option>
-                  <option value="enterprise">$25k+</option>
+                  <option value="small">Under ₹25K</option>
+                  <option value="medium">₹25K – ₹50K</option>
+                  <option value="large">₹50K – ₹1L</option>
+                  <option value="enterprise">₹1L+</option>
                 </select>
-                <textarea required placeholder="Message" rows={4} className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full resize-none" />
+                <textarea required name="message" placeholder="Message" rows={4} className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full resize-none" />
                 
+                {error && (
+                  <p role="alert" className="text-sm text-red-400">{error}</p>
+                )}
                 <button 
                   type="submit" 
                   disabled={isSubmitting}

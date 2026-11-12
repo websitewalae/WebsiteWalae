@@ -44,7 +44,7 @@ const aboutFaq = [
   },
   {
     question: "How can someone contact Website Walae?",
-    answer: "You can contact our official team directly via phone or email for project inquiries, partnerships, or consultations: Phone: +91 73177 82998, Email: websitewalae@gmail.com",
+    answer: "You can contact our official team directly via phone or email for project inquiries, partnerships, or consultations: Phone: +91 73177 82998, Email: support@websitewalae.com",
   },
 ];
 
