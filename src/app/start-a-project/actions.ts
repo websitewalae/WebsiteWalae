@@ -15,7 +15,9 @@ export async function submitProjectQuery(formData: any) {
     const supabase = await createClient();
 
     // 1. Insert into Supabase
-    const { data: queryData, error: dbError } = await supabase
+    // No .select() after insert: visitors (anon role) may INSERT leads but
+    // RLS correctly blocks them from reading the table back.
+    const { error: dbError } = await supabase
       .from("queries")
       .insert([
         {
@@ -29,9 +31,7 @@ export async function submitProjectQuery(formData: any) {
           details: formData.details,
           status: "new",
         }
-      ])
-      .select()
-      .single();
+      ]);
 
     if (dbError) {
       console.error("Supabase insert error:", dbError);
