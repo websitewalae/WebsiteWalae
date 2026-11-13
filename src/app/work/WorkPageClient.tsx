@@ -51,14 +51,14 @@ export default function WorkPageClient() {
 
       {/* Header Section */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] pt-12 pb-12">
-        <div className="flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-widest mb-4">
-          <Sparkles className="w-4 h-4" />
-          SELECTED PROJECTS // WORK SHOWCASE
-        </div>
-        <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
+        <h1 className="flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-widest mb-4">
+          <Sparkles className="w-4 h-4" aria-hidden="true" />
+          Our Work: Websites, Reels &amp; Campaigns for Lucknow Brands
+        </h1>
+        <p className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
           WORK THAT SPEAKS <br />
           <span className="text-brand-text-secondary">BEFORE WE DO.</span>
-        </h1>
+        </p>
         <p className="text-base sm:text-xl text-brand-text-secondary max-w-2xl font-medium">
           A collection of digital platforms, e-commerce storefronts, brand systems, and creative campaigns engineered for real-world presence and functionality.
         </p>

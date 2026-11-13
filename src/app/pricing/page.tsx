@@ -3,7 +3,7 @@ import PricingPageClient from "./PricingPageClient";
 import { getPackages } from "@/lib/packages";
 
 export const metadata: Metadata = {
-  title: "Pricing & Packages Digital Agency",
+  title: "Website & Digital Marketing Pricing in Lucknow",
   description: "Transparent, value-driven pricing for website development, SEO, social media marketing, and digital creative services.",
   keywords: ["Digital Marketing Pricing", "Web Development Cost India", "SEO Packages Lucknow", "Social Media Management Pricing"],
   alternates: {

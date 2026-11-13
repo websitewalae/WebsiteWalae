@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About Website Walae | Digital Creative Agency in Lucknow",
-  description: "Website Walae is a digital creative agency based in Lucknow. We combine design, technology, content, and marketing to build ecosystems that generate real business growth.",
+  title: "About Us | Digital Marketing Agency in Lucknow",
+  description: "Website Walae is a digital marketing and creative agency in Hazratganj, Lucknow, combining design, technology, content and marketing to grow businesses.",
   keywords: ["About Website Walae", "Digital Creative Agency Lucknow", "About Us", "Creative Agency"],
   alternates: {
     canonical: "https://websitewalae.com/about",
   },
   openGraph: {
     title: "About Website Walae | Digital Creative Agency in Lucknow",
-    description: "Website Walae is a digital creative agency based in Lucknow. We combine design, technology, content, and marketing to build ecosystems that generate real business growth.",
+    description: "Website Walae is a digital marketing and creative agency in Hazratganj, Lucknow, combining design, technology, content and marketing to grow businesses.",
     url: "https://websitewalae.com/about",
     siteName: "Website Walae",
     locale: "en_IN",

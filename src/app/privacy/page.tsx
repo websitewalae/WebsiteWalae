@@ -4,7 +4,7 @@ import { ArrowLeft, Shield, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Website Walae | Privacy Policy",
+  title: "Privacy Policy",
   description: "Learn how Website Walae collects, uses, and protects your personal and project information. Comprehensive privacy policy for our digital creative studio.",
   alternates: {
     canonical: "https://websitewalae.com/privacy",

@@ -314,14 +314,14 @@ export default function Services() {
 
                           {/* Hero Assembly */}
                           <div className="flex-1 flex flex-col items-center justify-center text-center my-4 z-10">
-                            <motion.h4 
+                            <motion.p 
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ delay: 0.2, duration: 0.4 }}
                               className="text-xl sm:text-2xl font-black text-white tracking-tight mb-2"
                             >
                               WE BUILD WHAT&apos;S NEXT.
-                            </motion.h4>
+                            </motion.p>
                             <motion.p 
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}

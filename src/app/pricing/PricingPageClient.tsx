@@ -35,13 +35,13 @@ export default function PricingPageClient({ initialPackages }: { initialPackages
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center sm:text-left flex flex-col items-center sm:items-start"
         >
-          <div className="flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-widest mb-4">
-            <Sparkles className="w-4 h-4" />
-            INVESTMENT
-          </div>
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
-            PRICING.
+          <h1 className="flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-widest mb-4">
+            <Sparkles className="w-4 h-4" aria-hidden="true" />
+            Website &amp; Digital Marketing Pricing in Lucknow
           </h1>
+          <p className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
+            PRICING.
+          </p>
           <p className="text-xl sm:text-3xl text-brand-text-secondary max-w-3xl font-bold mt-4 uppercase tracking-wide">
             CHOOSE WHAT YOU NEED.<br />
             <span className="text-brand-accent">BUILD WHAT YOU WANT.</span>

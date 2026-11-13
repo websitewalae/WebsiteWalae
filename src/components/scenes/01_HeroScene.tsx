@@ -389,25 +389,6 @@ export default function HeroScene() {
           </span>
         </motion.div>
 
-        {/* START HERE CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-5 flex flex-col items-center gap-3 pointer-events-auto"
-        >
-          <Link
-            href="/start-a-project"
-            className="group relative inline-flex items-center gap-2 bg-brand-accent text-black font-bold text-sm sm:text-base px-7 py-3 rounded-full shadow-[0_0_30px_rgba(199,255,61,0.45)] hover:shadow-[0_0_50px_rgba(199,255,61,0.7)] hover:scale-105 transition-all duration-300"
-          >
-            <Zap className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-            Start Here
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
-            Free Consultation · No Commitment
-          </span>
-        </motion.div>
       </div>
 
       {/* ========================================================================= */}
@@ -503,40 +484,9 @@ export default function HeroScene() {
       {/* ========================================================================= */}
       <div ref={contentRef} className="absolute inset-0 z-30 flex flex-col justify-between p-4 sm:p-6 md:p-10 pointer-events-none">
         
-        {/* Top HUD Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex justify-between items-center w-full pointer-events-auto"
-        >
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center" data-cursor="link">
-              <img src="/logo.png" alt="Website Walae" className="h-8 sm:h-10 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" />
-            </Link>
-          </div>
-
-          <div className="hidden md:flex flex-col items-center">
-            <div className="flex gap-1 opacity-40 mb-1">
-              {[...Array(19)].map((_, i) => (
-                <div key={i} className={`w-[1px] ${i % 5 === 0 ? "h-3 bg-white" : "h-2 bg-white/40"}`} />
-              ))}
-            </div>
-            <span className="text-[10px] font-mono tracking-[0.25em] text-white/50 uppercase">
-              WEBSITE WALAE // INTERACTIVE CREATIVE UNIVERSE
-            </span>
-          </div>
-
-          <div className="glass px-3 py-1.5 rounded-full border border-white/10 flex items-center gap-2 bg-black/60">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
-            </span>
-            <span className="text-[10px] font-mono font-bold text-white tracking-widest uppercase">
-              3D CORE ACTIVE
-            </span>
-          </div>
-        </motion.div>
+        {/* Spacer: the site-wide Navigation already shows the logo here, so the
+            hero no longer renders its own duplicate logo/status header. */}
+        <div aria-hidden="true" className="h-10" />
 
         {/* Immediate Scroll Cue (1.2s Intro Speed Requirement) */}
         <motion.div
@@ -567,6 +517,7 @@ export default function HeroScene() {
           <div className="glass px-2.5 py-1.5 sm:py-2 rounded-full border border-white/15 flex items-center gap-2 backdrop-blur-2xl bg-black/75 shadow-cinematic">
             <Link
               href="#work"
+              aria-label="See our work"
               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors text-white group"
             >
               <Sparkles className="w-3.5 h-3.5 text-brand-accent group-hover:scale-110 transition-transform" />
@@ -580,35 +531,17 @@ export default function HeroScene() {
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors text-white">
-              <Menu size={14} className="sm:w-4 sm:h-4" />
-            </button>
+            <Link
+              href="/services"
+              aria-label="View all services"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center transition-colors text-white"
+            >
+              <Menu size={14} className="sm:w-4 sm:h-4" aria-hidden="true" />
+            </Link>
           </div>
         </motion.div>
       </div>
 
-      {/* ========================================================================= */}
-      {/* START HERE CTA — Independent layer, not affected by GSAP scroll fade */}
-      {/* ========================================================================= */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 1.0 }}
-        className="absolute bottom-[88px] sm:bottom-[96px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-auto"
-      >
-        <Link
-          href="/start-a-project"
-          className="group inline-flex items-center gap-2 bg-brand-accent text-black font-bold text-sm sm:text-base px-6 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-[0_0_30px_rgba(199,255,61,0.5)] hover:shadow-[0_0_55px_rgba(199,255,61,0.8)] hover:scale-105 transition-all duration-300"
-          data-cursor="button"
-        >
-          <Zap className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-          Start Here
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
-        <span className="text-[9px] sm:text-[10px] font-mono tracking-widest text-white/35 uppercase">
-          Free Consultation · No Commitment
-        </span>
-      </motion.div>
 
     </section>
   );
