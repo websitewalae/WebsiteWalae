@@ -350,24 +350,15 @@ export default function HeroScene() {
           activeServiceIndex={activeServiceIndex}
         />
 
-        {/* Dynamic System Status Indicator */}
-        <motion.div
-          animate={{
-            scale: isLogoHovered ? [1, 1.05, 1] : 1,
-            borderColor: isLogoHovered ? "rgba(199,255,61,0.8)" : "rgba(255,255,255,0.15)",
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="mt-3 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border text-[10px] font-mono tracking-widest text-white uppercase flex items-center gap-2 shadow-cinematic pointer-events-none"
-        >
-          <span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
-          <span className="text-brand-accent font-bold">
-            {isLogoHovered
-              ? "SYSTEM AWAKENED // SELECT SERVICE"
-              : activeServiceIndex !== null
-              ? `SERVICE: ${SERVICES[activeServiceIndex].title}`
-              : "WEBSITE WALAE • CREATIVE SYSTEM"}
-          </span>
-        </motion.div>
+        {/* Plain-language headline: what we do and where */}
+        <div className="mt-3 px-4 text-center pointer-events-none max-w-[90vw]">
+          <h1 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            Digital Marketing Agency in Lucknow
+          </h1>
+          <p className="mt-1.5 text-[11px] sm:text-sm font-mono tracking-widest text-brand-accent uppercase">
+            Websites · Reels · SEO · Meta Ads
+          </p>
+        </div>
 
         {/* START HERE CTA */}
         <motion.div
@@ -512,7 +503,7 @@ export default function HeroScene() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex justify-center w-full pb-2 pointer-events-auto z-30"
+          className="hidden sm:flex justify-center w-full pb-2 pointer-events-auto z-30"
         >
           <div className="glass px-2.5 py-1.5 sm:py-2 rounded-full border border-white/15 flex items-center gap-2 backdrop-blur-2xl bg-black/75 shadow-cinematic">
             <Link
