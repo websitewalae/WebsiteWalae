@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import StartProjectClient from "./StartProjectClient";
 
 export const metadata: Metadata = {
-  title: "Start a Project with Website Walae | Digital Agency in Lucknow",
+  title: "Start a Project | Digital Agency in Lucknow",
   description: "Start your next digital project with Website Walae. Tell us what you're building, and we'll figure out the rest.",
   keywords: ["Start a Project", "Hire Digital Agency", "Web Development Inquiry", "SEO Quote"],
   alternates: {

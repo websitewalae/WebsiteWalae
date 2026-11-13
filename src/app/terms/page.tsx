@@ -4,7 +4,7 @@ import { ArrowLeft, Scale, CheckCircle2 } from "lucide-react";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Website Walae | Terms and Conditions",
+  title: "Terms and Conditions",
   description: "Terms and conditions governing our digital creative, web development, UI/UX, SEO, video production, and marketing services at Website Walae.",
   alternates: {
     canonical: "https://websitewalae.com/terms",

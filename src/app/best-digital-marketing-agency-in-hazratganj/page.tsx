@@ -5,9 +5,9 @@ import { ArrowLeft, ArrowRight, Search, Share2, BarChart3, Globe, Palette, FileT
 import HazratganjFaqAccordion from "./HazratganjFaqAccordion";
 
 /* ────────── SEO METADATA ────────── */
-const PAGE_TITLE = "Best Digital Marketing Agency in Hazratganj – Website Walae";
+const PAGE_TITLE = "Best Digital Marketing Agency in Hazratganj, Lucknow";
 const PAGE_DESC =
-  "Looking for the best digital marketing agency in Hazratganj, Lucknow? Website Walae offers SEO, social media marketing, PPC ads, website design, content marketing & local business marketing. Get a free consultation today!";
+  "Digital marketing agency in Hazratganj, Lucknow for SEO, social media, reels, Meta Ads and websites. Visit Website Walae at Halwasiya Market or call today.";
 const CANONICAL = "https://websitewalae.com/best-digital-marketing-agency-in-hazratganj";
 const COVER_IMAGE = "/images/articles/hazratganj-digital-marketing.jpg";
 const COVER_URL = `https://websitewalae.com${COVER_IMAGE}`;
@@ -61,7 +61,7 @@ const articleSchema = {
   description: PAGE_DESC,
   image: [COVER_URL],
   datePublished: "2025-06-15T10:00:00Z",
-  dateModified: new Date().toISOString(),
+  dateModified: "2026-11-13T10:00:00Z",
   mainEntityOfPage: { "@type": "WebPage", "@id": CANONICAL },
   author: { "@type": "Organization", name: "Website Walae", url: "https://websitewalae.com" },
   publisher: {
@@ -137,7 +137,7 @@ const services = [
     icon: "Share2",
     title: "Social Media Marketing (SMM)",
     desc: "From Instagram Reels to Facebook campaigns, we build your brand presence where your customers scroll every day. Our team crafts compelling copy, designs scroll-stopping visuals, runs performance ads, and fosters genuine community engagement.",
-    highlight: "340% Higher Engagement",
+    highlight: "Reels, Posts & Ads",
   },
   {
     icon: "Target",
@@ -265,7 +265,7 @@ export default function BestDigitalMarketingAgencyHazratganj() {
             </div>
             <div className="hidden sm:flex items-center gap-1 text-white/40">
               <Calendar className="w-3.5 h-3.5" />
-              <span>Updated 2025</span>
+              <span>Updated 2026</span>
             </div>
           </div>
         </div>
@@ -276,7 +276,7 @@ export default function BestDigitalMarketingAgencyHazratganj() {
           {/* Intro */}
           <div className="mb-12">
             <p className="text-base sm:text-lg text-white/80 leading-relaxed mb-6">
-              Hazratganj, Lucknow&apos;s most prestigious commercial hub, is experiencing a digital revolution. With businesses ranging from heritage boutiques and renowned restaurants to modern startups and professional service firms, competition for online visibility has never been fiercer. Whether you&apos;re a startup finding your feet or an established brand looking to scale, your success in 2025 hinges on one thing — a powerful digital presence.
+              Hazratganj, Lucknow&apos;s most prestigious commercial hub, is experiencing a digital revolution. With businesses ranging from heritage boutiques and renowned restaurants to modern startups and professional service firms, competition for online visibility has never been fiercer. Whether you&apos;re a startup finding your feet or an established brand looking to scale, your success in 2026 hinges on one thing — a powerful digital presence.
             </p>
             <p className="text-base sm:text-lg text-white/80 leading-relaxed">
               That&apos;s where <strong className="text-brand-accent">Website Walae</strong>, the best digital marketing agency in Hazratganj, steps in. We don&apos;t just run campaigns — we engineer growth systems that generate leads, build brand equity, and deliver measurable ROI for businesses across Lucknow and beyond.
@@ -286,16 +286,16 @@ export default function BestDigitalMarketingAgencyHazratganj() {
           {/* ── WHY DIGITAL MARKETING IS A MUST ── */}
           <section className="mb-14">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-6">
-              Why Digital Marketing is a Must in 2025
+              Why Digital Marketing is a Must in 2026
             </h2>
             <p className="text-base sm:text-lg text-white/80 leading-relaxed mb-6">
-              Digital marketing is no longer a &ldquo;nice-to-have&rdquo; — it&apos;s the lifeline of modern business. Over <strong className="text-brand-accent">78% of consumers</strong> in Lucknow research products and services online before making a purchase. Social media, search engines, and websites have become the primary touchpoints between brands and customers.
+              Digital marketing is no longer a &ldquo;nice-to-have&rdquo; — it&apos;s the lifeline of modern business. Most customers in Lucknow now <strong className="text-brand-accent">search online before they visit or call</strong> a business. Social media, search engines, and websites have become the primary touchpoints between brands and customers.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
               {[
-                { stat: "78%", label: "Consumers research online before buying" },
-                { stat: "4.5B+", label: "Active social media users worldwide" },
-                { stat: "92%", label: "Of traffic goes to Page 1 Google results" },
+                { stat: "Search", label: "Customers compare businesses on Google before they visit" },
+                { stat: "Mobile", label: "Most local searches happen on a phone, often on the go" },
+                { stat: "Reviews", label: "Ratings and recent reviews decide who gets the call" },
               ].map((item) => (
                 <div key={item.label} className="p-5 rounded-xl bg-white/[0.03] border border-white/5 text-center">
                   <div className="text-3xl sm:text-4xl font-extrabold text-brand-accent mb-2">{item.stat}</div>
@@ -418,7 +418,7 @@ export default function BestDigitalMarketingAgencyHazratganj() {
               {[
                 "High competition means you need to stand out in search results and social feeds",
                 "Premium customers expect a polished online presence — outdated websites lose credibility instantly",
-                "Local searches like 'best [service] near Hazratganj' are growing 45% year-over-year",
+                "Customers search for 'best [service] near Hazratganj' and pick from the top few results",
                 "Your competitors are already investing in digital — if you're not, you're falling behind",
                 "Word-of-mouth alone can't scale — digital marketing multiplies your reach exponentially",
               ].map((point) => (

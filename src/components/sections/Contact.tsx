@@ -77,14 +77,14 @@ export default function Contact() {
                 className="flex flex-col gap-4 sm:gap-6"
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <input required name="name" type="text" autoComplete="name" placeholder="Name" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
-                  <input required name="business" type="text" autoComplete="organization" placeholder="Business / Brand" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="name" aria-label="Your name" type="text" autoComplete="name" placeholder="Name" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="business" aria-label="Business or brand name" type="text" autoComplete="organization" placeholder="Business / Brand" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <input required name="email" type="email" autoComplete="email" placeholder="Email" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
-                  <input required name="phone" type="tel" autoComplete="tel" placeholder="Phone" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="email" aria-label="Email address" type="email" autoComplete="email" placeholder="Email" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
+                  <input required name="phone" aria-label="Phone number" type="tel" autoComplete="tel" placeholder="Phone" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full" />
                 </div>
-                <select required name="service" defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
+                <select required name="service" aria-label="Service you need" defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
                   <option value="" disabled>What do you need?</option>
                   <option value="website">Website Development</option>
                   <option value="design">UI/UX Design</option>
@@ -92,14 +92,14 @@ export default function Contact() {
                   <option value="content">Content Creation</option>
                   <option value="other">Multiple Services / Other</option>
                 </select>
-                <select required name="budget" defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
+                <select required name="budget" aria-label="Budget" defaultValue="" className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text-muted text-sm w-full appearance-none">
                   <option value="" disabled>Budget</option>
                   <option value="small">Under ₹25K</option>
                   <option value="medium">₹25K – ₹50K</option>
                   <option value="large">₹50K – ₹1L</option>
                   <option value="enterprise">₹1L+</option>
                 </select>
-                <textarea required name="message" placeholder="Message" rows={4} className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full resize-none" />
+                <textarea required name="message" aria-label="Message" placeholder="Message" rows={4} className="bg-[#0a0a0a] border border-brand-border rounded-xl px-4 sm:px-6 py-3.5 sm:py-4 outline-none focus:border-brand-accent transition-colors text-brand-text text-sm w-full resize-none" />
                 
                 {error && (
                   <p role="alert" className="text-sm text-red-400">{error}</p>

@@ -30,7 +30,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "website-development-lucknow",
     title: "Website Development",
     metaTitle: "Website Development Company in Lucknow",
-    metaDescription: "Website Walae is a website development company in Lucknow building custom Next.js websites, e-commerce platforms, and high-performance web applications for businesses.",
+    metaDescription: "Website development company in Lucknow. Fast, SEO-ready business websites, WordPress sites and Shopify stores from ₹7,000. Get a fixed quote.",
     h1: "Website Development Services in Lucknow",
     tagline: "Custom, high-performance websites built with modern technology.",
     description: "Website Walae builds custom websites and web applications using Next.js, React, and modern web technologies. We create fast, SEO-optimized, responsive digital platforms that help businesses establish a professional online presence and convert visitors into customers.",
@@ -78,7 +78,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "digital-marketing-lucknow",
     title: "Digital Marketing",
     metaTitle: "Digital Marketing Agency in Lucknow",
-    metaDescription: "Website Walae is a digital marketing agency in Lucknow providing SEO, social media marketing, content creation, Meta Ads, and comprehensive digital growth strategies for businesses.",
+    metaDescription: "Digital marketing agency in Lucknow for SEO, social media, reels, Meta Ads and websites. Website Walae plans and runs campaigns that bring real enquiries.",
     h1: "Digital Marketing Services in Lucknow",
     tagline: "Full-stack digital marketing that drives real business growth.",
     description: "Website Walae provides comprehensive digital marketing services that help businesses in Lucknow and across India grow their online presence, attract qualified leads, and convert them into customers. We combine SEO, social media, content marketing, and paid advertising into a unified growth strategy.",
@@ -125,7 +125,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "seo-lucknow",
     title: "SEO",
     metaTitle: "SEO Services in Lucknow | SEO Agency & Growth Partner",
-    metaDescription: "Website Walae provides revenue-focused SEO services in Lucknow. Technical Core Web Vitals audits, local Google Business Profile optimization, on-page architecture, and AI-ready search visibility starting from ₹12,000/month.",
+    metaDescription: "SEO services in Lucknow from ₹12,000/month: technical fixes, Google Business Profile, local SEO and content that brings enquiries. Website Walae, Hazratganj.",
     h1: "SEO Services in Lucknow",
     tagline: "Sub-second technical architecture, Google Maps 3-Pack authority, and search visibility engineered for qualified commercial leads.",
     description: "Website Walae delivers comprehensive, revenue-focused SEO services that help businesses in Lucknow and across India rank at the top of Google search results, capture high-intent commercial traffic, and generate verified phone calls and qualified enquiries without perpetual reliance on paid ads. We unite sub-second Next.js technical speed, hyper-local Google Business Profile domination, and semantic content strategy to build an appreciating organic search asset.",
@@ -175,7 +175,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "social-media-marketing-lucknow",
     title: "Social Media Marketing",
     metaTitle: "Social Media Marketing Agency in Lucknow",
-    metaDescription: "Website Walae is a social media marketing agency in Lucknow managing Instagram, Facebook, and LinkedIn growth strategies, content creation, and community engagement for businesses.",
+    metaDescription: "Social media marketing agency in Lucknow. Instagram reels, posts and Facebook management from ₹10,000/month, shot on location by Website Walae.",
     h1: "Social Media Marketing Services in Lucknow",
     tagline: "Strategic social media growth that builds real audiences.",
     description: "Website Walae provides social media marketing services that help businesses build engaged audiences, increase brand visibility, and drive customer inquiries through Instagram, Facebook, LinkedIn, and other social platforms.",
@@ -222,7 +222,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "ui-ux-design-lucknow",
     title: "UI/UX Design",
     metaTitle: "UI UX Design Agency in Lucknow",
-    metaDescription: "Website Walae is a UI/UX design agency in Lucknow creating intuitive interfaces, design systems, and interactive prototypes for websites, apps, and digital products.",
+    metaDescription: "UI/UX design agency in Lucknow. Wireframes, prototypes and design systems for websites and apps, from ₹25,000. Website Walae, Hazratganj.",
     h1: "UI/UX Design Services in Lucknow",
     tagline: "Intuitive, beautiful interfaces designed for conversion.",
     description: "Website Walae creates user interface and user experience designs that are visually stunning, easy to use, and optimized for conversion. We design complete design systems, interactive prototypes, and responsive layouts in Figma before development begins.",
@@ -316,7 +316,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "content-creation-lucknow",
     title: "Content Creation",
     metaTitle: "Content Creation Agency in Lucknow",
-    metaDescription: "Website Walae is a content creation agency in Lucknow providing brand photography, copywriting, creative direction, and multi-format content production for businesses.",
+    metaDescription: "Content creation agency in Lucknow: brand photography, copywriting and ad creatives from ₹10,000/month. Website Walae, Hazratganj.",
     h1: "Content Creation Services in Lucknow",
     tagline: "Creative content that tells your brand story and drives action.",
     description: "Website Walae creates compelling content across multiple formats — from brand photography and product shoots to persuasive copywriting and social media creative. We help businesses build content systems that consistently engage their target audience.",
@@ -362,7 +362,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "meta-ads-lucknow",
     title: "Meta Ads",
     metaTitle: "Meta Ads Agency in Lucknow",
-    metaDescription: "Website Walae is a Meta Ads agency in Lucknow managing Facebook and Instagram advertising campaigns with audience targeting, creative testing, and ROI optimization.",
+    metaDescription: "Meta Ads agency in Lucknow. Facebook and Instagram lead campaigns with targeting and creative testing, management from ₹8,000/month. Website Walae.",
     h1: "Meta Ads Services in Lucknow",
     tagline: "Precision paid advertising engineered for measurable ROI.",
     description: "Website Walae manages Meta (Facebook & Instagram) advertising campaigns that generate leads, drive sales, and deliver measurable return on ad spend. We handle everything from strategy and creative production to audience targeting and performance optimization.",
@@ -409,7 +409,7 @@ const SERVICES_DATA: Record<string, ServiceData> = {
     slug: "pr-lucknow",
     title: "PR / Public Relations",
     metaTitle: "PR Agency in Lucknow",
-    metaDescription: "Website Walae is a PR agency in Lucknow providing digital PR, media outreach, press release support, brand PR, and reputation management services for businesses.",
+    metaDescription: "PR agency in Lucknow for media outreach, press releases and reputation management, from ₹15,000/month. Website Walae, Hazratganj.",
     h1: "Public Relations Services in Lucknow",
     tagline: "Build credibility before you build attention.",
     description: "Website Walae provides public relations services that help businesses build credibility, manage their online reputation, and gain media visibility. We combine digital PR strategies with content-driven outreach to establish your brand as a trusted authority in your industry.",
@@ -504,6 +504,80 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // ─── PAGE COMPONENT ────────────────────────────────────────────────────────────
+
+
+// Real price ranges (same as /pricing) and a short note on what moves the
+// price, plus the most relevant guides from /articles for each service.
+const SERVICE_PRICING: Record<string, { rows: { label: string; price: string }[]; note: string; guides: { title: string; slug: string }[] }> = {
+  "website-development-lucknow": {
+    rows: [
+      { label: "WordPress business website", price: "₹7,000 – ₹30,000+" },
+      { label: "Custom website (Next.js)", price: "₹15,000 – ₹40,000+" },
+      { label: "Shopify online store", price: "₹20,000 – ₹50,000+" },
+    ],
+    note: "The price depends on the number of pages, features such as payments, bookings or a product catalogue, and whether we also write your content and shoot photos. Domain and hosting are billed at cost, in your name.",
+    guides: [
+      { title: "Website Development Cost in Lucknow (2026 Price Guide)", slug: "website-development-cost-in-lucknow" },
+      { title: "Why Lucknow Businesses Are Upgrading to Next.js", slug: "why-lucknow-businesses-upgrading-nextjs-web-platforms" },
+    ],
+  },
+  "ui-ux-design-lucknow": {
+    rows: [{ label: "UI/UX design (website or app)", price: "₹25,000 – ₹1,00,000+" }],
+    note: "A landing page or small website design sits at the lower end. Apps and dashboards with many screens, user flows and a design system cost more.",
+    guides: [{ title: "Website Development Cost in Lucknow", slug: "website-development-cost-in-lucknow" }],
+  },
+  "seo-lucknow": {
+    rows: [{ label: "Monthly SEO", price: "₹12,000 – ₹50,000 / month" }],
+    note: "Local SEO for one location with a few services sits at the lower end. More cities, more competitive keywords, regular articles and link building move it higher.",
+    guides: [
+      { title: "Best SEO Company in Lucknow: How to Choose", slug: "best-seo-company-in-lucknow" },
+      { title: "How to Rank Your Business on Google Maps in Lucknow", slug: "how-to-rank-on-google-maps-lucknow" },
+    ],
+  },
+  "social-media-marketing-lucknow": {
+    rows: [{ label: "Social media management", price: "₹10,000 – ₹40,000 / month" }],
+    note: "The number of reels per month, on-location shoots, and how many platforms we manage decide the price. Ad spend, if any, is paid directly to Meta.",
+    guides: [
+      { title: "Social Media Marketing Packages in Lucknow", slug: "social-media-marketing-packages-lucknow" },
+      { title: "How Indian Brands Scale with Instagram Reels and Meta Ads", slug: "how-indian-brands-scale-instagram-reels-meta-ads" },
+    ],
+  },
+  "content-creation-lucknow": {
+    rows: [{ label: "Content creation", price: "₹10,000 – ₹30,000 / month" }],
+    note: "Price depends on how many shoot days, photos, captions and ad creatives you need each month.",
+    guides: [{ title: "Social Media Marketing Packages in Lucknow", slug: "social-media-marketing-packages-lucknow" }],
+  },
+  "video-production-lucknow": {
+    rows: [{ label: "Video production", price: "₹15,000 – ₹80,000+ per project" }],
+    note: "A set of reels shot in one day sits at the lower end. Brand films and commercials with scripting, crew, locations and talent cost more.",
+    guides: [{ title: "How Indian Brands Scale with Instagram Reels and Meta Ads", slug: "how-indian-brands-scale-instagram-reels-meta-ads" }],
+  },
+  "meta-ads-lucknow": {
+    rows: [{ label: "Meta Ads management", price: "₹8,000 – ₹25,000+ / month" }],
+    note: "This is our management fee. Your ad budget is separate and paid directly to Meta from an ad account you own, so you always see what was spent.",
+    guides: [
+      { title: "How Indian Brands Scale with Instagram Reels and Meta Ads", slug: "how-indian-brands-scale-instagram-reels-meta-ads" },
+      { title: "Social Media Marketing Packages in Lucknow", slug: "social-media-marketing-packages-lucknow" },
+    ],
+  },
+  "pr-lucknow": {
+    rows: [{ label: "PR and media outreach", price: "₹15,000 – ₹65,000+ / month" }],
+    note: "Press releases and local media outreach sit at the lower end. Ongoing brand PR, reputation management and national coverage cost more.",
+    guides: [{ title: "Best SEO Company in Lucknow: How to Choose", slug: "best-seo-company-in-lucknow" }],
+  },
+  "digital-marketing-lucknow": {
+    rows: [
+      { label: "SEO", price: "₹12,000 – ₹50,000 / month" },
+      { label: "Social media marketing", price: "₹10,000 – ₹40,000 / month" },
+      { label: "Meta Ads management", price: "₹8,000 – ₹25,000+ / month" },
+    ],
+    note: "Most clients combine two or three services. We recommend a mix based on your goal and budget, and you can start with one and add more later.",
+    guides: [
+      { title: "Best SEO Company in Lucknow: How to Choose", slug: "best-seo-company-in-lucknow" },
+      { title: "Social Media Marketing Packages in Lucknow", slug: "social-media-marketing-packages-lucknow" },
+    ],
+  },
+};
 
 export default async function ServicePage({ params }: Props) {
   const { slug } = await params;
@@ -678,6 +752,44 @@ export default async function ServicePage({ params }: Props) {
         <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight mb-4">Why {service.title} Matters</h2>
         <p className="text-lg text-brand-text-secondary leading-relaxed max-w-3xl">{service.whyItMatters}</p>
       </section>
+
+      {/* Pricing + guides */}
+      {SERVICE_PRICING[service.slug] && (
+        <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] py-16 border-t border-white/10">
+          <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight mb-6">
+            {service.title} Pricing in Lucknow
+          </h2>
+          <div className="max-w-3xl">
+            <div className="rounded-2xl border border-white/10 overflow-hidden mb-4">
+              {SERVICE_PRICING[service.slug].rows.map((row) => (
+                <div key={row.label} className="flex justify-between gap-4 px-5 py-4 border-b border-white/10 last:border-b-0">
+                  <span className="text-white font-medium">{row.label}</span>
+                  <span className="text-brand-accent font-bold whitespace-nowrap">{row.price}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-brand-text-secondary leading-relaxed mb-4">{SERVICE_PRICING[service.slug].note}</p>
+            <p className="text-brand-text-secondary leading-relaxed">
+              Every project gets a fixed written quote before work starts. See all rates on our{" "}
+              <Link href="/pricing" className="text-brand-accent underline underline-offset-4">pricing page</Link>.
+            </p>
+            {SERVICE_PRICING[service.slug].guides.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-lg font-bold text-white mb-3">Helpful guides</h3>
+                <ul className="flex flex-col gap-2">
+                  {SERVICE_PRICING[service.slug].guides.map((g) => (
+                    <li key={g.slug}>
+                      <Link href={`/articles/${g.slug}`} className="text-brand-accent underline underline-offset-4 hover:text-white">
+                        {g.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* FAQ Section (Visible — AEO) */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-[5vw] py-16 border-t border-white/10">

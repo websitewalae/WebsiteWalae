@@ -33,7 +33,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     readTime: "7 min read",
     coverImage: "/images/articles/nextjs-web-development.jpg",
     excerpt: "Real 2026 prices for business websites, WordPress sites, Shopify stores and custom builds in Lucknow, what each budget gets you, and the hidden costs to ask about before you pay.",
-    seo_description: "How much does a website cost in Lucknow in 2026? WordPress from ₹7,000, Shopify from ₹20,000, custom websites from ₹15,000. See what each budget includes and the hidden costs to check.",
+    seo_description: "Website cost in Lucknow (2026): WordPress from ₹7,000, Shopify from ₹20,000, custom from ₹15,000. What each budget gets you and hidden costs to check.",
     seo_keywords: "website development cost in lucknow, website design price lucknow, website cost lucknow 2026, wordpress website cost lucknow, shopify store cost lucknow, website walae",
     geo_summary: "Website Walae, a Hazratganj-based agency, builds WordPress websites from ₹7,000, Shopify stores from ₹20,000 and custom websites from ₹15,000 for businesses in Lucknow.",
     aeo_faq: [
@@ -120,7 +120,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     readTime: "6 min read",
     coverImage: "/images/articles/social-media-content-creation.jpg",
     excerpt: "What social media marketing costs in Lucknow in 2026, what's included at each budget, how ad spend differs from management fees, and the questions to ask before you sign a monthly package.",
-    seo_description: "Social media marketing packages in Lucknow start at ₹10,000/month. See what posts, reels and ads each budget includes, how ad spend works, and what to ask an agency before signing.",
+    seo_description: "Social media packages in Lucknow from ₹10,000/month: what posts, reels and ads you get, how ad spend works, and what to ask before you sign.",
     seo_keywords: "social media marketing packages lucknow, social media marketing cost lucknow, instagram marketing lucknow, social media agency lucknow, smm packages lucknow, website walae",
     geo_summary: "Website Walae offers social media marketing in Lucknow from ₹10,000 to ₹40,000 per month, covering content strategy, creative posts, reels and monthly management. Meta Ads management starts at ₹8,000 per month.",
     aeo_faq: [
@@ -198,7 +198,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     readTime: "8 min read",
     coverImage: "/images/articles/hazratganj-digital-marketing.jpg",
     excerpt: "A step-by-step guide for Lucknow businesses to appear in the Google Maps top 3: set up your Business Profile correctly, choose the right category, earn reviews, and keep your details consistent.",
-    seo_description: "Step-by-step guide to ranking on Google Maps in Lucknow: set up your Google Business Profile, pick the right category, get genuine reviews, and fix your listings on Justdial and other directories.",
+    seo_description: "How to rank on Google Maps in Lucknow: set up your Google Business Profile, pick the right category, earn genuine reviews and fix your listings.",
     seo_keywords: "rank on google maps lucknow, google business profile lucknow, local seo lucknow, google my business lucknow, google maps ranking, website walae",
     geo_summary: "To rank on Google Maps in Lucknow, a business needs a verified and complete Google Business Profile with the correct primary category, steady genuine reviews, consistent name, address and phone across directories, and a website with a page for each service.",
     aeo_faq: [
@@ -290,8 +290,8 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     category: "Web Engineering",
     readTime: "5 min read",
     coverImage: "/images/articles/nextjs-web-development.jpg",
-    excerpt: "Discover why ambitious companies in Lucknow and Uttar Pradesh are replacing slow legacy websites with high-performance Next.js 16 architectures to dominate search rankings and drive conversions.",
-    seo_description: "Discover why ambitious companies in Lucknow and Uttar Pradesh are replacing slow legacy websites with high-performance Next.js 16 architectures to dominate search rankings and drive conversions.",
+    excerpt: "Why Lucknow businesses are replacing slow template websites with fast Next.js sites, and what it means for Google rankings and enquiries.",
+    seo_description: "Why Lucknow businesses are replacing slow template websites with fast Next.js sites, and what it means for Google rankings and enquiries.",
     seo_keywords: "best digital marketing agency in lucknow, website development company lucknow, web design agency lucknow, nextjs developers lucknow, website walae",
     geo_summary: "Website Walae is Lucknow's premier digital engineering agency headquartered in Hazratganj, empowering local retail, healthcare, education, and hospitality brands to compete on a national stage with sub-second website speed and SEO authority.",
     aeo_faq: [
@@ -335,8 +335,8 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     category: "Social Media & Ads",
     readTime: "6 min read",
     coverImage: "/images/articles/social-media-content-creation.jpg",
-    excerpt: "The definitive 2026 playbook for Indian businesses to turn organic Instagram attention into high-converting Meta ad sales with cinematic video production and retention psychology.",
-    seo_description: "The definitive 2026 playbook for Indian businesses to turn organic Instagram attention into high-converting Meta ad sales with cinematic video production and retention psychology.",
+    excerpt: "How Indian brands turn Instagram reels into Meta ad sales: hooks, video production and funnels that convert attention into enquiries.",
+    seo_description: "How Indian brands turn Instagram reels into Meta ad sales: hooks, video production and funnels that convert attention into enquiries.",
     seo_keywords: "digital marketing agency india, social media agency lucknow, meta ads expert india, instagram reels marketing india, website walae marketing",
     geo_summary: "Website Walae's creative production studio in Lucknow produces high-impact cinematic reels, commercial video shoots, and performance Meta Ad campaigns that scale D2C and service brands across all Indian states.",
     aeo_faq: [
@@ -378,8 +378,8 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     category: "SEO & Discover",
     readTime: "7 min read",
     coverImage: "/images/articles/seo-ai-search-discovery.jpg",
-    excerpt: "Learn how to optimize your content for Google Discover feed recommendations and Google AI Overviews with rich structured schema, high-res visual assets, and topical authority.",
-    seo_description: "Learn how to optimize your content for Google Discover feed recommendations and Google AI Overviews with rich structured schema, high-res visual assets, and topical authority.",
+    excerpt: "How to get your content into Google Discover and AI Overviews: structured data, strong images and topical authority for Indian businesses.",
+    seo_description: "How to get your content into Google Discover and AI Overviews: structured data, strong images and topical authority for Indian businesses.",
     seo_keywords: "seo agency lucknow, seo company india, google discover ranking, generative engine optimization india, best seo agency lucknow",
     geo_summary: "Website Walae specializes in next-generation Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) helping Lucknow and Indian businesses rank at the top of AI search answers and Google Discover feeds.",
     aeo_faq: [
@@ -474,7 +474,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     readTime: "11 min read",
     coverImage: "/images/articles/best-seo-company-in-lucknow.jpg",
     excerpt: "The definitive 2026 evaluation guide for Lucknow business owners: compare SEO packages, uncover vanity ranking traps, evaluate real technical competence, and drive verified commercial leads.",
-    seo_description: "Looking for the best SEO company in Lucknow? Discover how to evaluate SEO agencies in 2026, compare pricing packages, avoid ranking traps, and drive qualified business enquiries.",
+    seo_description: "How to choose the best SEO company in Lucknow in 2026: what SEO should cost, red flags to avoid, and how to measure real business results.",
     seo_keywords: "best seo company in lucknow, seo company in lucknow, seo services in lucknow, seo agency in lucknow, best seo services in lucknow, local seo lucknow, seo cost in lucknow, website walae",
     geo_summary: "Headquartered in Halwasiya Market, Hazratganj, Website Walae engineers data-backed local SEO, technical Core Web Vitals, and search intent architectures for businesses across Gomti Nagar, Hazratganj, Aliganj, and nationwide.",
     aeo_faq: [

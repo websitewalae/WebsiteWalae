@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: "Website Walae | Best Digital Marketing Agency in Lucknow",
     template: "%s | Website Walae",
   },
-  description: "Website Walae is a digital marketing and creative agency in Lucknow offering website development, UI/UX design, SEO, social media marketing, content creation, video production, Meta Ads and PR.",
+  description: "Website Walae is a digital marketing agency in Hazratganj, Lucknow for websites, SEO, social media, reels, video production and Meta Ads that bring enquiries.",
   keywords: [
     "Website Walae",
     "best digital marketing agency in Lucknow",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Website Walae | Best Digital Marketing Agency in Lucknow",
-    description: "Website Walae is a digital marketing and creative agency in Lucknow offering website development, UI/UX design, SEO, social media marketing, content creation, video production, Meta Ads and PR.",
+    description: "Website Walae is a digital marketing agency in Hazratganj, Lucknow for websites, SEO, social media, reels, video production and Meta Ads that bring enquiries.",
     url: "https://websitewalae.com",
     siteName: "Website Walae",
     locale: "en_IN",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Website Walae | Best Digital Marketing Agency in Lucknow",
-    description: "Website Walae is a digital marketing and creative agency in Lucknow offering website development, UI/UX design, SEO, social media marketing, content creation, video production, Meta Ads and PR.",
+    description: "Website Walae is a digital marketing agency in Hazratganj, Lucknow for websites, SEO, social media, reels, video production and Meta Ads that bring enquiries.",
     creator: "@websitewalae",
     images: ["https://websitewalae.com/og-image.png"],
   },

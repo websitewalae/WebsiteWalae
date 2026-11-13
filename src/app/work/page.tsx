@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import WorkPageClient from "./WorkPageClient";
 
 export const metadata: Metadata = {
-  title: "Work & Selected Projects",
+  title: "Our Work: Websites, Reels & Campaigns in Lucknow",
   description: "Explore selected web development, branding, UI/UX design, and digital marketing projects crafted by Website Walae digital creative studio.",
   keywords: ["Website Walae Work", "Web Development Portfolio", "UI UX Design Projects", "Digital Marketing Case Studies Lucknow"],
   alternates: {

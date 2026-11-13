@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactPageClient from "./ContactPageClient";
 
 export const metadata: Metadata = {
-  title: "Contact Website Walae | Hire a Digital Agency in Lucknow",
+  title: "Contact Us | Digital Marketing Agency in Lucknow",
   description: "Get in touch with Website Walae to discuss your next digital project. Call us directly at +91 7317782998 or start a project inquiry.",
   keywords: ["Contact Website Walae", "Digital Agency Contact", "Hire Web Developer Lucknow"],
   alternates: {

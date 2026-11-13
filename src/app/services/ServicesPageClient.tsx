@@ -224,15 +224,15 @@ export default function ServicesPageClient() {
         >
           <div className="inline-flex items-center gap-2 text-xs font-mono text-brand-accent bg-brand-accent/10 border border-brand-accent/30 px-3.5 py-1.5 rounded-full uppercase tracking-widest mb-6">
             <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-            <span>FULL-STACK DIGITAL CREATIVE STUDIO // 7 CORE CAPABILITIES</span>
+            <h1>Digital Marketing, Website &amp; Video Services in Lucknow</h1>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+          <p className="text-4xl sm:text-6xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
             CAPABILITIES <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-brand-accent">
               ENGINEERED TO GROW.
             </span>
-          </h1>
+          </p>
 
           <p className="text-base sm:text-xl md:text-2xl text-brand-text-secondary max-w-3xl font-medium leading-relaxed">
             We bridge high-end cinematic aesthetics with cutting-edge engineering and data-driven marketing. Everything you need to scale your brand under one unified roof.
@@ -471,7 +471,7 @@ export default function ServicesPageClient() {
                 VIEW PRICING PACKAGES
               </Link>
               <a
-                href="tel:7317782998"
+                href="tel:+917317782998"
                 className="w-full sm:w-auto px-6 py-4 rounded-full text-brand-text-secondary hover:text-brand-accent transition-colors font-mono text-xs inline-flex items-center justify-center gap-2"
               >
                 <PhoneCall className="w-4 h-4" />

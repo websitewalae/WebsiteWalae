@@ -25,14 +25,14 @@ export default function AboutPageClient() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-widest mb-4">
-            <Sparkles className="w-4 h-4" />
-            ABOUT US
-          </div>
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
+          <h1 className="flex items-center gap-2 text-xs font-mono text-brand-accent uppercase tracking-widest mb-4">
+            <Sparkles className="w-4 h-4" aria-hidden="true" />
+            About Website Walae, Digital Marketing Agency in Lucknow
+          </h1>
+          <p className="text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-6 leading-none">
             WEBSITE WALAE <br />
             <span className="text-brand-text-secondary">DIGITAL CREATIVE STUDIO.</span>
-          </h1>
+          </p>
           <p className="text-xl sm:text-2xl text-brand-text-secondary max-w-3xl font-medium mt-12 leading-relaxed">
             We are a collective of digital craftsmen. We don&apos;t just build websites; we build digital ecosystems.
           </p>

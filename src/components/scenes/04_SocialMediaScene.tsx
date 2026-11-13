@@ -50,29 +50,50 @@ const CLIENT_REELS = [
 // Dedicated 30-Day Client Cache Memory for Section Videos
 function ReelVideo({ src, poster, isActive }: { src: string; poster: string; isActive: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [inView, setInView] = useState(false);
 
-  // Only the active reel downloads and plays. The server already sends
-  // 30-day Cache-Control headers for /videos/reels, so the browser's HTTP
-  // cache handles repeat visits without pre-fetching every reel up front.
+  // The reels section sits far down the page. Don't attach the video source
+  // until the card is near the viewport, so the initial page load only
+  // fetches poster images. Pause again when it scrolls out of view.
   useEffect(() => {
-    if (!videoRef.current) return;
-    if (isActive) {
-      videoRef.current.play().catch(() => {});
-    } else {
-      videoRef.current.pause();
+    const el = videoRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
     }
-  }, [isActive]);
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const shouldPlay = isActive && inView;
+  // Once a reel has been requested, keep its source so it doesn't re-download.
+  const [loaded, setLoaded] = useState(false);
+  if (shouldPlay && !loaded) setLoaded(true);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (shouldPlay) {
+      el.play().catch(() => {});
+    } else {
+      el.pause();
+    }
+  }, [shouldPlay]);
 
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={loaded ? src : undefined}
       poster={poster}
       loop
       muted
       playsInline
-      autoPlay={isActive}
-      preload={isActive ? "metadata" : "none"}
+      preload="none"
+      aria-label="Client reel"
       className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-105"
     />
   );
