@@ -30,7 +30,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="relative w-full min-h-screen bg-brand-bg flex flex-col items-center justify-center overflow-hidden py-24 md:py-48">
+    <section id="about" ref={sectionRef} className="relative w-full min-h-screen bg-brand-bg flex flex-col items-center justify-center overflow-hidden py-24 md:py-32">
       {/* Floating Objects (Desktop Only to avoid mobile layout clutter) */}
       <div ref={objectsRef} className="absolute inset-0 pointer-events-none z-0 hidden md:block">
         <div className="absolute top-[20%] left-[10%] w-32 h-32 glass rounded-full shadow-floating opacity-30 flex items-center justify-center text-xs font-mono text-brand-text-muted">CAMERA</div>

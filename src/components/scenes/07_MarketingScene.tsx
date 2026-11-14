@@ -23,7 +23,7 @@ export default function MarketingScene() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=130%",
+          end: "+=60%",
           scrub: 0.4,
           pin: true,
           pinSpacing: true,
@@ -31,9 +31,9 @@ export default function MarketingScene() {
       });
 
       // 0% - Viewport entry: text & search engine enter immediately
-      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(textRef.current, { opacity: 1, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
       tl.fromTo(searchRef.current, 
-        { opacity: 0, y: 60, scale: 0.92 }, 
+        { opacity: 1, y: 60, scale: 0.92 }, 
         { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" },
         "<"
       );
@@ -57,14 +57,6 @@ export default function MarketingScene() {
         );
       }
 
-      // 75% - Morph exit into Services overview
-      tl.to([analyticsRef.current, textRef.current], {
-        opacity: 0,
-        y: -30,
-        scale: 0.95,
-        duration: 0.5,
-        ease: "power2.in"
-      }, "+=0.2");
 
       return () => tl.kill();
     });

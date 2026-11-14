@@ -23,7 +23,7 @@ export default function WebDesignScene() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=130%",
+          end: "+=60%",
           scrub: 0.4,
           pin: true,
           pinSpacing: true,
@@ -31,10 +31,10 @@ export default function WebDesignScene() {
       });
 
       // 0% - Immediate entry: headline & screen expansion start together
-      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(textRef.current, { opacity: 1, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
       
       tl.fromTo(screenRef.current, 
-        { scale: 0.35, y: 120, opacity: 0, borderRadius: "40px" },
+        { scale: 0.75, y: 120, opacity: 1, borderRadius: "40px" },
         { scale: 1, y: 0, opacity: 1, borderRadius: "16px", duration: 0.7, ease: "power2.out" },
         "<"
       );
@@ -52,14 +52,6 @@ export default function WebDesignScene() {
         );
       }
 
-      // 75% - Morph exit into Development Code Editor
-      tl.to([screenRef.current, textRef.current], {
-        opacity: 0,
-        scale: 1.05,
-        y: -30,
-        duration: 0.5,
-        ease: "power2.in"
-      }, "+=0.2");
 
       return () => tl.kill();
     });

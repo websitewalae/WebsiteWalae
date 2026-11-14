@@ -29,7 +29,7 @@ export default function ContentCreationScene() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=130%",
+          end: "+=60%",
           scrub: 0.4,
           pin: true,
           pinSpacing: true,
@@ -37,12 +37,12 @@ export default function ContentCreationScene() {
       });
 
       // 0% - Immediate entry: REC indicator lights up & headline enters
-      tl.fromTo(recRef.current, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3 });
-      tl.fromTo(textRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
+      tl.fromTo(recRef.current, { opacity: 1, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.3 });
+      tl.fromTo(textRef.current, { opacity: 1, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, "<");
 
       // 10%-40% - Staggered card sequence (CONTENT -> DISTRIBUTION -> ATTENTION)
       tl.fromTo(cards, 
-        { opacity: 0, y: 90, scale: 0.82, rotateX: 20 },
+        { opacity: 1, y: 90, scale: 0.82, rotateX: 20 },
         { 
           opacity: 1, 
           y: 0, 
@@ -76,18 +76,6 @@ export default function ContentCreationScene() {
         duration: 0.4,
       });
 
-      // 80%-100% - Cards compress into flowing data stream transitioning into Editing Scene
-      tl.to(cards, {
-        z: -500,
-        y: -200,
-        scale: 0.35,
-        opacity: 0,
-        stagger: 0.06,
-        duration: 0.7,
-        ease: "power2.in"
-      });
-
-      tl.to(textRef.current, { opacity: 0, y: -30, duration: 0.4 }, "<");
 
       return () => tl.kill();
     });

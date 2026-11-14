@@ -224,7 +224,7 @@ export default function HeroScene() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=120%",
+        end: "+=50%",
         scrub: 0.4,
         pin: true,
         pinSpacing: true,
@@ -235,9 +235,9 @@ export default function HeroScene() {
     tl.to(
       logoContainerRef.current,
       {
-        scale: 0.65,
-        y: "-15%",
-        opacity: 0.3,
+        scale: 0.85,
+        y: "-8%",
+        opacity: 0.7,
         duration: 1,
         ease: "none",
       },
@@ -247,8 +247,8 @@ export default function HeroScene() {
     tl.to(
       nodesContainerRef.current,
       {
-        scale: 0.8,
-        opacity: 0.1,
+        scale: 0.9,
+        opacity: 0.6,
         duration: 0.8,
         ease: "power2.in",
       },
@@ -258,8 +258,8 @@ export default function HeroScene() {
     tl.to(
       contentRef.current,
       {
-        opacity: 0,
-        y: -50,
+        opacity: 0.6,
+        y: -30,
         duration: 0.7,
         ease: "power2.inOut",
       },

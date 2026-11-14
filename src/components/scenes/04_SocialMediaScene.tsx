@@ -205,17 +205,17 @@ export default function SocialMediaScene() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=130%",
+          end: "+=60%",
           scrub: 0.4,
           pin: true,
           pinSpacing: true,
         },
       });
 
-      tl.fromTo(textRef.current, { opacity: 0, scale: 0.95, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.4 });
+      tl.fromTo(textRef.current, { opacity: 1, scale: 0.95, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.4 });
 
       tl.fromTo(cards, 
-        { opacity: 0, y: 150, scale: 0.8, rotateZ: 0 },
+        { opacity: 1, y: 150, scale: 0.8, rotateZ: 0 },
         {
           opacity: 1,
           y: 0,
@@ -229,16 +229,6 @@ export default function SocialMediaScene() {
         "-=0.2"
       );
 
-      tl.to(cards, {
-        y: -350,
-        scale: (i) => i === 1 ? 1.4 : 0.6,
-        opacity: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: "power2.in"
-      });
-
-      tl.to(textRef.current, { opacity: 0, y: -40, duration: 0.4 }, "<");
 
       return () => tl.kill();
     });
