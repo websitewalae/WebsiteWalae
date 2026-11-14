@@ -6,8 +6,8 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Flame } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Articles & Digital Insights - Lucknow & India Agency",
-  description: "Read authoritative articles, case studies, and engineering playbooks on website development, SEO, viral Instagram reels, and AI search engines in Lucknow and across India.",
+  title: "Digital Marketing Guides for Lucknow Businesses",
+  description: "Guides on website costs, SEO, Google Maps, Instagram reels and Meta Ads for businesses in Lucknow, with real prices from Website Walae.",
   keywords: [
     "Website Walae Articles",
     "Digital Marketing Agency in Lucknow Blog",
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     canonical: "https://websitewalae.com/articles",
   },
   openGraph: {
-    title: "Articles & Digital Insights - Lucknow & India Agency",
-    description: "Read authoritative articles, case studies, and engineering playbooks on website development, SEO, viral Instagram reels, and AI search engines in Lucknow and across India.",
+    title: "Digital Marketing Guides for Lucknow Businesses",
+    description: "Guides on website costs, SEO, Google Maps, Instagram reels and Meta Ads for businesses in Lucknow, with real prices from Website Walae.",
     url: "https://websitewalae.com/articles",
     siteName: "Website Walae",
     locale: "en_US",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Articles & Digital Insights",
-    description: "Read authoritative articles, case studies, and engineering playbooks on website development, SEO, viral Instagram reels, and AI search engines in Lucknow and across India.",
+    description: "Guides on website costs, SEO, Google Maps, Instagram reels and Meta Ads for businesses in Lucknow, with real prices from Website Walae.",
     images: ["https://websitewalae.com/images/tech_hero_bg.jpg"],
   },
   robots: {

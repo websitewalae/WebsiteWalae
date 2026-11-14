@@ -18,7 +18,7 @@ export async function generateMetadata(props: {
     };
   }
 
-  const title = article.title;
+  const title = article.seo_title || article.title;
   const description =
     article.seo_description ||
     "Authoritative insights on web development, digital marketing, and business scaling in Lucknow and India from Website Walae.";
