@@ -12,6 +12,8 @@ export interface Article {
   category?: string;
   coverImage?: string;
   seo_description?: string;
+  /** Short title for search results (template adds " | Website Walae"). */
+  seo_title?: string;
   seo_keywords?: string;
   geo_summary?: string;
   aeo_faq?: Array<{ question: string; answer: string }>;
@@ -28,6 +30,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-11-13T09:00:00Z",
     title: "Website Development Cost in Lucknow (2026 Price Guide)",
     slug: "website-development-cost-in-lucknow",
+    seo_title: "Website Development Cost in Lucknow (2026)",
     author: "Website Walae",
     category: "Web Engineering",
     readTime: "7 min read",
@@ -115,6 +118,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-11-13T09:30:00Z",
     title: "Social Media Marketing Packages in Lucknow: What You Get for Your Budget",
     slug: "social-media-marketing-packages-lucknow",
+    seo_title: "Social Media Marketing Packages in Lucknow",
     author: "Website Walae",
     category: "Social Media",
     readTime: "6 min read",
@@ -193,6 +197,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-11-13T10:00:00Z",
     title: "How to Rank Your Business on Google Maps in Lucknow",
     slug: "how-to-rank-on-google-maps-lucknow",
+    seo_title: "How to Rank on Google Maps in Lucknow",
     author: "Website Walae",
     category: "SEO & Growth",
     readTime: "8 min read",
@@ -286,6 +291,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-03-01T10:00:00Z",
     title: "Why Lucknow Businesses Are Upgrading to Next.js Web Platforms in 2026",
     slug: "why-lucknow-businesses-upgrading-nextjs-web-platforms",
+    seo_title: "Why Lucknow Businesses Are Moving to Next.js",
     author: "Website Walae Engineering Team",
     category: "Web Engineering",
     readTime: "5 min read",
@@ -331,6 +337,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-03-05T12:30:00Z",
     title: "How Indian Brands Scale 10x ROI with Viral Instagram Reels & Meta Ad Funnels",
     slug: "how-indian-brands-scale-instagram-reels-meta-ads",
+    seo_title: "Instagram Reels + Meta Ads for Indian Brands",
     author: "Website Walae Creative Studio",
     category: "Social Media & Ads",
     readTime: "6 min read",
@@ -374,6 +381,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-03-08T09:15:00Z",
     title: "Ranking in Google Discover & AI Overviews: The 2026 SEO Strategy for India",
     slug: "ranking-google-discover-ai-overviews-india",
+    seo_title: "Google Discover & AI Overviews SEO (2026)",
     author: "Website Walae SEO Intelligence",
     category: "SEO & Discover",
     readTime: "7 min read",
@@ -417,6 +425,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-10-10T10:00:00Z",
     title: "Hostinger Coupon Code 2026: Get 20% Off With WEBSITEWALAE",
     slug: "hostinger-coupon-code-2026",
+    seo_title: "Hostinger Coupon Code 2026: 20% Off",
     author: "Website Walae",
     category: "Web Hosting",
     readTime: "4 min read",
@@ -469,6 +478,7 @@ export const CORNERSTONE_ARTICLES: Article[] = [
     created_at: "2026-03-12T10:00:00Z",
     title: "Best SEO Company in Lucknow: How to Choose the Right SEO Partner in 2026",
     slug: "best-seo-company-in-lucknow",
+    seo_title: "Best SEO Company in Lucknow: How to Choose",
     author: "Website Walae SEO Intelligence",
     category: "SEO & Growth",
     readTime: "11 min read",
