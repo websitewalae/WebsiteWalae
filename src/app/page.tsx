@@ -139,6 +139,9 @@ export default function Home() {
       {/* Global Cinematic Grain Overlay */}
       <div className="noise-overlay" />
 
+      {/* Primary H1 — accessible to crawlers immediately */}
+      <h1 className="sr-only">Best Digital Marketing Agency in Lucknow — Website Walae</h1>
+
       {/* Interactive Client-Side Content */}
       <HomePageClient />
 

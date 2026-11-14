@@ -302,7 +302,7 @@ export default function SocialMediaScene() {
       </div>
 
       <div ref={textRef} className="absolute md:top-[12%] top-[8%] text-center px-4 z-20 w-full">
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2 uppercase font-inter-tight leading-tight">REELS WE MADE FOR LUCKNOW BRANDS.</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight mb-2 uppercase font-inter-tight leading-tight">FROM CONTENT TO ATTENTION.</h2>
         <p className="text-[10px] sm:text-sm text-brand-accent font-mono">REAL CLIENT PRODUCTIONS &amp; VIRAL SOCIAL REELS</p>
       </div>
 

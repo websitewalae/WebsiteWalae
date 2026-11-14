@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import ScrollTrigger from "gsap/ScrollTrigger";
 
 import SceneController from "@/components/scenes/SceneController";
 import HeroScene from "@/components/scenes/01_HeroScene";
@@ -24,25 +23,6 @@ import CameraInterface from "@/components/scenes/CameraInterface";
 
 export default function HomePageClient() {
   const [cameraModeActive, setCameraModeActive] = useState(false);
-  // The pinned, scroll-scrubbed cinematic scenes are a desktop experience.
-  // On phones they made the page ~25 screens long and "stuck" while
-  // scrolling, so they're only mounted on screens 768px and wider.
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const update = () => setIsDesktop(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  // Scenes mount after hydration on desktop; recalculate scroll positions
-  // for the sections below them once they're in the DOM.
-  useEffect(() => {
-    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
-    return () => cancelAnimationFrame(id);
-  }, [isDesktop]);
 
   // Lock scroll on the body only when camera mode is explicitly opened
   useEffect(() => {
@@ -67,12 +47,12 @@ export default function HomePageClient() {
       <div className="w-full">
         <SceneController>
           <HeroScene />
-          {isDesktop && <ContentCreationScene />}
-          {isDesktop && <EditingScene />}
+          <ContentCreationScene />
+          <EditingScene />
           <SocialMediaScene />
-          {isDesktop && <WebDesignScene />}
-          {isDesktop && <DevelopmentScene />}
-          {isDesktop && <MarketingScene />}
+          <WebDesignScene />
+          <DevelopmentScene />
+          <MarketingScene />
         </SceneController>
 
         <Services />
