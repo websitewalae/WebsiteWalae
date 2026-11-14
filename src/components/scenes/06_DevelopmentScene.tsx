@@ -152,7 +152,7 @@ export default function DevelopmentScene() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=130%",
+          end: "+=60%",
           scrub: 0.4,
           pin: true,
           pinSpacing: true,
@@ -160,9 +160,9 @@ export default function DevelopmentScene() {
       });
 
       // 0% - Viewport entry: text & editor rotate in immediately
-      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(textRef.current, { opacity: 1, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
       tl.fromTo(editorRef.current, 
-        { opacity: 0, rotateY: 15, scale: 0.9, x: 40 }, 
+        { opacity: 1, rotateY: 15, scale: 0.9, x: 40 }, 
         { opacity: 1, rotateY: 0, scale: 1, x: 0, duration: 0.6, ease: "power2.out" },
         "<"
       );
@@ -185,14 +185,6 @@ export default function DevelopmentScene() {
         );
       }
 
-      // 75% - Morph exit into Marketing Engine
-      tl.to([editorRef.current, textRef.current], {
-        opacity: 0,
-        scale: 0.94,
-        y: -40,
-        duration: 0.5,
-        ease: "power2.in"
-      }, "+=0.2");
 
       return () => tl.kill();
     });

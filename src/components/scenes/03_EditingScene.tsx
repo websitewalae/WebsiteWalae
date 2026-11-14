@@ -23,7 +23,7 @@ export default function EditingScene() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=130%",
+          end: "+=60%",
           scrub: 0.4,
           pin: true,
           pinSpacing: true,
@@ -31,9 +31,9 @@ export default function EditingScene() {
       });
 
       // 0% - Viewport entry: Fade in text and UI immediately
-      tl.fromTo(textRef.current, { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
+      tl.fromTo(textRef.current, { opacity: 1, y: 35 }, { opacity: 1, y: 0, duration: 0.4 });
       tl.fromTo(uiRef.current, 
-        { opacity: 0, scale: 0.92, rotateX: -8, y: 60 }, 
+        { opacity: 1, scale: 0.92, rotateX: -8, y: 60 }, 
         { opacity: 1, scale: 1, rotateX: 0, y: 0, duration: 0.6, ease: "power2.out" },
         "<"
       );
@@ -62,14 +62,6 @@ export default function EditingScene() {
         duration: 0.1 
       });
 
-      // 80% - Exit transition into Social Media Engine
-      tl.to([uiRef.current, textRef.current], {
-        opacity: 0,
-        scale: 0.94,
-        y: -40,
-        duration: 0.5,
-        ease: "power2.in"
-      }, "+=0.2");
 
       return () => tl.kill();
     });
